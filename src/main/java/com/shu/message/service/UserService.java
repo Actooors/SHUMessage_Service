@@ -1,6 +1,8 @@
 package com.shu.message.service;
 
+import com.shu.message.dao.UserMapper;
 import com.shu.message.model.Json.LoginInfo;
+import com.shu.message.model.entity.User;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.ResultSetting.LoginResponse;
 import com.shu.message.tools.AuthTool;

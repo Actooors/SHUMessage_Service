@@ -11,6 +11,10 @@ public class User {
 
     private String mail;
 
+    private String bigImg;
+
+    private String img;
+
     public String getUserId() {
         return userId;
     }
@@ -49,5 +53,21 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail == null ? null : mail.trim();
+    }
+
+    public String getBigImg() {
+        return bigImg;
+    }
+
+    public void setBigImg(String bigImg) {
+        this.bigImg = bigImg == null ? null : bigImg.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 }

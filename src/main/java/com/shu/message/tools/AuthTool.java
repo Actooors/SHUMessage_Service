@@ -1,8 +1,6 @@
 package com.shu.message.tools;
 
 
-import com.shu.message.model.entity.User;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;

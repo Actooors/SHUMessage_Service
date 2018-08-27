@@ -16,7 +16,7 @@ public interface NewsMapper {
 
     int insertSelective(News record);
 
-    List<News> selectByExample(NewsExample example);
+    List<News> selectByExample(@Param("example")NewsExample example,@Param("page")Integer page,@Param("pageSize")Integer pageSize);
 
     News selectByPrimaryKey(String md5Id);
 

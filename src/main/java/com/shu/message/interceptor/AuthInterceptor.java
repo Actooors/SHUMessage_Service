@@ -19,7 +19,7 @@ import java.io.PrintWriter;
  */
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
-    private static final String LOGIN_URL = "/api/login";
+    private static final String LOGIN_URL = "/login";
     private static final String TOKEN_NAME = "Authorization";
     private static final int HTTP_CODE = 401;
 

@@ -25,11 +25,11 @@ public class InterceptorConfigurerAdapter implements WebMvcConfigurer {
      * @Author: ggmr
      * @Date: 18-7-31
      */
-    /*
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authInterceptor).addPathPatterns("/**").excludePathPatterns("/login").excludePathPatterns("/swagger-ui.html");
+        registry.addInterceptor(authInterceptor).addPathPatterns("/**").excludePathPatterns("/login/**","/swagger-resources/**");
     }
-    */
+
 }
 

@@ -34,6 +34,7 @@ public class NewsService {
      */
     public Result getNewsList(int pageNum, int pageSize) {
         NewsExample example = new NewsExample();
+        example.setOrderByClause("`create_date` DESC");
         example.setStartRow(pageNum * pageSize);
         example.setPageSize(pageSize);
         List<News> list= newsMapper.selectByExample(example);

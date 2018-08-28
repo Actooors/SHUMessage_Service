@@ -9,7 +9,7 @@ create table tbl_User (
 ) comment '用户表' charset = utf8;
 
 create table tbl_News (
-  news_id int primary key comment '新闻id'
+  news_id int auto_increment primary key  comment '新闻id'
   md5_id varchar(255) not null comment '新闻的url md5转化为key',
   title varchar(64) not null comment '新闻标题',
   author varchar(32) comment '作者',
@@ -28,7 +28,7 @@ create table tbl_News (
   ) comment '新闻表' charset = utf8;
 
 create table tbl_Label (
-  label_id varchar(8) primary key comment '标签id',
+  label_id int auto_increment primary key comment '标签id',
   label_name varchar(16)  comment '标签名字',
   user_id varchar(8) comment '创建此标签的管理员id'
 ) comment '标签表' charset = utf8;

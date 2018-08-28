@@ -4,8 +4,8 @@ import com.shu.message.dao.NewsMapper;
 import com.shu.message.model.entity.News;
 import com.shu.message.model.entity.NewsExample;
 import com.shu.message.model.ov.Result;
-import com.shu.message.model.ov.ResultSetting.NewsResponse;
-import com.shu.message.model.ov.ResultSetting.NewsResponseInfo;
+import com.shu.message.model.ov.resultsetting.NewsResponse;
+import com.shu.message.model.ov.resultsetting.NewsResponseInfo;
 import com.shu.message.tools.ResultTool;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,9 @@ import java.util.List;
  */
 @Service
 public class NewsService {
+
+    @Resource
+    private UserService userService;
 
     @Resource
     private NewsMapper newsMapper;
@@ -45,22 +48,24 @@ public class NewsService {
         int nums = 0;
         for(News news : list) {
             NewsResponseInfo res = new NewsResponseInfo();
-            res.setAuthor(news.getWebNameId(), news.getWebName());
+            res.setAuthor(userService.getUserInfoById(news.getWebNameId()));
             res.setContent(news.getTitle());
             res.setExtraInfo("官方新闻");
             res.setInfo(news.getNewsId());
             res.setShareInfo(news.getLikeNum(), news.getCommentNum(), news.getSharesNum());
             res.setTopic(news.getTagId(), news.getTag());
-            res.setUrl(news.getUrl());
+            res.setPublishTime(news.getCreateDate());
+            int newsType = news.getType();
+            if(newsType == 1) {
+                res.setMedia(newsType, news.getTitle(), news.getUrl());
+            } else {
+                String ss = news.getImageUrlList();
+                res.setMedia(newsType, news.getImageUrlList());
+            }
             resList.add(res);
             nums++;
         }
-//        NewsResponse n = new NewsResponse(resList, nums);
-        NewsResponse n = new NewsResponse();
-        n.setCards(resList);
-        n.setNums(nums);
-        return ResultTool.success(n);
+        return ResultTool.success(new NewsResponse(resList, nums));
     }
-
 
 }

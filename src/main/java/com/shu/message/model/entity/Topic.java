@@ -13,6 +13,8 @@ public class Topic {
 
     private Integer sharesNum;
 
+    private String imgUrl;
+
     public Integer getTopicId() {
         return topicId;
     }
@@ -59,5 +61,13 @@ public class Topic {
 
     public void setSharesNum(Integer sharesNum) {
         this.sharesNum = sharesNum;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
     }
 }

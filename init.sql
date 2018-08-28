@@ -24,7 +24,8 @@ create table tbl_News (
   image_url_list varchar(2048) comment '图片地址',
   comment_num int default 0 comment '评论数',
   like_num int default 0 comment '点赞数',
-  shares_num int default 0 comment '分享数'
+  shares_num int default 0 comment '分享数',
+  type int comment '1是url 2是img'
   ) comment '新闻表' charset = utf8;
 
 create table tbl_Label (
@@ -35,15 +36,19 @@ create table tbl_Label (
 
 create table tbl_Comment (
   comment_id int primary key comment '评论id',
-  type int comment '1评论的是新闻 2某人的动态 3某人的评论',
+  type int comment '0评论的是新闻 1某人的动态 2某人的评论',
   id int comment '根据type为对应的id',
   user_id varchar(8) comment '发布者id',
-  content varchar(512) comment '评论内容'
+  content varchar(512) comment '评论内容',
+  comment_num int default 0 comment '评论数',
+  like_num int default 0 comment '点赞数',
+  img_url varchar(256) comment '评论如果有图片的话那么为图片地址'
+  create_time timestamp DEFAULT current_timestamp NULL COMMENT '创建评论的时间';
 ) comment '评论表' charset = utf8;
 
 create table tbl_Like (
   like_id int primary key comment '点赞id',
-  type int comment '1点赞的是新闻 2是某人的动态',
+  type int comment '0点赞的是新闻 1是某人的动态 2是某人的评论',
   news_id int comment '根据type对应的新闻或动态的id',
   user_id varchar(8) comment '发布者id',
   is_liked int comment '是否点赞 1点赞 2取消点赞'
@@ -55,5 +60,6 @@ create table tbl_Topic (
   news_id int comment '链接对应的新闻的id',
   comment_num int default 0 comment '评论数',
   like_num int default 0 comment '点赞数',
-  shares_num int default 0 comment '分享数'
+  shares_num int default 0 comment '分享数',
+  img_url varchar(256) comment '评论如果有图片的话那么为图片地址'
 ) comment '点赞表' charset = utf8;

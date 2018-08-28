@@ -1,6 +1,7 @@
 package com.shu.message.model.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommentExample {
@@ -421,6 +422,256 @@ public class CommentExample {
 
         public Criteria andContentNotBetween(String value1, String value2) {
             addCriterion("content not between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumIsNull() {
+            addCriterion("comment_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumIsNotNull() {
+            addCriterion("comment_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumEqualTo(Integer value) {
+            addCriterion("comment_num =", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumNotEqualTo(Integer value) {
+            addCriterion("comment_num <>", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumGreaterThan(Integer value) {
+            addCriterion("comment_num >", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("comment_num >=", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumLessThan(Integer value) {
+            addCriterion("comment_num <", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumLessThanOrEqualTo(Integer value) {
+            addCriterion("comment_num <=", value, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumIn(List<Integer> values) {
+            addCriterion("comment_num in", values, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumNotIn(List<Integer> values) {
+            addCriterion("comment_num not in", values, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumBetween(Integer value1, Integer value2) {
+            addCriterion("comment_num between", value1, value2, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("comment_num not between", value1, value2, "commentNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumIsNull() {
+            addCriterion("like_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumIsNotNull() {
+            addCriterion("like_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumEqualTo(Integer value) {
+            addCriterion("like_num =", value, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumNotEqualTo(Integer value) {
+            addCriterion("like_num <>", value, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumGreaterThan(Integer value) {
+            addCriterion("like_num >", value, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("like_num >=", value, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumLessThan(Integer value) {
+            addCriterion("like_num <", value, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumLessThanOrEqualTo(Integer value) {
+            addCriterion("like_num <=", value, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumIn(List<Integer> values) {
+            addCriterion("like_num in", values, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumNotIn(List<Integer> values) {
+            addCriterion("like_num not in", values, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumBetween(Integer value1, Integer value2) {
+            addCriterion("like_num between", value1, value2, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andLikeNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("like_num not between", value1, value2, "likeNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlIsNull() {
+            addCriterion("img_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlIsNotNull() {
+            addCriterion("img_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlEqualTo(String value) {
+            addCriterion("img_url =", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotEqualTo(String value) {
+            addCriterion("img_url <>", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlGreaterThan(String value) {
+            addCriterion("img_url >", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("img_url >=", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlLessThan(String value) {
+            addCriterion("img_url <", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlLessThanOrEqualTo(String value) {
+            addCriterion("img_url <=", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlLike(String value) {
+            addCriterion("img_url like", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotLike(String value) {
+            addCriterion("img_url not like", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlIn(List<String> values) {
+            addCriterion("img_url in", values, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotIn(List<String> values) {
+            addCriterion("img_url not in", values, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlBetween(String value1, String value2) {
+            addCriterion("img_url between", value1, value2, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotBetween(String value1, String value2) {
+            addCriterion("img_url not between", value1, value2, "imgUrl");
             return (Criteria) this;
         }
     }

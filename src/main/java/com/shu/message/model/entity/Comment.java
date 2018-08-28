@@ -1,5 +1,7 @@
 package com.shu.message.model.entity;
 
+import java.util.Date;
+
 public class Comment {
     private Integer commentId;
 
@@ -10,6 +12,14 @@ public class Comment {
     private String userId;
 
     private String content;
+
+    private Integer commentNum;
+
+    private Integer likeNum;
+
+    private Date createTime;
+
+    private String imgUrl;
 
     public Integer getCommentId() {
         return commentId;
@@ -49,5 +59,37 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Integer getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Integer commentNum) {
+        this.commentNum = commentNum;
+    }
+
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
     }
 }

@@ -7,6 +7,10 @@
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="like_num" property="likeNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    comment_id, type, id, user_id, content
+    comment_id, type, id, user_id, content, comment_num, like_num, create_time, img_url
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.CommentExample" >
     select
@@ -102,9 +106,13 @@
   </delete>
   <insert id="insert" parameterType="com.shu.message.model.entity.Comment" >
     insert into tbl_Comment (comment_id, type, id, 
-      user_id, content)
+      user_id, content, comment_num, 
+      like_num, create_time, img_url
+      )
     values (#{commentId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, 
-      #{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+      #{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{commentNum,jdbcType=INTEGER}, 
+      #{likeNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.shu.message.model.entity.Comment" >
     insert into tbl_Comment
@@ -124,6 +132,18 @@
       <if test="content != null" >
         content,
       </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="likeNum != null" >
+        like_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="commentId != null" >
@@ -140,6 +160,18 @@
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="likeNum != null" >
+        #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -167,6 +199,18 @@
       <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
       </if>
+      <if test="record.commentNum != null" >
+        comment_num = #{record.commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.likeNum != null" >
+        like_num = #{record.likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imgUrl != null" >
+        img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -178,7 +222,11 @@
       type = #{record.type,jdbcType=INTEGER},
       id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR}
+      content = #{record.content,jdbcType=VARCHAR},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      like_num = #{record.likeNum,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      img_url = #{record.imgUrl,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,6 +246,18 @@
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="likeNum != null" >
+        like_num = #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
@@ -206,7 +266,11 @@
     set type = #{type,jdbcType=INTEGER},
       id = #{id,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR}
+      content = #{content,jdbcType=VARCHAR},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
 </mapper>

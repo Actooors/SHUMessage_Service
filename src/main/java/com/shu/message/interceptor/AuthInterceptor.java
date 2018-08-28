@@ -19,24 +19,27 @@ import java.io.PrintWriter;
  */
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
-    private static final String LOGIN_URL = "/login";
+    private static final String LOGIN_URL = "/api/login";
     private static final String TOKEN_NAME = "Authorization";
+    private static final String REQUEST_METHOD = "OPTIONS";
     private static final int HTTP_CODE = 401;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         // 登陆接口不做拦截
-        if (LOGIN_URL.equals(request.getRequestURI())) {
+        response.setHeader("Access-Control-Allow-Origin", "http://0.0.0.0:8888");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+        response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+        if (LOGIN_URL.equals(request.getRequestURI()) || request.getMethod().equals(REQUEST_METHOD)) {
+            response.setStatus(200);
             return true;
         }
         if(request.getHeader(TOKEN_NAME) == null) {
             returnErrorMessage(response);
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
-
 
     private void returnErrorMessage(HttpServletResponse response) throws IOException {
         Result rst = new Result();

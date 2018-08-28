@@ -8,6 +8,7 @@
     <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
     <result column="like_num" property="likeNum" jdbcType="INTEGER" />
     <result column="shares_num" property="sharesNum" jdbcType="INTEGER" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    topic_id, content, news_id, comment_num, like_num, shares_num
+    topic_id, content, news_id, comment_num, like_num, shares_num, img_url
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.TopicExample" >
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.shu.message.model.entity.Topic" >
     insert into tbl_Topic (topic_id, content, news_id, 
-      comment_num, like_num, shares_num
-      )
+      comment_num, like_num, shares_num, 
+      img_url)
     values (#{topicId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{newsId,jdbcType=INTEGER}, 
-      #{commentNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, #{sharesNum,jdbcType=INTEGER}
-      )
+      #{commentNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, #{sharesNum,jdbcType=INTEGER}, 
+      #{imgUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.shu.message.model.entity.Topic" >
     insert into tbl_Topic
@@ -130,6 +131,9 @@
       <if test="sharesNum != null" >
         shares_num,
       </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="topicId != null" >
@@ -149,6 +153,9 @@
       </if>
       <if test="sharesNum != null" >
         #{sharesNum,jdbcType=INTEGER},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,6 +186,9 @@
       <if test="record.sharesNum != null" >
         shares_num = #{record.sharesNum,jdbcType=INTEGER},
       </if>
+      <if test="record.imgUrl != null" >
+        img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -191,7 +201,8 @@
       news_id = #{record.newsId,jdbcType=INTEGER},
       comment_num = #{record.commentNum,jdbcType=INTEGER},
       like_num = #{record.likeNum,jdbcType=INTEGER},
-      shares_num = #{record.sharesNum,jdbcType=INTEGER}
+      shares_num = #{record.sharesNum,jdbcType=INTEGER},
+      img_url = #{record.imgUrl,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -214,6 +225,9 @@
       <if test="sharesNum != null" >
         shares_num = #{sharesNum,jdbcType=INTEGER},
       </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
@@ -223,7 +237,8 @@
       news_id = #{newsId,jdbcType=INTEGER},
       comment_num = #{commentNum,jdbcType=INTEGER},
       like_num = #{likeNum,jdbcType=INTEGER},
-      shares_num = #{sharesNum,jdbcType=INTEGER}
+      shares_num = #{sharesNum,jdbcType=INTEGER},
+      img_url = #{imgUrl,jdbcType=VARCHAR}
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
 </mapper>

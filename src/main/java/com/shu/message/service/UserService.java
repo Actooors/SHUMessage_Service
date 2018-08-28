@@ -4,7 +4,8 @@ import com.shu.message.dao.UserMapper;
 import com.shu.message.model.Json.LoginInfo;
 import com.shu.message.model.entity.User;
 import com.shu.message.model.ov.Result;
-import com.shu.message.model.ov.ResultSetting.LoginResponse;
+import com.shu.message.model.ov.resultsetting.LoginResponse;
+import com.shu.message.model.ov.resultsetting.UserInfo;
 import com.shu.message.tools.AuthTool;
 import com.shu.message.tools.JwtUtil;
 import com.shu.message.tools.ResultTool;
@@ -71,6 +72,8 @@ public class UserService {
                 User newUser = AuthTool.getInfo(loginUser.getUserId());
                 //如果返回了newUser，说明操作正常
                 if (newUser != null) {
+                    //暂时作为默认头像
+                    newUser.setImg("https://avatars2.githubusercontent.com/u/30586220?s=460&v=4");
                     userMapper.insert(newUser);
                     return ResultTool.success(setLoginResponse(loginUser.getUserId(), newUser.getUserName()));
                     //如果没有得到newUser，说明验证异常
@@ -83,5 +86,36 @@ public class UserService {
             }
         }
 
+    }
+
+    
+    /**
+     * @Description: 根据用户id得到用户头像和名字
+     * @Param: [userId]
+     * @Return: com.shu.message.model.ov.resultsetting.UserInfo
+     * @Author: ggmr
+     * @Date: 18-8-28
+     */
+    UserInfo getUserInfoById(String userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user == null) {
+            return null;
+        }
+        return new UserInfo(userId, user.getImg(), user.getUserName());
+    }
+
+    /**
+     * @Description: 根据用户id得到用户姓名
+     * @Param: [userId]
+     * @Return: java.lang.String
+     * @Author: ggmr
+     * @Date: 18-8-28
+     */
+    String getUserNameById(String userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user == null) {
+            return null;
+        }
+        return user.getUserName();
     }
 }

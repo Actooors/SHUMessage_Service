@@ -1,5 +1,7 @@
 package com.shu.message.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class News {
@@ -9,6 +11,7 @@ public class News {
 
     private String author;
 
+    @JsonFormat(locale="zh", timezone = "GMT+8", pattern = "yyyy-MM-ddTHH:mm:ss")
     private Date createDate;
 
     private String webNameId;
@@ -34,6 +37,8 @@ public class News {
     private String url;
 
     private String title;
+
+    private Integer type;
 
     public Integer getNewsId() {
         return newsId;
@@ -161,5 +166,13 @@ public class News {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

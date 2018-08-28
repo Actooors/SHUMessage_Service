@@ -10,15 +10,15 @@ public interface NewsMapper {
 
     int deleteByExample(NewsExample example);
 
-    int deleteByPrimaryKey(String md5Id);
+    int deleteByPrimaryKey(Integer newsId);
 
     int insert(News record);
 
     int insertSelective(News record);
 
-    List<News> selectByExample(@Param("example")NewsExample example,@Param("page")Integer page,@Param("pageSize")Integer pageSize);
+    List<News> selectByExample(NewsExample example);
 
-    News selectByPrimaryKey(String md5Id);
+    News selectByPrimaryKey(Integer newsId);
 
     int updateByExampleSelective(@Param("record") News record, @Param("example") NewsExample example);
 

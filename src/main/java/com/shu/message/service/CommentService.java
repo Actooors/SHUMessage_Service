@@ -104,6 +104,7 @@ public class CommentService {
                     .andTypeEqualTo(COMMENT_TYPE)
                     .andIdEqualTo(reply.getCommentId());
             List<Comment> commentReplyList = commentMapper.selectByExample(commentReplyExample);
+            commentReplyList.sort((Comment o1, Comment o2) -> (o1.getLikeNum().compareTo(o2.getLikeNum())));
             int replyNum = 0;
             //便利这个回复的所有的子回复，并且最多显示2个
             List<RepresentativesInfo> representativesInfoList = new LinkedList<>();

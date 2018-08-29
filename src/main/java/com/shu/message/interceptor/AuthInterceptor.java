@@ -26,7 +26,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        // 登陆接口不做拦截
+        // 登陆接口不做拦截及解决跨域问题
         response.setHeader("Access-Control-Allow-Origin", "http://0.0.0.0:8888");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
         response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
@@ -45,7 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         Result rst = new Result();
         rst.setCode(ResultCode.FAILED);
         rst.setMessage("请登录后再访问页面");
-        response.setContentType("application/json;charset=utf-8");
+        response.setContentType("application.yml/json;charset=utf-8");
         response.setStatus(HTTP_CODE);
         PrintWriter out = response.getWriter();
         ObjectMapper mapper = new ObjectMapper();

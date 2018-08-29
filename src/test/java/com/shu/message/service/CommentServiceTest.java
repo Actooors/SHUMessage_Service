@@ -1,0 +1,30 @@
+package com.shu.message.service;
+
+import com.shu.message.model.ov.resultsetting.CommentRequest;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
+
+import static org.junit.Assert.*;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+public class CommentServiceTest {
+
+    @Resource
+    private CommentService commentService;
+
+    @Test
+    public void insertComment() {
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setType(3);
+        commentRequest.setId(1);
+        commentRequest.setReplyId(12);
+        commentRequest.setContent("我们赶紧取学习怎么使用“百链云图书馆”吧！");
+        commentService.insertComment("16121666",commentRequest);
+        //System.out.print(commentRequest.getReplyId());
+    }
+}

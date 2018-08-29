@@ -108,13 +108,13 @@ public class CommentService {
             int replyNum = 0;
             //便利这个回复的所有的子回复，并且最多显示2个
             List<RepresentativesInfo> representativesInfoList = new LinkedList<>();
-            for(Comment commentreply : commentReplyList) {
+            for(Comment commentReply : commentReplyList) {
                 if(replyNum == 2) { break; }
                 RepresentativesInfo representativesInfo = new RepresentativesInfo();
-                representativesInfo.setAuthor(commentreply.getUserId(),
-                            userService.getUserNameById(commentreply.getUserId()));
-                representativesInfo.setContent(commentreply.getContent());
-                representativesInfo.setPhotos(commentreply.getImgUrl());
+                representativesInfo.setAuthor(commentReply.getUserId(),
+                            userService.getUserNameById(commentReply.getUserId()));
+                representativesInfo.setContent(commentReply.getContent());
+                representativesInfo.setPhotos(commentReply.getImgUrl());
                 representativesInfoList.add(representativesInfo);
                 replyNum++;
             }
@@ -125,5 +125,43 @@ public class CommentService {
         }
         return new CommentListResponseInfo(blockName, cards);
     }
+
+    /**
+     * @Description: 该api对新闻、动态进行评论，或者对评论进行回复，或者对回复进行回复
+     * @Param: [type,id,content,img]
+     * @Return:com.shu.message.model.ov.Result
+     * @Author: xw
+     * @Date: 18-8-29
+     */
+
+    public Result insertComment(String userId, CommentRequest commentRequest){
+
+        Result result = new Result();
+        try {
+            Comment comment = new Comment();
+            comment.setType(commentRequest.getType());
+            comment.setId(commentRequest.getId());
+            comment.setUserId(userId);
+            comment.setContent(commentRequest.getContent());
+            comment.setImgUrl(commentRequest.getImg());
+            if(commentRequest.getReplyId() != null){
+                comment.setReplayId(commentRequest.getReplyId());
+                Comment comment1 = commentMapper.selectByPrimaryKey(commentRequest.getReplyId());
+                comment.setReplayUserId(comment1.getUserId());
+                commentMapper.insertSelective(comment);
+            }else{
+                comment.setReplayId(null);
+                comment.setReplayUserId(null);
+                commentMapper.insertSelective(comment);
+            }
+            result = ResultTool.success();
+        }catch (Exception e){
+            result = ResultTool.error("评论失败！");
+        }
+
+        return result;
+    }
+
+
 
 }

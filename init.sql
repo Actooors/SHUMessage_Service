@@ -44,6 +44,8 @@ create table tbl_Comment (
   like_num int default 0 comment '点赞数',
   img_url varchar(256) comment '评论如果有图片的话那么为图片地址'
   create_time timestamp DEFAULT current_timestamp NULL COMMENT '创建评论的时间';
+  eplay_id      int(11) null comment '要回复的回复ID',
+  replay_user_id varchar(8) null comment '要回复的用户ID'
 ) comment '评论表' charset = utf8;
 
 create table tbl_Like (

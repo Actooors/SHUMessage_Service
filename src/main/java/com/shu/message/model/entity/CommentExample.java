@@ -674,6 +674,136 @@ public class CommentExample {
             addCriterion("img_url not between", value1, value2, "imgUrl");
             return (Criteria) this;
         }
+
+        public Criteria andReplayIdIsNull() {
+            addCriterion("replay_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdIsNotNull() {
+            addCriterion("replay_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdEqualTo(Integer value) {
+            addCriterion("replay_id =", value, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdNotEqualTo(Integer value) {
+            addCriterion("replay_id <>", value, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdGreaterThan(Integer value) {
+            addCriterion("replay_id >", value, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("replay_id >=", value, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdLessThan(Integer value) {
+            addCriterion("replay_id <", value, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdLessThanOrEqualTo(Integer value) {
+            addCriterion("replay_id <=", value, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdIn(List<Integer> values) {
+            addCriterion("replay_id in", values, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdNotIn(List<Integer> values) {
+            addCriterion("replay_id not in", values, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdBetween(Integer value1, Integer value2) {
+            addCriterion("replay_id between", value1, value2, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("replay_id not between", value1, value2, "replayId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdIsNull() {
+            addCriterion("replay_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdIsNotNull() {
+            addCriterion("replay_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdEqualTo(String value) {
+            addCriterion("replay_user_id =", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdNotEqualTo(String value) {
+            addCriterion("replay_user_id <>", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdGreaterThan(String value) {
+            addCriterion("replay_user_id >", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("replay_user_id >=", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdLessThan(String value) {
+            addCriterion("replay_user_id <", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdLessThanOrEqualTo(String value) {
+            addCriterion("replay_user_id <=", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdLike(String value) {
+            addCriterion("replay_user_id like", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdNotLike(String value) {
+            addCriterion("replay_user_id not like", value, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdIn(List<String> values) {
+            addCriterion("replay_user_id in", values, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdNotIn(List<String> values) {
+            addCriterion("replay_user_id not in", values, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdBetween(String value1, String value2) {
+            addCriterion("replay_user_id between", value1, value2, "replayUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReplayUserIdNotBetween(String value1, String value2) {
+            addCriterion("replay_user_id not between", value1, value2, "replayUserId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

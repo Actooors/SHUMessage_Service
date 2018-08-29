@@ -21,6 +21,10 @@ public class Comment {
 
     private String imgUrl;
 
+    private Integer replayId;
+
+    private String replayUserId;
+
     public Integer getCommentId() {
         return commentId;
     }
@@ -91,5 +95,21 @@ public class Comment {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+    }
+
+    public Integer getReplayId() {
+        return replayId;
+    }
+
+    public void setReplayId(Integer replayId) {
+        this.replayId = replayId;
+    }
+
+    public String getReplayUserId() {
+        return replayUserId;
+    }
+
+    public void setReplayUserId(String replayUserId) {
+        this.replayUserId = replayUserId == null ? null : replayUserId.trim();
     }
 }

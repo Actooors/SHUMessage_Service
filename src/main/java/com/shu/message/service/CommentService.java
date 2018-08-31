@@ -52,18 +52,12 @@ public class CommentService {
         if(page > 0) {
             commentListResponseInfoList.add(new CommentListResponseInfo("热门评论"));
         } else {
-//            list.sort(new Comparator<Comment>() {
-//                @Override
-//                public int compare(Comment o1, Comment o2) {
-//                    return o1.getLikeNum().compareTo(o2.getLikeNum());
-//                }
-//            });
             //热评根据点赞数排序
-            list.sort((Comment o1, Comment o2) -> (o1.getLikeNum().compareTo(o2.getLikeNum())));
+            list.sort((Comment o1, Comment o2) -> (o2.getLikeNum().compareTo(o1.getLikeNum())));
             commentListResponseInfoList.add(setComment(HOT_COMMENT, list, limit.get(0), page));
         }
         //最新评论根据时间排序
-        list.sort((Comment o1, Comment o2) -> (o1.getCreateTime().compareTo(o2.getCreateTime())));
+        list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
         commentListResponseInfoList.add(setComment(NEW_COMMENT, list, limit.get(1), page));
         //最新评论
         return ResultTool.success(new CommentListResponse(commentListResponseInfoList));
@@ -84,7 +78,7 @@ public class CommentService {
             if(blockName.equals(HOT_COMMENT)) {
                 comment = list.get(count);
             } else {
-                comment = list.get(page + count);
+                comment = list.get(page * limitNum + count);
             }
             CommentInfo commentInfo = new CommentInfo();
             commentInfo.setAuthor(userService.getUserInfoById(comment.getUserId()));
@@ -92,19 +86,22 @@ public class CommentService {
             commentInfo.setInfo(comment.getType(), comment.getCommentId());
             commentInfo.setLike(comment.getLikeNum());
             commentInfo.setPhotos(comment.getImgUrl());
-
+            commentInfo.setPublishTime(comment.getCreateTime());
             //该评论的回复内容
             ReplyInfo replyInfo = new ReplyInfo();
             Comment reply = commentMapper.selectByPrimaryKey(comment.getCommentId());
             replyInfo.setCount(reply.getCommentNum());
-            if(reply.getCommentNum() == 0) { continue; }
+            if(reply.getCommentNum() == 0) {
+                cards.add(commentInfo);
+                continue;
+            }
             //根据这个回复内容的id找到他的所有的回复
             CommentExample commentReplyExample = new CommentExample();
             commentReplyExample.createCriteria()
                     .andTypeEqualTo(COMMENT_TYPE)
                     .andIdEqualTo(reply.getCommentId());
             List<Comment> commentReplyList = commentMapper.selectByExample(commentReplyExample);
-            commentReplyList.sort((Comment o1, Comment o2) -> (o1.getLikeNum().compareTo(o2.getLikeNum())));
+            commentReplyList.sort((Comment o1, Comment o2) -> (o2.getLikeNum().compareTo(o1.getLikeNum())));
             int replyNum = 0;
             //便利这个回复的所有的子回复，并且最多显示2个
             List<RepresentativesInfo> representativesInfoList = new LinkedList<>();
@@ -129,11 +126,10 @@ public class CommentService {
     /**
      * @Description: 该api对新闻、动态进行评论，或者对评论进行回复，或者对回复进行回复
      * @Param: [type,id,content,img]
-     * @Return:com.shu.message.model.ov.Result
+     * @Return: com.shu.message.model.ov.Result
      * @Author: xw
      * @Date: 18-8-29
      */
-
     public Result insertComment(String userId, CommentRequest commentRequest){
 
         Result result = new Result();
@@ -161,7 +157,5 @@ public class CommentService {
 
         return result;
     }
-
-
 
 }

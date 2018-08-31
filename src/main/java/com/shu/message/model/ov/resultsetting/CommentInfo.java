@@ -1,9 +1,8 @@
 package com.shu.message.model.ov.resultsetting;
 
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.*;
 
 /**
  * @program: message
@@ -16,7 +15,7 @@ public class CommentInfo {
     private String content;
     private List<String> imgs = new LinkedList<>();
     private UserInfo author;
-    private String dateTime;
+    private Date publishTime;
     private int like;
     private ReplyInfo replies;
 
@@ -53,12 +52,12 @@ public class CommentInfo {
         this.author = author;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public Date getPublishTime() {
+        return publishTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
     }
 
     public int getLike() {

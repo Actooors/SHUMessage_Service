@@ -30,6 +30,11 @@ public class CommentService {
 
     private static final String HOT_COMMENT = "热门评论";
     private static final String NEW_COMMENT = "最新评论";
+    private static final String ALL_COMMENT = "全部回复";
+
+
+
+
 
     /**
      * @Description: 根据给定信息返回评论列表
@@ -44,25 +49,35 @@ public class CommentService {
                 .andTypeEqualTo(type)
                 .andIdEqualTo(msgId);
         List<Comment> list = commentMapper.selectByExample(example);
-        if(list.isEmpty()) {
-            return ResultTool.error("没有评论");
+        if (list.isEmpty()) {
+            if (type == 0) {
+                return ResultTool.error("没有评论");
+            } else if (type == 1) {
+                return ResultTool.error("没有动态");
+            } else {
+                return ResultTool.error("没有回复");
+            }
         }
-        List<CommentListResponseInfo> commentListResponseInfoList = new LinkedList<>();
-        //hot评论
-        if(page > 0) {
-            commentListResponseInfoList.add(new CommentListResponseInfo("热门评论"));
+        if (type != COMMENT_TYPE) {
+            List<CommentListResponseInfo> commentListResponseInfoList = new LinkedList<>();
+            //hot评论
+            if (page > 0) {
+                commentListResponseInfoList.add(new CommentListResponseInfo("热门评论"));
+            } else {
+                //热评根据点赞数排序
+                list.sort((Comment o1, Comment o2) -> (o2.getLikeNum().compareTo(o1.getLikeNum())));
+                commentListResponseInfoList.add(setComment(HOT_COMMENT, list, limit.get(0), page));
+            }
+            //最新评论根据时间排序
+            list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
+            commentListResponseInfoList.add(setComment(NEW_COMMENT, list, limit.get(1), page));
+            //最新评论
+            return ResultTool.success(new CommentListResponse(commentListResponseInfoList));
         } else {
-            //热评根据点赞数排序
-            list.sort((Comment o1, Comment o2) -> (o2.getLikeNum().compareTo(o1.getLikeNum())));
-            commentListResponseInfoList.add(setComment(HOT_COMMENT, list, limit.get(0), page));
+            list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
+            return ResultTool.success(new ReplyListResponse(setComment(ALL_COMMENT, list, limit.get(0), page)));
         }
-        //最新评论根据时间排序
-        list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
-        commentListResponseInfoList.add(setComment(NEW_COMMENT, list, limit.get(1), page));
-        //最新评论
-        return ResultTool.success(new CommentListResponse(commentListResponseInfoList));
     }
-
     /**
      * @Description: 填写CommentListResponseInfo内容
      * @Param: [blockName, list, limitNum]
@@ -85,13 +100,13 @@ public class CommentService {
             commentInfo.setContent(comment.getContent());
             commentInfo.setInfo(comment.getType(), comment.getCommentId());
             commentInfo.setLike(comment.getLikeNum());
-            commentInfo.setPhotos(comment.getImgUrl());
+            commentInfo.setImgs(comment.getImgUrl());
             commentInfo.setPublishTime(comment.getCreateTime());
             //该评论的回复内容
             ReplyInfo replyInfo = new ReplyInfo();
             Comment reply = commentMapper.selectByPrimaryKey(comment.getCommentId());
             replyInfo.setCount(reply.getCommentNum());
-            if(reply.getCommentNum() == 0) {
+            if(reply.getCommentNum() == 0 || blockName.equals(ALL_COMMENT)) {
                 cards.add(commentInfo);
                 continue;
             }
@@ -132,7 +147,7 @@ public class CommentService {
      */
     public Result insertComment(String userId, CommentRequest commentRequest){
 
-        Result result = new Result();
+        Result result;
         try {
             Comment comment = new Comment();
             comment.setType(commentRequest.getType());

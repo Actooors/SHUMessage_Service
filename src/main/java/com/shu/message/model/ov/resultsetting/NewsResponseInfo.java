@@ -98,15 +98,4 @@ public class NewsResponseInfo {
         }
     }
 
-
-//    media:{
-//        type:"url",
-//                title:"",//新闻标题，若无标题请置null
-//                url:""//爬取的新闻请将原新闻url写在这里
-//    }
-////图片
-//    media:{
-//        type:"img",
-//                imgs:["",""]//最多3张
-//    }
 }

@@ -26,15 +26,12 @@ public class CommentController {
     @Resource
     private CommentService commentService;
 
-    @GetMapping("/commentList")
+    @GetMapping("/list")
     @ApiOperation(value = "获取评论列表", httpMethod = "GET")
     public Result getNewsList(@RequestParam(value = "type") int type,
                               @RequestParam(value = "id") int id,
                               @RequestParam(value = "page") int page,
                               @RequestParam(value = "limit") List<Integer> limit) {
-        List<Integer> s = new LinkedList<>();
-        s.add(2);
-        s.add(3);
         return commentService.getCommentList(type, id, page, limit);
     }
 

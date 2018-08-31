@@ -36,11 +36,11 @@ public class CommentInfo {
         this.content = content;
     }
 
-    public List<String> getPhotos() {
+    public List<String> getImgs() {
         return imgs;
     }
 
-    public void setPhotos(String photos) {
+    public void setImgs(String photos) {
         this.imgs.add(photos);
     }
 

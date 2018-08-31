@@ -1,6 +1,5 @@
 package com.shu.message.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -11,13 +10,22 @@ public class Comment {
 
     private Integer id;
 
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    private Integer likeNum;
+
     private String userId;
 
     private String content;
 
     private Integer commentNum;
 
-    private Integer likeNum;
 
     private Date createTime;
 
@@ -75,13 +83,6 @@ public class Comment {
         this.commentNum = commentNum;
     }
 
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
-    }
 
     public Date getCreateTime() {
         return createTime;

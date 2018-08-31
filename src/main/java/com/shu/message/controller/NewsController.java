@@ -1,6 +1,5 @@
 package com.shu.message.controller;
 
-import com.shu.message.model.Json.LoginInfo;
 import com.shu.message.model.ov.Result;
 import com.shu.message.service.NewsService;
 import io.swagger.annotations.Api;

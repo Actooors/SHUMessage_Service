@@ -60,18 +60,6 @@ public class ResultTool {
         return result;
     }
 
-    /**
-     * @Description: 当请求失败并不需要返回任何信息时使用
-     * @Param: []
-     * @Return: com.management.model.ov.Result
-     * @Author: ggmr
-     * @Date: 18-7-29
-     */
-    public static Result error(){
-        Result result = new Result();
-        result.setCode(FAILED);
-        return result;
-    }
 
     /**
      * @Description: 党请求失败并且返回失败信息时使用

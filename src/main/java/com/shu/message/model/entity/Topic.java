@@ -1,5 +1,6 @@
 package com.shu.message.model.entity;
 
+
 public class Topic {
     private Integer topicId;
 
@@ -10,6 +11,14 @@ public class Topic {
     private Integer commentNum;
 
     private Integer likeNum;
+
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
 
     private Integer sharesNum;
 
@@ -47,13 +56,6 @@ public class Topic {
         this.commentNum = commentNum;
     }
 
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
-    }
 
     public Integer getSharesNum() {
         return sharesNum;

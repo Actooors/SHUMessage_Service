@@ -16,6 +16,16 @@ public class News {
 
     private String webNameId;
 
+    private Integer likeNum;
+
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
+
     private String webName;
 
     private String apartment;
@@ -29,8 +39,6 @@ public class News {
     private String imageUrlList;
 
     private Integer commentNum;
-
-    private Integer likeNum;
 
     private Integer sharesNum;
 
@@ -134,14 +142,6 @@ public class News {
 
     public void setCommentNum(Integer commentNum) {
         this.commentNum = commentNum;
-    }
-
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
     }
 
     public Integer getSharesNum() {

@@ -1,8 +1,9 @@
 package com.shu.message.service;
 
-import com.shu.message.dao.UserMapper;
+import com.shu.message.dao.*;
+import com.shu.message.model.Json.LikeInfo;
 import com.shu.message.model.Json.LoginInfo;
-import com.shu.message.model.entity.User;
+import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.LoginResponse;
 import com.shu.message.model.ov.resultsetting.UserInfo;
@@ -12,6 +13,7 @@ import com.shu.message.tools.ResultTool;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @program: message
@@ -24,6 +26,18 @@ public class UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private LikeMapper likeMapper;
+
+    @Resource
+    private NewsMapper newsMapper;
+
+    @Resource
+    private TopicMapper topicMapper;
+
+    @Resource
+    private CommentMapper commentMapper;
 
     /**
      * @Description: 根据参数生成登录返回需要的信息
@@ -118,4 +132,48 @@ public class UserService {
         }
         return user.getUserName();
     }
+
+    /**
+     * @Description: 对新闻或者动态或者评论点赞
+     * @Param: [likeInfo, userId]
+     * @Return: com.shu.message.model.ov.Result
+     * @Author: ggmr
+     * @Date: 18-8-31
+     */
+    public Result setLike(LikeInfo likeInfo, String userId) {
+        int isLike = likeInfo.getLike() ? 1 : 2,
+            type = likeInfo.getType(),
+            id = likeInfo.getId();
+        LikeExample example = new LikeExample();
+        example.createCriteria()
+                .andTypeEqualTo(type)
+                .andNewsIdEqualTo(id);
+        List<Like> like = likeMapper.selectByExample(example);
+        if(like.isEmpty()) {
+            Like newLike = new Like();
+            newLike.setIsLiked(isLike);
+            newLike.setNewsId(id);
+            newLike.setType(type);
+            newLike.setUserId(userId);
+            likeMapper.insert(newLike);
+        } else {
+            like.get(0).setIsLiked(isLike);
+            likeMapper.updateByPrimaryKeySelective(like.get(0));
+        }
+        if(type == 0) {
+            News news =  newsMapper.selectByPrimaryKey(id);
+            news.setLikeNum(isLike == 1 ? news.getLikeNum() + 1 : news.getLikeNum() - 1);
+            newsMapper.updateByPrimaryKeySelective(news);
+        } else if(type == 1) {
+            Topic topic = topicMapper.selectByPrimaryKey(id);
+            topic.setLikeNum(isLike == 1 ? topic.getLikeNum() + 1 : topic.getLikeNum() - 1);
+            topicMapper.updateByPrimaryKeySelective(topic);
+        } else {
+            Comment comment = commentMapper.selectByPrimaryKey(id);
+            comment.setLikeNum(isLike == 1 ? comment.getLikeNum() + 1 : comment.getLikeNum() - 1);
+            commentMapper.updateByPrimaryKeySelective(comment);
+        }
+        return ResultTool.success();
+    }
+
 }

@@ -88,12 +88,15 @@ public class CommentService {
     private CommentListResponseInfo setComment(String blockName, List<Comment> list, int limitNum, int page) {
         List<CommentInfo> cards = new LinkedList<>();
         //便利所有的给定的排序后的评论
-        for(int count = 0;count < limitNum; count++) {
+        int maxLen = list.size();
+        for(int count = 0;count < limitNum && count < maxLen; count++) {
             Comment comment;
             if(blockName.equals(HOT_COMMENT)) {
                 comment = list.get(count);
             } else {
-                comment = list.get(page * limitNum + count);
+                int cur = page * limitNum + count;
+                if(cur >= maxLen) { break; }
+                comment = list.get(cur);
             }
             CommentInfo commentInfo = new CommentInfo();
             commentInfo.setAuthor(userService.getUserInfoById(comment.getUserId()));
@@ -107,6 +110,8 @@ public class CommentService {
             Comment reply = commentMapper.selectByPrimaryKey(comment.getCommentId());
             replyInfo.setCount(reply.getCommentNum());
             if(reply.getCommentNum() == 0 || blockName.equals(ALL_COMMENT)) {
+                replyInfo.setCount(0);
+                commentInfo.setReplies(replyInfo);
                 cards.add(commentInfo);
                 continue;
             }

@@ -6,9 +6,10 @@ import java.util.List;
 
 public class NewsExample {
 
-    protected  int startRow;
+    int startRow;
+    int pageSize;
 
-    protected int pageSize;
+    protected String orderByClause;
 
     public int getStartRow() {
         return startRow;
@@ -25,12 +26,6 @@ public class NewsExample {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-
-    public void setOredCriteria(List<Criteria> oredCriteria) {
-        this.oredCriteria = oredCriteria;
-    }
-
-    protected String orderByClause;
 
     protected boolean distinct;
 
@@ -390,143 +385,143 @@ public class NewsExample {
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdIsNull() {
-            addCriterion("web_name_id is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdIsNotNull() {
-            addCriterion("web_name_id is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdEqualTo(String value) {
-            addCriterion("web_name_id =", value, "webNameId");
+        public Criteria andUserIdEqualTo(String value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdNotEqualTo(String value) {
-            addCriterion("web_name_id <>", value, "webNameId");
+        public Criteria andUserIdNotEqualTo(String value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdGreaterThan(String value) {
-            addCriterion("web_name_id >", value, "webNameId");
+        public Criteria andUserIdGreaterThan(String value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdGreaterThanOrEqualTo(String value) {
-            addCriterion("web_name_id >=", value, "webNameId");
+        public Criteria andUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdLessThan(String value) {
-            addCriterion("web_name_id <", value, "webNameId");
+        public Criteria andUserIdLessThan(String value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdLessThanOrEqualTo(String value) {
-            addCriterion("web_name_id <=", value, "webNameId");
+        public Criteria andUserIdLessThanOrEqualTo(String value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdLike(String value) {
-            addCriterion("web_name_id like", value, "webNameId");
+        public Criteria andUserIdLike(String value) {
+            addCriterion("user_id like", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdNotLike(String value) {
-            addCriterion("web_name_id not like", value, "webNameId");
+        public Criteria andUserIdNotLike(String value) {
+            addCriterion("user_id not like", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdIn(List<String> values) {
-            addCriterion("web_name_id in", values, "webNameId");
+        public Criteria andUserIdIn(List<String> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdNotIn(List<String> values) {
-            addCriterion("web_name_id not in", values, "webNameId");
+        public Criteria andUserIdNotIn(List<String> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdBetween(String value1, String value2) {
-            addCriterion("web_name_id between", value1, value2, "webNameId");
+        public Criteria andUserIdBetween(String value1, String value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIdNotBetween(String value1, String value2) {
-            addCriterion("web_name_id not between", value1, value2, "webNameId");
+        public Criteria andUserIdNotBetween(String value1, String value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIsNull() {
-            addCriterion("web_name is null");
+        public Criteria andUserNameIsNull() {
+            addCriterion("user_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIsNotNull() {
-            addCriterion("web_name is not null");
+        public Criteria andUserNameIsNotNull() {
+            addCriterion("user_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameEqualTo(String value) {
-            addCriterion("web_name =", value, "webName");
+        public Criteria andUserNameEqualTo(String value) {
+            addCriterion("user_name =", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameNotEqualTo(String value) {
-            addCriterion("web_name <>", value, "webName");
+        public Criteria andUserNameNotEqualTo(String value) {
+            addCriterion("user_name <>", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameGreaterThan(String value) {
-            addCriterion("web_name >", value, "webName");
+        public Criteria andUserNameGreaterThan(String value) {
+            addCriterion("user_name >", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameGreaterThanOrEqualTo(String value) {
-            addCriterion("web_name >=", value, "webName");
+        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
+            addCriterion("user_name >=", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameLessThan(String value) {
-            addCriterion("web_name <", value, "webName");
+        public Criteria andUserNameLessThan(String value) {
+            addCriterion("user_name <", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameLessThanOrEqualTo(String value) {
-            addCriterion("web_name <=", value, "webName");
+        public Criteria andUserNameLessThanOrEqualTo(String value) {
+            addCriterion("user_name <=", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameLike(String value) {
-            addCriterion("web_name like", value, "webName");
+        public Criteria andUserNameLike(String value) {
+            addCriterion("user_name like", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameNotLike(String value) {
-            addCriterion("web_name not like", value, "webName");
+        public Criteria andUserNameNotLike(String value) {
+            addCriterion("user_name not like", value, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameIn(List<String> values) {
-            addCriterion("web_name in", values, "webName");
+        public Criteria andUserNameIn(List<String> values) {
+            addCriterion("user_name in", values, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameNotIn(List<String> values) {
-            addCriterion("web_name not in", values, "webName");
+        public Criteria andUserNameNotIn(List<String> values) {
+            addCriterion("user_name not in", values, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameBetween(String value1, String value2) {
-            addCriterion("web_name between", value1, value2, "webName");
+        public Criteria andUserNameBetween(String value1, String value2) {
+            addCriterion("user_name between", value1, value2, "userName");
             return (Criteria) this;
         }
 
-        public Criteria andWebNameNotBetween(String value1, String value2) {
-            addCriterion("web_name not between", value1, value2, "webName");
+        public Criteria andUserNameNotBetween(String value1, String value2) {
+            addCriterion("user_name not between", value1, value2, "userName");
             return (Criteria) this;
         }
 

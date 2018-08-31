@@ -59,7 +59,7 @@ public class NewsService {
         int nums = 0;
         for(News news : list) {
             NewsResponseInfo res = new NewsResponseInfo();
-            res.setAuthor(userService.getUserInfoById(news.getWebNameId()));
+            res.setAuthor(userService.getUserInfoById(news.getUserId()));
             res.setContent(news.getTitle());
             res.setExtraInfo("官方新闻");
             res.setInfo(news.getNewsId());
@@ -82,7 +82,7 @@ public class NewsService {
             TopicExample example3 = new TopicExample();
             example3.createCriteria()
                     .andTypeEqualTo(0)
-                    .andUsreIdEqualTo(userId)
+                    .andUserIdEqualTo(userId)
                     .andNewsIdEqualTo(news.getNewsId());
 
             res.setFootprint(

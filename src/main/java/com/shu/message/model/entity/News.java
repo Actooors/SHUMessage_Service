@@ -1,32 +1,17 @@
 package com.shu.message.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.shu.message.model.entity.messagepackage.MessageAbstract;
 
 import java.util.Date;
 
-public class News {
+public class News extends MessageAbstract {
     private Integer newsId;
 
     private String md5Id;
 
     private String author;
 
-    @JsonFormat(locale="zh", timezone = "GMT+8", pattern = "yyyy-MM-ddTHH:mm:ss")
-    private Date createDate;
-
-    private String webNameId;
-
-    private Integer likeNum;
-
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
-    }
-
-    private String webName;
+    private String userName;
 
     private String apartment;
 
@@ -34,19 +19,12 @@ public class News {
 
     private String tag;
 
-    private String content;
-
     private String imageUrlList;
-
-    private Integer commentNum;
-
-    private Integer sharesNum;
 
     private String url;
 
     private String title;
 
-    private Integer type;
 
     public Integer getNewsId() {
         return newsId;
@@ -72,28 +50,12 @@ public class News {
         this.author = author == null ? null : author.trim();
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getWebNameId() {
-        return webNameId;
-    }
-
-    public void setWebNameId(String webNameId) {
-        this.webNameId = webNameId == null ? null : webNameId.trim();
-    }
-
-    public String getWebName() {
-        return webName;
-    }
-
-    public void setWebName(String webName) {
-        this.webName = webName == null ? null : webName.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getApartment() {
@@ -120,36 +82,12 @@ public class News {
         this.tag = tag == null ? null : tag.trim();
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
     public String getImageUrlList() {
         return imageUrlList;
     }
 
     public void setImageUrlList(String imageUrlList) {
         this.imageUrlList = imageUrlList == null ? null : imageUrlList.trim();
-    }
-
-    public Integer getCommentNum() {
-        return commentNum;
-    }
-
-    public void setCommentNum(Integer commentNum) {
-        this.commentNum = commentNum;
-    }
-
-    public Integer getSharesNum() {
-        return sharesNum;
-    }
-
-    public void setSharesNum(Integer sharesNum) {
-        this.sharesNum = sharesNum;
     }
 
     public String getUrl() {
@@ -168,11 +106,4 @@ public class News {
         this.title = title == null ? null : title.trim();
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 }

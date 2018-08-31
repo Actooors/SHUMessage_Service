@@ -40,8 +40,8 @@ public class NewsResponseInfo {
         return info;
     }
 
-    public void setInfo(int id) {
-        this.info.put("type",0);
+    public void setInfo(int type, int id) {
+        this.info.put("type", type);
         this.info.put("id",id);
     }
 
@@ -76,10 +76,10 @@ public class NewsResponseInfo {
         return shareInfo;
     }
 
-    public void setShareInfo(Integer like, Integer comment, Integer share) {
-        this.shareInfo.put("like",like);
-        this.shareInfo.put("comment",comment);
-        this.shareInfo.put("share",share);
+    public void setShareInfo(Integer ... num) {
+        this.shareInfo.put("like", num[0]);
+        this.shareInfo.put("comment", num[1]);
+        this.shareInfo.put("share", num[2]);
     }
 
     public Map<String, Object> getMedia() {

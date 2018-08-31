@@ -15,16 +15,11 @@ public class News extends MessageAbstract {
 
     private String apartment;
 
-    private Integer tagId;
-
-    private String tag;
-
     private String imageUrlList;
 
     private String url;
 
     private String title;
-
 
     public Integer getNewsId() {
         return newsId;
@@ -64,22 +59,6 @@ public class News extends MessageAbstract {
 
     public void setApartment(String apartment) {
         this.apartment = apartment == null ? null : apartment.trim();
-    }
-
-    public Integer getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Integer tagId) {
-        this.tagId = tagId;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
     }
 
     public String getImageUrlList() {

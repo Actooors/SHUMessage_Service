@@ -1,8 +1,10 @@
 package com.shu.message.controller;
 
+import com.shu.message.model.Json.HostInfo;
 import com.shu.message.model.Json.LikeInfo;
 import com.shu.message.model.Json.LoginInfo;
 import com.shu.message.model.ov.Result;
+import com.shu.message.service.IframeService;
 import com.shu.message.service.UserService;
 import com.shu.message.tools.JwtUtil;
 import io.swagger.annotations.Api;
@@ -25,6 +27,9 @@ public class CommonController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private IframeService iframeService;
+
     @PostMapping("/like")
     @ApiOperation(value = "点赞", httpMethod = "POST")
     public Result login(@RequestHeader(value = "Authorization") String token,
@@ -32,4 +37,17 @@ public class CommonController {
         String userId = JwtUtil.parseJwt(token);
         return userService.setLike(likeInfo,userId);
     }
+
+    @PostMapping("/newIframe")
+    @ApiOperation(value = "添加iframe", httpMethod = "POST")
+    public Result addIframe(@RequestBody HostInfo hostInfo) {
+        return iframeService.newUrl(hostInfo);
+    }
+
+    @GetMapping("/iframe")
+    @ApiOperation(value = "查询iframe", httpMethod = "GET")
+    public Result findIframe(@RequestParam(value = "host") String host) {
+        return iframeService.findUrl(host);
+    }
+
 }

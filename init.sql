@@ -65,3 +65,8 @@ create table tbl_Topic (
   shares_num int default 0 comment '分享数',
   img_url varchar(256) comment '评论如果有图片的话那么为图片地址'
 ) comment '点赞表' charset = utf8;
+
+
+create table tbl_Iframe (
+  host varchar(128) primary key comment 'host作为id'
+)

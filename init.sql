@@ -59,7 +59,8 @@ create table tbl_Like (
 create table tbl_Topic (
   topic_id int primary key comment '动态id',
   content varchar(4096) not null comment '动态的内容',
-  news_id int comment '链接对应的新闻的id',
+  news_id int comment '链接对应的新闻的id或者动态id',
+  type int comment '动态类型 0是转发新闻 1是转发动态 2是自己发的动态',
   comment_num int default 0 comment '评论数',
   like_num int default 0 comment '点赞数',
   shares_num int default 0 comment '分享数',
@@ -68,5 +69,6 @@ create table tbl_Topic (
 
 
 create table tbl_Iframe (
-  host varchar(128) primary key comment 'host作为id'
+  id int primary key auto_increment comment 'id',
+  host varchar(128) comment 'host'
 )

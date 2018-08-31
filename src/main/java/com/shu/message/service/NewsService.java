@@ -1,8 +1,10 @@
 package com.shu.message.service;
 
+import com.shu.message.dao.CommentMapper;
+import com.shu.message.dao.LikeMapper;
 import com.shu.message.dao.NewsMapper;
-import com.shu.message.model.entity.News;
-import com.shu.message.model.entity.NewsExample;
+import com.shu.message.dao.TopicMapper;
+import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.NewsResponse;
 import com.shu.message.model.ov.resultsetting.NewsResponseInfo;
@@ -28,6 +30,15 @@ public class NewsService {
     @Resource
     private NewsMapper newsMapper;
 
+    @Resource
+    private CommentMapper commentMapper;
+
+    @Resource
+    private TopicMapper topicMapper;
+
+    @Resource
+    private LikeMapper likeMapper;
+
     /**
      * @Description: 获取新闻列表
      * @Param: [pageNum, pageSize]
@@ -35,7 +46,7 @@ public class NewsService {
      * @Author: ggmr
      * @Date: 18-8-28
      */
-    public Result getNewsList(int pageNum, int pageSize) {
+    public Result getNewsList(int pageNum, int pageSize, String userId) {
         NewsExample example = new NewsExample();
         example.setOrderByClause("`create_date` DESC");
         example.setStartRow(pageNum * pageSize);
@@ -55,6 +66,30 @@ public class NewsService {
             res.setShareInfo(news.getLikeNum(), news.getCommentNum(), news.getSharesNum());
             res.setTopic(news.getTagId(), news.getTag());
             res.setPublishTime(news.getCreateDate());
+
+            CommentExample example2 = new CommentExample();
+            example2.createCriteria()
+                    .andTypeEqualTo(0)
+                    .andUserIdEqualTo(userId)
+                    .andIdEqualTo(news.getNewsId());
+
+            LikeExample example1 = new LikeExample();
+            example1.createCriteria()
+                    .andTypeEqualTo(0)
+                    .andUserIdEqualTo(userId)
+                    .andNewsIdEqualTo(news.getNewsId());
+
+            TopicExample example3 = new TopicExample();
+            example3.createCriteria()
+                    .andTypeEqualTo(0)
+                    .andUsreIdEqualTo(userId)
+                    .andNewsIdEqualTo(news.getNewsId());
+
+            res.setFootprint(
+                    !likeMapper.selectByExample(example1).isEmpty(),
+                    !commentMapper.selectByExample(example2).isEmpty(),
+                    !topicMapper.selectByExample(example3).isEmpty()
+            );
             int newsType = news.getType();
             if(newsType == 1) {
                 res.setMedia(newsType, news.getTitle(), news.getUrl());

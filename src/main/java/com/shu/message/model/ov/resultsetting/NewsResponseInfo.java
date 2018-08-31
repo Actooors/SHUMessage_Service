@@ -19,6 +19,7 @@ public class NewsResponseInfo {
     private Date publishTime;
     private Map<String, Integer> shareInfo = new Hashtable<>();
     private Map<String, Object> media = new Hashtable<>();
+    private Map<String, Boolean> footprint = new Hashtable<>();
 
     public Date getPublishTime() {
         return publishTime;
@@ -98,4 +99,13 @@ public class NewsResponseInfo {
         }
     }
 
+    public Map<String, Boolean> getFootprint() {
+        return footprint;
+    }
+
+    public void setFootprint(Boolean ... judge) {
+        this.footprint.put("like", judge[0]);
+        this.footprint.put("comment", judge[1]);
+        this.footprint.put("forward", judge[2]);
+    }
 }

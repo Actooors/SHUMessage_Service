@@ -1,6 +1,5 @@
 package com.shu.message.model.entity;
 
-
 public class Topic {
     private Integer topicId;
 
@@ -8,21 +7,17 @@ public class Topic {
 
     private Integer newsId;
 
+    private Integer type;
+
     private Integer commentNum;
 
     private Integer likeNum;
 
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
-    }
-
     private Integer sharesNum;
 
     private String imgUrl;
+
+    private String usreId;
 
     public Integer getTopicId() {
         return topicId;
@@ -48,6 +43,14 @@ public class Topic {
         this.newsId = newsId;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public Integer getCommentNum() {
         return commentNum;
     }
@@ -56,6 +59,13 @@ public class Topic {
         this.commentNum = commentNum;
     }
 
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
 
     public Integer getSharesNum() {
         return sharesNum;
@@ -71,5 +81,13 @@ public class Topic {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl == null ? null : imgUrl.trim();
+    }
+
+    public String getUsreId() {
+        return usreId;
+    }
+
+    public void setUsreId(String usreId) {
+        this.usreId = usreId == null ? null : usreId.trim();
     }
 }

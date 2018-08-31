@@ -2,6 +2,7 @@ package com.shu.message.model.ov.resultsetting;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class CommentListResponseInfo {
 
     public CommentListResponseInfo(String blockName) {
         this.blockName = blockName;
+        this.cards = new LinkedList<>();
     }
 
     public CommentListResponseInfo(String blockName, List<CommentInfo> cards) {

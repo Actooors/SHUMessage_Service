@@ -25,10 +25,8 @@ public class NewsController {
 
     @GetMapping("/newsList")
     @ApiOperation(value = "获取新闻列表", httpMethod = "GET")
-    public Result getNewsList(@RequestHeader(value = "Authorization") String token,
-                             @RequestParam(value = "page") int page,
+    public Result getNewsList(@RequestParam(value = "page") int page,
                              @RequestParam(value = "pageSize") int pageSize) {
-        String userId = JwtUtil.parseJwt(token);
-        return newsService.getNewsList(page, pageSize, userId);
+        return newsService.getNewsList(page, pageSize);
     }
 }

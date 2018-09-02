@@ -58,8 +58,8 @@ public class CommentService {
                 return ResultTool.error("没有回复");
             }
         }
+        List<CommentListResponseInfo> commentListResponseInfoList = new LinkedList<>();
         if (type != COMMENT_TYPE) {
-            List<CommentListResponseInfo> commentListResponseInfoList = new LinkedList<>();
             //hot评论
             if (page > 0) {
                 commentListResponseInfoList.add(new CommentListResponseInfo("热门评论"));
@@ -72,11 +72,12 @@ public class CommentService {
             list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
             commentListResponseInfoList.add(setComment(NEW_COMMENT, list, limit.get(1), page));
             //最新评论
-            return ResultTool.success(new CommentListResponse(commentListResponseInfoList));
         } else {
+            //获取回复
             list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
-            return ResultTool.success(new ReplyListResponse(setComment(ALL_COMMENT, list, limit.get(0), page)));
+            commentListResponseInfoList.add(setComment(ALL_COMMENT, list, limit.get(0), page));
         }
+        return ResultTool.success(new CommentListResponse(commentListResponseInfoList));
     }
     /**
      * @Description: 填写CommentListResponseInfo内容
@@ -101,7 +102,7 @@ public class CommentService {
             CommentInfo commentInfo = new CommentInfo();
             commentInfo.setAuthor(userService.getUserInfoById(comment.getUserId()));
             commentInfo.setContent(comment.getContent());
-            commentInfo.setInfo(comment.getType(), comment.getCommentId());
+            commentInfo.setInfo(2, comment.getCommentId());
             commentInfo.setLike(comment.getLikeNum());
             commentInfo.setImgs(comment.getImgUrl());
             commentInfo.setPublishTime(comment.getCreateTime());

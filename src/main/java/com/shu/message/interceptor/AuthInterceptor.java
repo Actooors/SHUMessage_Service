@@ -30,6 +30,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Origin", "http://0.0.0.0:8888");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
         response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+        String s = request.getRequestURI();
         if (LOGIN_URL.equals(request.getRequestURI()) || request.getMethod().equals(REQUEST_METHOD)) {
             response.setStatus(200);
             return true;

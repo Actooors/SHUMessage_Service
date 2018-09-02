@@ -48,6 +48,7 @@ public class NewsService {
         int nums = 0;
         for(News news : list) {
             NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), userId);
+            res.setContent(news.getTitle());
             int newsType = news.getType();
             if(newsType == 1) {
                 res.setMedia(newsType, news.getTitle(), news.getUrl());

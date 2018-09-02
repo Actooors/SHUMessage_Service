@@ -1,8 +1,11 @@
 package com.shu.message.service;
 
 import com.shu.message.dao.CommentMapper;
+import com.shu.message.dao.LikeMapper;
 import com.shu.message.model.entity.Comment;
 import com.shu.message.model.entity.CommentExample;
+import com.shu.message.model.entity.Like;
+import com.shu.message.model.entity.LikeExample;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.*;
 import com.shu.message.tools.ResultTool;
@@ -25,6 +28,9 @@ public class CommentService {
 
     @Resource
     private CommentMapper commentMapper;
+
+    @Resource
+    private LikeMapper likeMapper;
 
     private static final int COMMENT_TYPE = 2;
 
@@ -103,7 +109,16 @@ public class CommentService {
             commentInfo.setAuthor(userService.getUserInfoById(comment.getUserId()));
             commentInfo.setContent(comment.getContent());
             commentInfo.setInfo(2, comment.getCommentId());
-            commentInfo.setLike(comment.getLikeNum());
+            commentInfo.setShareInfo(comment.getLikeNum());
+
+            LikeExample example = new LikeExample();
+            example.createCriteria()
+                    .andTypeEqualTo(2)
+                    .andUserIdEqualTo(comment.getUserId())
+                    .andNewsIdEqualTo(comment.getCommentId());
+            List<Like> l = likeMapper.selectByExample(example);
+            commentInfo.setFootprint(!(l.isEmpty() || l.get(0).getIsLiked() == 2));
+
             commentInfo.setImgs(comment.getImgUrl());
             commentInfo.setPublishTime(comment.getCreateTime());
             //该评论的回复内容

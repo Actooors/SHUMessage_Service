@@ -150,6 +150,7 @@ public class UserService {
                 .andNewsIdEqualTo(id);
         List<Like> like = likeMapper.selectByExample(example);
         if(like.isEmpty()) {
+            if(isLike == 2) {return ResultTool.error("点赞格式错误"); }
             Like newLike = new Like();
             newLike.setIsLiked(isLike);
             newLike.setNewsId(id);
@@ -157,6 +158,7 @@ public class UserService {
             newLike.setUserId(userId);
             likeMapper.insert(newLike);
         } else {
+            if(like.get(0).getIsLiked().equals(isLike)) { return ResultTool.error("点赞格式有误"); }
             like.get(0).setIsLiked(isLike);
             likeMapper.updateByPrimaryKeySelective(like.get(0));
         }

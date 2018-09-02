@@ -16,8 +16,28 @@ public class CommentInfo {
     private List<String> imgs = new LinkedList<>();
     private UserInfo author;
     private Date publishTime;
-    private int like;
+    private Map<String, Integer> shareInfo = new Hashtable<>();
+    private Map<String, Boolean> footprint = new Hashtable<>();
+
+
     private ReplyInfo replies;
+
+
+    public Map<String, Integer> getShareInfo() {
+        return shareInfo;
+    }
+
+    public void setShareInfo(int shareNum) {
+        this.shareInfo.put("like", shareNum);
+    }
+
+    public Map<String, Boolean> getFootprint() {
+        return footprint;
+    }
+
+    public void setFootprint(Boolean isLiked) {
+        this.footprint.put("like", isLiked);
+    }
 
     public Map<String, Integer> getInfo() {
         return info;
@@ -58,14 +78,6 @@ public class CommentInfo {
 
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
-    }
-
-    public int getLike() {
-        return like;
-    }
-
-    public void setLike(int like) {
-        this.like = like;
     }
 
     public ReplyInfo getReplies() {

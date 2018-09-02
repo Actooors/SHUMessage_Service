@@ -5,6 +5,7 @@ import com.shu.message.dao.LikeMapper;
 import com.shu.message.dao.NewsMapper;
 import com.shu.message.dao.TopicMapper;
 import com.shu.message.model.entity.CommentExample;
+import com.shu.message.model.entity.Like;
 import com.shu.message.model.entity.LikeExample;
 import com.shu.message.model.entity.TopicExample;
 import com.shu.message.model.entity.messagepackage.MessageAbstract;
@@ -12,6 +13,7 @@ import com.shu.message.model.ov.resultsetting.NewsResponseInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @program: message
@@ -74,6 +76,7 @@ public class MessageService {
                 .andTypeEqualTo(type)
                 .andUserIdEqualTo(userId)
                 .andNewsIdEqualTo(id);
+        List<Like> l = likeMapper.selectByExample(example1);
 
         TopicExample example3 = new TopicExample();
         example3.createCriteria()
@@ -82,7 +85,7 @@ public class MessageService {
                 .andNewsIdEqualTo(id);
 
         res.setFootprint(
-                !likeMapper.selectByExample(example1).isEmpty(),
+                !(l.isEmpty() || l.get(0).getIsLiked() == 2),
                 !commentMapper.selectByExample(example2).isEmpty(),
                 !topicMapper.selectByExample(example3).isEmpty()
         );

@@ -35,7 +35,7 @@ public class NewsService {
      * @Author: ggmr
      * @Date: 18-8-28
      */
-    public Result getNewsList(int pageNum, int pageSize) {
+    public Result getNewsList(int pageNum, int pageSize, String userId) {
         NewsExample example = new NewsExample();
         example.setOrderByClause("`create_date` DESC");
         example.setStartRow(pageNum * pageSize);
@@ -47,7 +47,7 @@ public class NewsService {
         List<NewsResponseInfo> resList = new LinkedList<>();
         int nums = 0;
         for(News news : list) {
-            NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId());
+            NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId(), userId);
             res.setContent(news.getTitle());
             int newsType = news.getType();
             if(newsType == 1) {
@@ -62,9 +62,9 @@ public class NewsService {
     }
 
     public Result getNews(int type, int id, String userId) {
-        NewsResponseInfo res = messageService.findCommonMessage(type, id, userId);
         News news = newsMapper.selectByPrimaryKey(id);
         int newsType = news.getType();
+        NewsResponseInfo res = messageService.findCommonMessage(type, id, news.getUserId(), userId);
         if(newsType == 1) {
             res.setMedia(newsType, news.getTitle(), news.getUrl());
         } else {

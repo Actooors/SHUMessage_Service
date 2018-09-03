@@ -51,7 +51,7 @@ public class MessageService {
      * @Author: ggmr
      * @Date: 18-8-31
      */
-    NewsResponseInfo findCommonMessage(int type, int id, String userId) {
+    NewsResponseInfo findCommonMessage(int type, int id, String autherId, String userId) {
         MessageAbstract o = new MessageAbstract();
         if(type == NEWS) {
             o = newsMapper.selectByPrimaryKey(id);
@@ -59,7 +59,7 @@ public class MessageService {
             o = topicMapper.selectByPrimaryKey(id);
         }
         NewsResponseInfo res = new NewsResponseInfo();
-        res.setAuthor(userService.getUserInfoById(userId));
+        res.setAuthor(userService.getUserInfoById(autherId));
         res.setInfo(type, id);
         res.setPublishTime(o.getCreateDate());
         res.setTopic(o.getTagId(), o.getTag());

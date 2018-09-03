@@ -147,7 +147,8 @@ public class UserService {
         LikeExample example = new LikeExample();
         example.createCriteria()
                 .andTypeEqualTo(type)
-                .andNewsIdEqualTo(id);
+                .andNewsIdEqualTo(id)
+                .andUserIdEqualTo(userId);
         List<Like> like = likeMapper.selectByExample(example);
         if(like.isEmpty()) {
             if(isLike == 2) {return ResultTool.error("点赞格式错误"); }

@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         // 登陆接口不做拦截及解决跨域问题
-        response.setHeader("Access-Control-Allow-Origin", "http://0.0.0.0:8888");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
         response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
         String s = request.getRequestURI();

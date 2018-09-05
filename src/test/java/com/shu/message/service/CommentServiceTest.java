@@ -20,10 +20,10 @@ public class CommentServiceTest {
     @Test
     public void insertComment() {
         CommentRequest commentRequest = new CommentRequest();
-        commentRequest.setType(3);
-        commentRequest.setId(1);
-        commentRequest.setReplyId(12);
-        commentRequest.setContent("我们赶紧取学习怎么使用“百链云图书馆”吧！");
+        commentRequest.setType(0);
+        commentRequest.setId(2);
+        //commentRequest.setReplyId(12);
+        commentRequest.setContent("良神郭神轩神唐神！");
         commentService.insertComment("16121666",commentRequest);
         //System.out.print(commentRequest.getReplyId());
     }

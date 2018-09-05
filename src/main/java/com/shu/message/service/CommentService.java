@@ -2,10 +2,8 @@ package com.shu.message.service;
 
 import com.shu.message.dao.CommentMapper;
 import com.shu.message.dao.LikeMapper;
-import com.shu.message.model.entity.Comment;
-import com.shu.message.model.entity.CommentExample;
-import com.shu.message.model.entity.Like;
-import com.shu.message.model.entity.LikeExample;
+import com.shu.message.dao.NewsMapper;
+import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.*;
 import com.shu.message.tools.ResultTool;
@@ -31,6 +29,9 @@ public class CommentService {
 
     @Resource
     private LikeMapper likeMapper;
+
+    @Resource
+    private NewsMapper newsMapper;
 
     private static final int COMMENT_TYPE = 2;
 
@@ -186,6 +187,18 @@ public class CommentService {
                 comment.setReplayId(null);
                 comment.setReplayUserId(null);
                 commentMapper.insertSelective(comment);
+            }
+
+            if(commentRequest.getType()==0){
+                News news = newsMapper.selectByPrimaryKey(commentRequest.getId());
+                news.setCommentNum(news.getCommentNum()+1);
+                newsMapper.updateByPrimaryKey(news);
+            }
+            if(commentRequest.getType()==2 || commentRequest.getType()==3){
+                Comment comment1 = commentMapper.selectById(commentRequest.getId());
+                News news = newsMapper.selectByPrimaryKey(comment1.getId());
+                news.setCommentNum(news.getCommentNum()+1);
+                newsMapper.updateByPrimaryKey(news);
             }
             result = ResultTool.success();
         }catch (Exception e){

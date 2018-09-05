@@ -21,6 +21,7 @@ public class News extends MessageAbstract {
 
     private String title;
 
+
     public Integer getNewsId() {
         return newsId;
     }

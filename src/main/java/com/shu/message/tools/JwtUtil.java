@@ -15,7 +15,7 @@ import java.util.Date;
  * @create: 2018-07-29 18:33
  */
 public class JwtUtil {
-    private final static byte[] ENCODE_KEY = "LabManagementSystem".getBytes();
+    private final static byte[] ENCODE_KEY = "message".getBytes();
     private static JWTVerifier jwtVerifier;
 
     public static String createJwt(String subject) {

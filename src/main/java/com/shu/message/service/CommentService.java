@@ -49,7 +49,7 @@ public class CommentService {
      * @Author: ggmr
      * @Date: 18-8-28
      */
-    public Result getCommentList(int type, int msgId, int page, List<Integer> limit) {
+    public Result getCommentList(int type, int msgId, int page, List<Integer> limit, String userId) {
         CommentExample example = new CommentExample();
         example.createCriteria()
                 .andTypeEqualTo(type)
@@ -72,16 +72,16 @@ public class CommentService {
             } else {
                 //热评根据点赞数排序
                 list.sort((Comment o1, Comment o2) -> (o2.getLikeNum().compareTo(o1.getLikeNum())));
-                commentListResponseInfoList.add(setComment(HOT_COMMENT, list, limit.get(0), page));
+                commentListResponseInfoList.add(setComment(HOT_COMMENT, list, limit.get(0), page, userId));
             }
             //最新评论根据时间排序
             list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
-            commentListResponseInfoList.add(setComment(NEW_COMMENT, list, limit.get(1), page));
+            commentListResponseInfoList.add(setComment(NEW_COMMENT, list, limit.get(1), page, userId));
             //最新评论
         } else {
             //获取回复
             list.sort((Comment o1, Comment o2) -> (o2.getCreateTime().compareTo(o1.getCreateTime())));
-            commentListResponseInfoList.add(setComment(ALL_COMMENT, list, limit.get(0), page));
+            commentListResponseInfoList.add(setComment(ALL_COMMENT, list, limit.get(0), page, userId));
         }
         return ResultTool.success(new CommentListResponse(commentListResponseInfoList));
     }
@@ -92,7 +92,8 @@ public class CommentService {
      * @Author: ggmr
      * @Date: 18-8-28
      */
-    private CommentListResponseInfo setComment(String blockName, List<Comment> list, int limitNum, int page) {
+    private CommentListResponseInfo setComment(String blockName, List<Comment> list,
+                                               int limitNum, int page, String userId) {
         List<CommentInfo> cards = new LinkedList<>();
         //便利所有的给定的排序后的评论
         int maxLen = list.size();
@@ -114,7 +115,7 @@ public class CommentService {
             LikeExample example = new LikeExample();
             example.createCriteria()
                     .andTypeEqualTo(2)
-                    .andUserIdEqualTo(comment.getUserId())
+                    .andUserIdEqualTo(userId)
                     .andNewsIdEqualTo(comment.getCommentId());
             List<Like> l = likeMapper.selectByExample(example);
             commentInfo.setFootprint(!(l.isEmpty() || l.get(0).getIsLiked() == 2));

@@ -28,11 +28,13 @@ public class CommentController {
 
     @GetMapping("/list")
     @ApiOperation(value = "获取评论列表", httpMethod = "GET")
-    public Result getNewsList(@RequestParam(value = "type") int type,
+    public Result getNewsList(@RequestHeader(value = "Authorization") String token,
+                              @RequestParam(value = "type") int type,
                               @RequestParam(value = "id") int id,
                               @RequestParam(value = "page") int page,
                               @RequestParam(value = "limit") List<Integer> limit) {
-        return commentService.getCommentList(type, id, page, limit);
+        String userId = JwtUtil.parseJwt(token);
+        return commentService.getCommentList(type, id, page, limit, userId);
     }
 
     @PostMapping("/newComment")

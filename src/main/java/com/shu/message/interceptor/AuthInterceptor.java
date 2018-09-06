@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
     private static final String LOGIN_URL = "/api/login";
+    private static final String ADD_IFRAME = "/api/common/newIframe";
     private static final String TOKEN_NAME = "Authorization";
     private static final String REQUEST_METHOD = "OPTIONS";
     private static final int HTTP_CODE = 401;
@@ -30,8 +31,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
         response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-        String s = request.getRequestURI();
-        if (LOGIN_URL.equals(request.getRequestURI()) || request.getMethod().equals(REQUEST_METHOD)) {
+        if (ADD_IFRAME.equals(request.getRequestURI()) || LOGIN_URL.equals(request.getRequestURI())
+                || request.getMethod().equals(REQUEST_METHOD)) {
             response.setStatus(200);
             return true;
         }

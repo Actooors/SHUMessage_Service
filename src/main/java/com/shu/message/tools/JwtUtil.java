@@ -18,7 +18,7 @@ public class JwtUtil {
     private final static byte[] ENCODE_KEY = "message".getBytes();
     private static JWTVerifier jwtVerifier;
 
-    public static String createJwt(String subject) {
+    public static String createJwt(String subject, String userName) {
         Date currentDate = new Date();
         // 过期时间5天
         Calendar calendar = Calendar.getInstance();
@@ -28,6 +28,7 @@ public class JwtUtil {
                 .withIssuedAt(currentDate)
                 .withExpiresAt(calendar.getTime())
                 .withSubject(subject)
+                .withClaim("userName", userName)
                 .sign(algorithm);
     }
 

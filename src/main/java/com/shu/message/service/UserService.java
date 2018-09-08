@@ -48,7 +48,7 @@ public class UserService {
      */
     private LoginResponse setLoginResponse(String userId, String userName) {
         LoginResponse response = new LoginResponse();
-        response.setToken(JwtUtil.createJwt(userId));
+        response.setToken(JwtUtil.createJwt(userId, userName));
         response.setUserId(userId);
         response.setUserName(userName);
         return response;

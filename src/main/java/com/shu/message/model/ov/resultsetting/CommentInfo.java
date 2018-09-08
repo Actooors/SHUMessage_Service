@@ -61,7 +61,9 @@ public class CommentInfo {
     }
 
     public void setImgs(String photos) {
-        this.imgs.add(photos);
+        if(photos != null) {
+            this.imgs.add(photos);
+        }
     }
 
     public UserInfo getAuthor() {

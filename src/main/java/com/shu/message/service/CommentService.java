@@ -194,7 +194,7 @@ public class CommentService {
                 news.setCommentNum(news.getCommentNum()+1);
                 newsMapper.updateByPrimaryKey(news);
             }
-            if(commentRequest.getType()==3){
+            if(commentRequest.getType()==3 || commentRequest.getType()==2){
                 Comment comment1 = commentMapper.selectByPrimaryKey(commentRequest.getId());
                 comment1.setCommentNum(comment1.getCommentNum()+1);
                 commentMapper.updateByPrimaryKey(comment1);

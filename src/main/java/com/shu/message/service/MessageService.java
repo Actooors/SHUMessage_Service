@@ -52,12 +52,7 @@ public class MessageService {
      * @Date: 18-8-31
      */
     NewsResponseInfo findCommonMessage(int type, int id, String autherId, String userId) {
-        MessageAbstract o = new MessageAbstract();
-        if(type == NEWS) {
-            o = newsMapper.selectByPrimaryKey(id);
-        } else if(type == TOPIC) {
-            o = topicMapper.selectByPrimaryKey(id);
-        }
+        MessageAbstract o = findMessageType(type, id);
         NewsResponseInfo res = new NewsResponseInfo();
         res.setAuthor(userService.getUserInfoById(autherId));
         res.setInfo(type, id);
@@ -90,6 +85,25 @@ public class MessageService {
                 !topicMapper.selectByExample(example3).isEmpty()
         );
         return res;
+    }
+
+
+    /**
+     * @Description: 根据type是1或者0来判断这个消息是动态还是新闻
+     * @Param: [type, id]
+     * @Return: com.shu.message.model.entity.messagepackage.MessageAbstract
+     * @Author: ggmr
+     * @Date: 18-9-9
+     */
+    MessageAbstract findMessageType(int type, int id) {
+        MessageAbstract o = new MessageAbstract();
+        if(type == NEWS) {
+            o = newsMapper.selectByPrimaryKey(id);
+        } else if(type == TOPIC) {
+            o = topicMapper.selectByPrimaryKey(id);
+        }
+        return o;
+        
     }
 
 }

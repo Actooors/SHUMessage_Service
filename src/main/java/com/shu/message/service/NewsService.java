@@ -1,14 +1,20 @@
 package com.shu.message.service;
 
+import com.shu.message.dao.CommentMapper;
+import com.shu.message.dao.LikeMapper;
 import com.shu.message.dao.NewsMapper;
 import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
+import com.shu.message.model.ov.resultsetting.CommentInfo;
 import com.shu.message.model.ov.resultsetting.NewsResponse;
 import com.shu.message.model.ov.resultsetting.NewsResponseInfo;
+import com.shu.message.model.ov.resultsetting.ReplyInfo;
 import com.shu.message.tools.ResultTool;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.annotation.Resource;
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,9 +30,17 @@ public class NewsService {
     @Resource
     private NewsMapper newsMapper;
 
+    @Resource
+    private CommentMapper commentMapper;
 
     @Resource
     private MessageService messageService;
+
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private LikeMapper likeMapper;
 
     /**
      * @Description: 获取新闻列表
@@ -62,14 +76,33 @@ public class NewsService {
     }
 
     public Result getNews(int type, int id, String userId) {
-        News news = newsMapper.selectByPrimaryKey(id);
-        int newsType = news.getType();
-        NewsResponseInfo res = messageService.findCommonMessage(type, id, news.getUserId(), userId);
-        if(newsType == 1) {
-            res.setMedia(newsType, news.getTitle(), news.getUrl());
+        if(type == 2) {
+            Comment comment = commentMapper.selectByPrimaryKey(id);
+            CommentInfo res = new CommentInfo();
+            res.setInfo(type, id);
+            res.setContent(comment.getContent());
+            res.setImgs(comment.getImgUrl());
+            res.setAuthor(userService.getUserInfoById(comment.getUserId()));
+            res.setPublishTime(comment.getCreateTime());
+            res.setShareInfo(comment.getLikeNum());
+            LikeExample example = new LikeExample();
+            example.createCriteria()
+                    .andTypeEqualTo(type)
+                    .andUserIdEqualTo(userId)
+                    .andNewsIdEqualTo(comment.getCommentId());
+            List<Like> l = likeMapper.selectByExample(example);
+           res.setFootprint(!(l.isEmpty() || l.get(0).getIsLiked() == 2));
+           return ResultTool.success(res);
         } else {
-            res.setMedia(newsType, news.getImageUrlList());
+            News news = newsMapper.selectByPrimaryKey(id);
+            int newsType = news.getType();
+            NewsResponseInfo res = messageService.findCommonMessage(type, id, news.getUserId(), userId);
+            if (newsType == 1) {
+                res.setMedia(newsType, news.getTitle(), news.getUrl());
+            } else {
+                res.setMedia(newsType, news.getImageUrlList());
+            }
+            return ResultTool.success(res);
         }
-        return ResultTool.success(res);
     }
 }

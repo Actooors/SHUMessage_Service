@@ -20,8 +20,8 @@ public class CommentServiceTest {
     @Test
     public void insertComment() {
         CommentRequest commentRequest = new CommentRequest();
-        commentRequest.setType(0);
-        commentRequest.setId(2);
+        commentRequest.setType(3);
+        commentRequest.setId(34);
         //commentRequest.setReplyId(12);
         commentRequest.setContent("良神郭神轩神唐神！");
         commentService.insertComment("16121666",commentRequest);

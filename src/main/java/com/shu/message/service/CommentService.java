@@ -194,12 +194,12 @@ public class CommentService {
                 news.setCommentNum(news.getCommentNum()+1);
                 newsMapper.updateByPrimaryKey(news);
             }
-            if(commentRequest.getType()==2 || commentRequest.getType()==3){
-                Comment comment1 = commentMapper.selectById(commentRequest.getId());
-                News news = newsMapper.selectByPrimaryKey(comment1.getId());
-                news.setCommentNum(news.getCommentNum()+1);
-                newsMapper.updateByPrimaryKey(news);
+            if(commentRequest.getType()==3){
+                Comment comment1 = commentMapper.selectByPrimaryKey(commentRequest.getId());
+                comment1.setCommentNum(comment1.getCommentNum()+1);
+                commentMapper.updateByPrimaryKey(comment1);
             }
+
             result = ResultTool.success();
         }catch (Exception e){
             result = ResultTool.error("评论失败！");

@@ -24,7 +24,7 @@ public interface IframeMapper {
 
     int updateByExample(@Param("record") Iframe record, @Param("example") IframeExample example);
 
-    int updateByPrimaryKeySelective(Iframe record);
+    int updateByPrimaryKeySelecztive(Iframe record);
 
     int updateByPrimaryKey(Iframe record);
 }

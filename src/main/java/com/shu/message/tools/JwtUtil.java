@@ -5,6 +5,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,17 +21,18 @@ public class JwtUtil {
     private final static byte[] ENCODE_KEY = "message".getBytes();
     private static JWTVerifier jwtVerifier;
 
-    public static String createJwt(String subject, String userName) {
+    public static String createJwt(String subject, String userName) throws UnsupportedEncodingException {
         Date currentDate = new Date();
         // 过期时间5天
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, 5);
+        calendar.add(Calendar.DATE, 60);
         Algorithm algorithm = Algorithm.HMAC512(ENCODE_KEY);
+        System.out.print(encode(userName));
         return JWT.create()
                 .withIssuedAt(currentDate)
                 .withExpiresAt(calendar.getTime())
                 .withSubject(subject)
-                .withClaim("userName", userName)
+                .withClaim("userName", encode(userName))
                 .sign(algorithm);
     }
 
@@ -40,4 +44,20 @@ public class JwtUtil {
         jwtVerifier.verify(jwt);
         return JWT.decode(jwt).getSubject();
     }
+
+    static String encode(String url)
+    {
+        try {
+            String encodeURL= URLEncoder.encode( url, "UTF-8" );
+
+            return encodeURL;
+
+        } catch (UnsupportedEncodingException e) {
+
+            return "Issue while encoding" +e.getMessage();
+
+        }
+
+    }
+
 }

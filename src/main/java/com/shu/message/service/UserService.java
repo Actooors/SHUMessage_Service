@@ -13,6 +13,7 @@ import com.shu.message.tools.ResultTool;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class UserService {
      * @Author: ggmr
      * @Date: 18-7-29
      */
-    private LoginResponse setLoginResponse(String userId, String userName) {
+    private LoginResponse setLoginResponse(String userId, String userName) throws UnsupportedEncodingException {
         LoginResponse response = new LoginResponse();
         response.setToken(JwtUtil.createJwt(userId, userName));
         response.setUserId(userId);
@@ -61,7 +62,7 @@ public class UserService {
      * @Author: ggmr
      * @Date: 18-7-29
      */
-    public Result login(LoginInfo loginUser) {
+    public Result login(LoginInfo loginUser) throws UnsupportedEncodingException {
         //先判断账号和密码是否输入为空
         if(loginUser == null || loginUser.getUserId() == null || "".equals(loginUser.getUserId())
                 || "".equals(loginUser.getPassword()) ||loginUser.getPassword() == null) {

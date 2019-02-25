@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shu.message.dao.GroupsMapper" >
+  <!--<resultMap id="BaseResultMap" type="com.shu.message.model.entity.Groups" >-->
+    <!--<id column="groups_id" property="groupsId" jdbcType="INTEGER" />-->
+    <!--<result column="groups_name" property="groupsName" jdbcType="VARCHAR" />-->
+    <!--<result column="description" property="description" jdbcType="VARCHAR" />-->
+    <!--<result column="groups_label" property="groupsLabel" jdbcType="INTEGER" />-->
+    <!--<result column="users_id" property="usersId" jdbcType="INTEGER" />-->
+    <!--<result column="people_num" property="peopleNum" jdbcType="INTEGER" />-->
+    <!--<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />-->
+    <!--<result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />-->
+  <!--</resultMap>-->
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--&lt;!&ndash;<sql id="Base_Column_List" >&ndash;&gt;-->
+    <!--&lt;!&ndash;groups_id, groups_name, description, groups_label, users_id, people_num, create_time, &ndash;&gt;-->
+    <!--&lt;!&ndash;delete_time&ndash;&gt;-->
+  <!--&lt;!&ndash;</sql>&ndash;&gt;-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.GroupsExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--'true' as QUERYID,-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_groups-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_groups-->
+    <!--where groups_id = #{groupsId,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from tbl_groups-->
+    <!--where groups_id = #{groupsId,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shu.message.model.entity.GroupsExample" >-->
+    <!--delete from tbl_groups-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shu.message.model.entity.Groups" >-->
+    <!--insert into tbl_groups (groups_id, groups_name, description, -->
+      <!--groups_label, users_id, people_num, -->
+      <!--create_time, delete_time)-->
+    <!--values (#{groupsId,jdbcType=INTEGER}, #{groupsName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, -->
+      <!--#{groupsLabel,jdbcType=INTEGER}, #{usersId,jdbcType=INTEGER}, #{peopleNum,jdbcType=INTEGER}, -->
+      <!--#{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shu.message.model.entity.Groups" >-->
+    <!--insert into tbl_groups-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="groupsId != null" >-->
+        <!--groups_id,-->
+      <!--</if>-->
+      <!--<if test="groupsName != null" >-->
+        <!--groups_name,-->
+      <!--</if>-->
+      <!--<if test="description != null" >-->
+        <!--description,-->
+      <!--</if>-->
+      <!--<if test="groupsLabel != null" >-->
+        <!--groups_label,-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--users_id,-->
+      <!--</if>-->
+      <!--<if test="peopleNum != null" >-->
+        <!--people_num,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="groupsId != null" >-->
+        <!--#{groupsId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="groupsName != null" >-->
+        <!--#{groupsName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="description != null" >-->
+        <!--#{description,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="groupsLabel != null" >-->
+        <!--#{groupsLabel,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--#{usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="peopleNum != null" >-->
+        <!--#{peopleNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shu.message.model.entity.GroupsExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from tbl_groups-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update tbl_groups-->
+    <!--<set >-->
+      <!--<if test="record.groupsId != null" >-->
+        <!--groups_id = #{record.groupsId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.groupsName != null" >-->
+        <!--groups_name = #{record.groupsName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.description != null" >-->
+        <!--description = #{record.description,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.groupsLabel != null" >-->
+        <!--groups_label = #{record.groupsLabel,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.usersId != null" >-->
+        <!--users_id = #{record.usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.peopleNum != null" >-->
+        <!--people_num = #{record.peopleNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.createTime != null" >-->
+        <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="record.deleteTime != null" >-->
+        <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update tbl_groups-->
+    <!--set groups_id = #{record.groupsId,jdbcType=INTEGER},-->
+      <!--groups_name = #{record.groupsName,jdbcType=VARCHAR},-->
+      <!--description = #{record.description,jdbcType=VARCHAR},-->
+      <!--groups_label = #{record.groupsLabel,jdbcType=INTEGER},-->
+      <!--users_id = #{record.usersId,jdbcType=INTEGER},-->
+      <!--people_num = #{record.peopleNum,jdbcType=INTEGER},-->
+      <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shu.message.model.entity.Groups" >-->
+    <!--update tbl_groups-->
+    <!--<set >-->
+      <!--<if test="groupsName != null" >-->
+        <!--groups_name = #{groupsName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="description != null" >-->
+        <!--description = #{description,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="groupsLabel != null" >-->
+        <!--groups_label = #{groupsLabel,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--users_id = #{usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="peopleNum != null" >-->
+        <!--people_num = #{peopleNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where groups_id = #{groupsId,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shu.message.model.entity.Groups" >-->
+    <!--update tbl_groups-->
+    <!--set groups_name = #{groupsName,jdbcType=VARCHAR},-->
+      <!--description = #{description,jdbcType=VARCHAR},-->
+      <!--groups_label = #{groupsLabel,jdbcType=INTEGER},-->
+      <!--users_id = #{usersId,jdbcType=INTEGER},-->
+      <!--people_num = #{peopleNum,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where groups_id = #{groupsId,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

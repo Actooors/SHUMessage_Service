@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shu.message.dao.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.shu.message.model.entity.News" >
+    <id column="news_id" property="newsId" jdbcType="INTEGER" />
+    <result column="news_name" property="newsName" jdbcType="VARCHAR" />
+    <result column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="news_url" property="newsUrl" jdbcType="VARCHAR" />
+    <result column="news_content" property="newsContent" jdbcType="VARCHAR" />
+    <result column="news_description" property="newsDescription" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="like_num" property="likeNum" jdbcType="INTEGER" />
+    <result column="share_num" property="shareNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="getNewsListMap" type="com.shu.message.model.mapresult.UserNewsInfo">
+    <id     column="news_id" property="newsId" jdbcType="INTEGER" />
+    <result column="news_name" property="newsName" jdbcType="VARCHAR" />
+    <result column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="news_url" property="newsUrl" jdbcType="VARCHAR" />
+    <result column="news_content" property="newsContent" jdbcType="VARCHAR" />
+    <result column="news_description" property="newsDescription" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="like_num" property="likeNum" jdbcType="INTEGER" />
+    <result column="share_num" property="shareNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <!--点赞 评论，分享-->
+    <result column="liked" property="liked" jdbcType="BOOLEAN"/>
+    <result column="commented" property="commented" jdbcType="BOOLEAN"/>
+    <result column="shared" property="shared" jdbcType="BOOLEAN"/>
+  </resultMap>
+
+
+  <!--<select id="selectNewsList" resultMap="BaseResultMap" parameterType="map">-->
+    <!--SELECT-->
+      <!--news_id, news_name, users_id, news_url, news_content, news_description, img_url,-->
+      <!--type, comment_num, like_num, share_num, create_time, delete_time-->
+    <!--FROM tbl_news-->
+    <!--ORDER BY create_time DESC-->
+    <!--LIMIT #{startRow,jdbcType=INTEGER} OFFSET #{endRow,jdbcType=INTEGER};-->
+  <!--</select>-->
+
+
+  <select id="selectNewsList" resultMap="getNewsListMap" parameterType="map">
+    SELECT
+      tbl_news.news_id, tbl_news.news_name, tbl_news.users_id, tbl_news.news_url,
+      tbl_news.news_content, tbl_news.news_description, tbl_news.img_url,
+      tbl_news.type, tbl_news.comment_num, tbl_news.like_num,
+      tbl_news.share_num, tbl_news.create_time, tbl_news.delete_time,
+      liked, commented, shared
+    FROM tbl_news LEFT JOIN tbl_discuss ON news_id = tbl_discuss.id
+                  LEFT JOIN tbl_share ON news_id = tbl_share.id
+                  LEFT JOIN tbl_like ON news_id = tbl_like.id
+    ORDER BY create_time DESC
+    LIMIT #{startRow,jdbcType=INTEGER} OFFSET #{endRow,jdbcType=INTEGER};
+  </select>
+
+
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--news_id, news_name, users_id, news_url, news_content, news_description, img_url, -->
+    <!--type, comment_num, like_num, share_num, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.NewsExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--'true' as QUERYID,-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_news-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_news-->
+    <!--where news_id = #{newsId,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from tbl_news-->
+    <!--where news_id = #{newsId,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shu.message.model.entity.NewsExample" >-->
+    <!--delete from tbl_news-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shu.message.model.entity.News" >-->
+    <!--insert into tbl_news (news_id, news_name, users_id, -->
+      <!--news_url, news_content, news_description, -->
+      <!--img_url, type, comment_num, -->
+      <!--like_num, share_num, create_time, -->
+      <!--delete_time)-->
+    <!--values (#{newsId,jdbcType=INTEGER}, #{newsName,jdbcType=VARCHAR}, #{usersId,jdbcType=VARCHAR}, -->
+      <!--#{newsUrl,jdbcType=VARCHAR}, #{newsContent,jdbcType=VARCHAR}, #{newsDescription,jdbcType=VARCHAR}, -->
+      <!--#{imgUrl,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, -->
+      <!--#{likeNum,jdbcType=INTEGER}, #{shareNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, -->
+      <!--#{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shu.message.model.entity.News" >-->
+    <!--insert into tbl_news-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="newsId != null" >-->
+        <!--news_id,-->
+      <!--</if>-->
+      <!--<if test="newsName != null" >-->
+        <!--news_name,-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--users_id,-->
+      <!--</if>-->
+      <!--<if test="newsUrl != null" >-->
+        <!--news_url,-->
+      <!--</if>-->
+      <!--<if test="newsContent != null" >-->
+        <!--news_content,-->
+      <!--</if>-->
+      <!--<if test="newsDescription != null" >-->
+        <!--news_description,-->
+      <!--</if>-->
+      <!--<if test="imgUrl != null" >-->
+        <!--img_url,-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type,-->
+      <!--</if>-->
+      <!--<if test="commentNum != null" >-->
+        <!--comment_num,-->
+      <!--</if>-->
+      <!--<if test="likeNum != null" >-->
+        <!--like_num,-->
+      <!--</if>-->
+      <!--<if test="shareNum != null" >-->
+        <!--share_num,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="newsId != null" >-->
+        <!--#{newsId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="newsName != null" >-->
+        <!--#{newsName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--#{usersId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="newsUrl != null" >-->
+        <!--#{newsUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="newsContent != null" >-->
+        <!--#{newsContent,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="newsDescription != null" >-->
+        <!--#{newsDescription,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="imgUrl != null" >-->
+        <!--#{imgUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--#{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="commentNum != null" >-->
+        <!--#{commentNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="likeNum != null" >-->
+        <!--#{likeNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="shareNum != null" >-->
+        <!--#{shareNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shu.message.model.entity.NewsExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from tbl_news-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update tbl_news-->
+    <!--<set >-->
+      <!--<if test="record.newsId != null" >-->
+        <!--news_id = #{record.newsId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.newsName != null" >-->
+        <!--news_name = #{record.newsName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.usersId != null" >-->
+        <!--users_id = #{record.usersId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.newsUrl != null" >-->
+        <!--news_url = #{record.newsUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.newsContent != null" >-->
+        <!--news_content = #{record.newsContent,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.newsDescription != null" >-->
+        <!--news_description = #{record.newsDescription,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.imgUrl != null" >-->
+        <!--img_url = #{record.imgUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.type != null" >-->
+        <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.commentNum != null" >-->
+        <!--comment_num = #{record.commentNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.likeNum != null" >-->
+        <!--like_num = #{record.likeNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.shareNum != null" >-->
+        <!--share_num = #{record.shareNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.createTime != null" >-->
+        <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="record.deleteTime != null" >-->
+        <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update tbl_news-->
+    <!--set news_id = #{record.newsId,jdbcType=INTEGER},-->
+      <!--news_name = #{record.newsName,jdbcType=VARCHAR},-->
+      <!--users_id = #{record.usersId,jdbcType=VARCHAR},-->
+      <!--news_url = #{record.newsUrl,jdbcType=VARCHAR},-->
+      <!--news_content = #{record.newsContent,jdbcType=VARCHAR},-->
+      <!--news_description = #{record.newsDescription,jdbcType=VARCHAR},-->
+      <!--img_url = #{record.imgUrl,jdbcType=VARCHAR},-->
+      <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--comment_num = #{record.commentNum,jdbcType=INTEGER},-->
+      <!--like_num = #{record.likeNum,jdbcType=INTEGER},-->
+      <!--share_num = #{record.shareNum,jdbcType=INTEGER},-->
+      <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shu.message.model.entity.News" >-->
+    <!--update tbl_news-->
+    <!--<set >-->
+      <!--<if test="newsName != null" >-->
+        <!--news_name = #{newsName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--users_id = #{usersId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="newsUrl != null" >-->
+        <!--news_url = #{newsUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="newsContent != null" >-->
+        <!--news_content = #{newsContent,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="newsDescription != null" >-->
+        <!--news_description = #{newsDescription,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="imgUrl != null" >-->
+        <!--img_url = #{imgUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="commentNum != null" >-->
+        <!--comment_num = #{commentNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="likeNum != null" >-->
+        <!--like_num = #{likeNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="shareNum != null" >-->
+        <!--share_num = #{shareNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where news_id = #{newsId,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shu.message.model.entity.News" >-->
+    <!--update tbl_news-->
+    <!--set news_name = #{newsName,jdbcType=VARCHAR},-->
+      <!--users_id = #{usersId,jdbcType=VARCHAR},-->
+      <!--news_url = #{newsUrl,jdbcType=VARCHAR},-->
+      <!--news_content = #{newsContent,jdbcType=VARCHAR},-->
+      <!--news_description = #{newsDescription,jdbcType=VARCHAR},-->
+      <!--img_url = #{imgUrl,jdbcType=VARCHAR},-->
+      <!--type = #{type,jdbcType=INTEGER},-->
+      <!--comment_num = #{commentNum,jdbcType=INTEGER},-->
+      <!--like_num = #{likeNum,jdbcType=INTEGER},-->
+      <!--share_num = #{shareNum,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where news_id = #{newsId,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

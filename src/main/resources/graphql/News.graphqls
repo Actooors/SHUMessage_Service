@@ -1,0 +1,63 @@
+schema {
+    query: Query
+ #   mutation: Mutation
+}
+
+type Query {
+    getNewsList(page: Int!, pageSize: Int!): [NewsResponseInfo]
+}
+
+#type Mutation {
+#
+#}
+
+
+
+type NewsResponseInfo {
+    info: Info
+    topic: Topic
+    extraInfo: String
+    content: String
+    author: UserInfo
+    publishTime: Date
+    shareInfo:ShareInfo
+    media: Media
+    footprint: Footprint
+}
+
+type Info {
+    type: Int
+    id: Int
+}
+
+type Topic {
+    id: Int
+    name: String
+}
+
+type UserInfo {
+    id: String
+    avatar: String
+    name: String
+}
+
+type ShareInfo {
+    like: Int
+    comment: Int
+    share: Int
+}
+
+type Media {
+    type: String
+    title: String
+    value: String
+    imgs: [String]
+}
+
+type Footprint {
+    like: Boolean
+    comment: Boolean
+    forward: Boolean
+}
+
+scalar Date

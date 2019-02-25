@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shu.message.dao.DiscussMapper" >
+  <!--<resultMap id="BaseResultMap" type="com.shu.message.model.entity.Discuss" >-->
+    <!--<id column="discuss_id" property="discussId" jdbcType="INTEGER" />-->
+    <!--<result column="id" property="id" jdbcType="INTEGER" />-->
+    <!--<result column="type" property="type" jdbcType="INTEGER" />-->
+    <!--<result column="comment_id" property="commentId" jdbcType="INTEGER" />-->
+    <!--<result column="users_id" property="usersId" jdbcType="INTEGER" />-->
+    <!--<result column="content" property="content" jdbcType="VARCHAR" />-->
+    <!--<result column="reply_num" property="replyNum" jdbcType="INTEGER" />-->
+    <!--<result column="reply_like_num" property="replyLikeNum" jdbcType="INTEGER" />-->
+    <!--<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />-->
+    <!--<result column="commented" property="commented" jdbcType="BIT" />-->
+
+  <!--<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />-->
+    <!--<result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />-->
+  <!--</resultMap>-->
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--&lt;!&ndash;<sql id="Base_Column_List" >&ndash;&gt;-->
+    <!--&lt;!&ndash;discuss_id, id, type, comment_id, users_id, content, reply_num, reply_like_num, img_url, &ndash;&gt;-->
+    <!--&lt;!&ndash;create_time, delete_time&ndash;&gt;-->
+  <!--&lt;!&ndash;</sql>&ndash;&gt;-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.DiscussExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--'true' as QUERYID,-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_discuss-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_discuss-->
+    <!--where discuss_id = #{discussId,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from tbl_discuss-->
+    <!--where discuss_id = #{discussId,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shu.message.model.entity.DiscussExample" >-->
+    <!--delete from tbl_discuss-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shu.message.model.entity.Discuss" >-->
+    <!--insert into tbl_discuss (discuss_id, id, type, -->
+      <!--comment_id, users_id, content, -->
+      <!--reply_num, reply_like_num, img_url, -->
+      <!--create_time, delete_time)-->
+    <!--values (#{discussId,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, -->
+      <!--#{commentId,jdbcType=INTEGER}, #{usersId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, -->
+      <!--#{replyNum,jdbcType=INTEGER}, #{replyLikeNum,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}, -->
+      <!--#{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shu.message.model.entity.Discuss" >-->
+    <!--insert into tbl_discuss-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="discussId != null" >-->
+        <!--discuss_id,-->
+      <!--</if>-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type,-->
+      <!--</if>-->
+      <!--<if test="commentId != null" >-->
+        <!--comment_id,-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--users_id,-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content,-->
+      <!--</if>-->
+      <!--<if test="replyNum != null" >-->
+        <!--reply_num,-->
+      <!--</if>-->
+      <!--<if test="replyLikeNum != null" >-->
+        <!--reply_like_num,-->
+      <!--</if>-->
+      <!--<if test="imgUrl != null" >-->
+        <!--img_url,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="discussId != null" >-->
+        <!--#{discussId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--#{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="commentId != null" >-->
+        <!--#{commentId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--#{usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--#{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="replyNum != null" >-->
+        <!--#{replyNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="replyLikeNum != null" >-->
+        <!--#{replyLikeNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="imgUrl != null" >-->
+        <!--#{imgUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shu.message.model.entity.DiscussExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from tbl_discuss-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update tbl_discuss-->
+    <!--<set >-->
+      <!--<if test="record.discussId != null" >-->
+        <!--discuss_id = #{record.discussId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.type != null" >-->
+        <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.commentId != null" >-->
+        <!--comment_id = #{record.commentId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.usersId != null" >-->
+        <!--users_id = #{record.usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.content != null" >-->
+        <!--content = #{record.content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.replyNum != null" >-->
+        <!--reply_num = #{record.replyNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.replyLikeNum != null" >-->
+        <!--reply_like_num = #{record.replyLikeNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.imgUrl != null" >-->
+        <!--img_url = #{record.imgUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.createTime != null" >-->
+        <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="record.deleteTime != null" >-->
+        <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update tbl_discuss-->
+    <!--set discuss_id = #{record.discussId,jdbcType=INTEGER},-->
+      <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--comment_id = #{record.commentId,jdbcType=INTEGER},-->
+      <!--users_id = #{record.usersId,jdbcType=INTEGER},-->
+      <!--content = #{record.content,jdbcType=VARCHAR},-->
+      <!--reply_num = #{record.replyNum,jdbcType=INTEGER},-->
+      <!--reply_like_num = #{record.replyLikeNum,jdbcType=INTEGER},-->
+      <!--img_url = #{record.imgUrl,jdbcType=VARCHAR},-->
+      <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shu.message.model.entity.Discuss" >-->
+    <!--update tbl_discuss-->
+    <!--<set >-->
+      <!--<if test="id != null" >-->
+        <!--id = #{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="commentId != null" >-->
+        <!--comment_id = #{commentId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="usersId != null" >-->
+        <!--users_id = #{usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="replyNum != null" >-->
+        <!--reply_num = #{replyNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="replyLikeNum != null" >-->
+        <!--reply_like_num = #{replyLikeNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="imgUrl != null" >-->
+        <!--img_url = #{imgUrl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where discuss_id = #{discussId,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shu.message.model.entity.Discuss" >-->
+    <!--update tbl_discuss-->
+    <!--set id = #{id,jdbcType=INTEGER},-->
+      <!--type = #{type,jdbcType=INTEGER},-->
+      <!--comment_id = #{commentId,jdbcType=INTEGER},-->
+      <!--users_id = #{usersId,jdbcType=INTEGER},-->
+      <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--reply_num = #{replyNum,jdbcType=INTEGER},-->
+      <!--reply_like_num = #{replyLikeNum,jdbcType=INTEGER},-->
+      <!--img_url = #{imgUrl,jdbcType=VARCHAR},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where discuss_id = #{discussId,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

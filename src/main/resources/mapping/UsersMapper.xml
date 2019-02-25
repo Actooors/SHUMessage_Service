@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+<mapper namespace="com.shu.message.dao.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.shu.message.model.entity.Users" >
+    <id column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="INTEGER" />
+    <result column="is_able_login" property="isAbleLogin" jdbcType="BIT" />
+    <result column="user_img" property="userImg" jdbcType="VARCHAR" />
+    <result column="user_big_img" property="userBigImg" jdbcType="VARCHAR" />
+    <result column="back_img" property="backImg" jdbcType="VARCHAR" />
+    <result column="lasting_num" property="lastingNum" jdbcType="INTEGER" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="social_group_num" property="socialGroupNum" jdbcType="INTEGER" />
+    <result column="follow_num" property="followNum" jdbcType="INTEGER" />
+    <result column="be_concerned_num" property="beConcernedNum" jdbcType="INTEGER" />
+    <result column="my_social_group_num" property="mySocialGroupNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <!--<insert id="insert" parameterType="com.shu.message.model.entity.Users" >-->
+    <!--<selectKey keyProperty="users_id" resultType="java.lang.Integer" order="AFTER">-->
+      <!--SELECT nextval('t_user_id_seq')-->
+    <!--</selectKey>-->
+    <!--insert into tbl_users (type, username,-->
+                           <!--student_id, password, real_name,-->
+                           <!--department, phone, mail,-->
+                           <!--label, birthday, sex,-->
+                           <!--location, school, job,-->
+                           <!--identity, is_able_login, user_img,-->
+                           <!--user_big_img, back_img, lasting_num,-->
+                           <!--last_login_time, social_group_num, follow_num,-->
+                           <!--be_concerned_num, my_social_group_num, create_time,-->
+                           <!--delete_time)-->
+    <!--values (#{type,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},-->
+            <!--#{studentId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},-->
+            <!--#{department,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR},-->
+            <!--#{label,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},-->
+            <!--#{location,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR},-->
+            <!--#{identity,jdbcType=VARCHAR}, #{isAbleLogin,jdbcType=BIT}, #{userImg,jdbcType=VARCHAR},-->
+            <!--#{userBigImg,jdbcType=VARCHAR}, #{backImg,jdbcType=VARCHAR}, #{lastingNum,jdbcType=INTEGER},-->
+            <!--#{lastLoginTime,jdbcType=TIMESTAMP}, #{socialGroupNum,jdbcType=INTEGER}, #{followNum,jdbcType=INTEGER},-->
+            <!--#{beConcernedNum,jdbcType=INTEGER}, #{mySocialGroupNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},-->
+            <!--#{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+
+
+  <!--<sql id="Base_Column_List" >-->
+    <!--users_id, type, username, student_id, password, real_name, department, phone, mail,-->
+    <!--label, birthday, sex, location, school, job, identity, is_able_login, user_img, user_big_img,-->
+    <!--back_img, lasting_num, last_login_time, social_group_num, follow_num, be_concerned_num,-->
+    <!--my_social_group_num, create_time, delete_time-->
+  <!--</sql>-->
+
+  <insert id="insert" parameterType="com.shu.message.model.entity.Users" >
+    <selectKey order="AFTER" keyProperty="usersId" resultType="java.lang.Integer">
+      SELECT currval('tbl_users_users_id_seq')
+    </selectKey>
+
+    insert into tbl_users
+    <!--
+      prefix表示在下面这些动态添加的语句前加一个左括号
+      suffix表示在右边加一个括号
+      suffixOverrides表示删除最后一个括号
+    -->
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="isAbleLogin != null" >
+        is_able_login,
+      </if>
+      <if test="userImg != null" >
+        user_img,
+      </if>
+      <if test="userBigImg != null" >
+        user_big_img,
+      </if>
+      <if test="backImg != null" >
+        back_img,
+      </if>
+      <if test="lastingNum != null" >
+        lasting_num,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="socialGroupNum != null" >
+        social_group_num,
+      </if>
+      <if test="followNum != null" >
+        follow_num,
+      </if>
+      <if test="beConcernedNum != null" >
+        be_concerned_num,
+      </if>
+      <if test="mySocialGroupNum != null" >
+        my_social_group_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="deleteTime != null" >
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="isAbleLogin != null" >
+        #{isAbleLogin,jdbcType=BIT},
+      </if>
+      <if test="userImg != null" >
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userBigImg != null" >
+        #{userBigImg,jdbcType=VARCHAR},
+      </if>
+      <if test="backImg != null" >
+        #{backImg,jdbcType=VARCHAR},
+      </if>
+      <if test="lastingNum != null" >
+        #{lastingNum,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="socialGroupNum != null" >
+        #{socialGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="followNum != null" >
+        #{followNum,jdbcType=INTEGER},
+      </if>
+      <if test="beConcernedNum != null" >
+        #{beConcernedNum,jdbcType=INTEGER},
+      </if>
+      <if test="mySocialGroupNum != null" >
+        #{mySocialGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByUsersId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+      users_id, type, username, student_id, password, real_name, department, phone, mail,
+      label, birthday, sex, location, school, job, identity, is_able_login, user_img, user_big_img,
+      back_img, lasting_num, last_login_time, social_group_num, follow_num, be_concerned_num,
+      my_social_group_num, create_time, delete_time
+    from tbl_users
+    where users_id = #{usersId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+      users_id, type, username, student_id, password, real_name, department, phone, mail,
+      label, birthday, sex, location, school, job, identity, is_able_login, user_img, user_big_img,
+      back_img, lasting_num, last_login_time, social_group_num, follow_num, be_concerned_num,
+      my_social_group_num, create_time, delete_time
+    from tbl_users
+  </select>
+
+
+
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--users_id, type, username, student_id, password, real_name, department, phone, mail, -->
+    <!--label, birthday, sex, location, school, job, identity, is_able_login, user_img, user_big_img, -->
+    <!--back_img, lasting_num, last_login_time, social_group_num, follow_num, be_concerned_num, -->
+    <!--my_social_group_num, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.UsersExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--'true' as QUERYID,-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_users-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_users-->
+    <!--where users_id = #{usersId,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from tbl_users-->
+    <!--where users_id = #{usersId,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shu.message.model.entity.UsersExample" >-->
+    <!--delete from tbl_users-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+
+  <!--<select id="countByExample" parameterType="com.shu.message.model.entity.UsersExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from tbl_users-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update tbl_users-->
+    <!--<set >-->
+      <!--<if test="record.usersId != null" >-->
+        <!--users_id = #{record.usersId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.type != null" >-->
+        <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.username != null" >-->
+        <!--username = #{record.username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.studentId != null" >-->
+        <!--student_id = #{record.studentId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.password != null" >-->
+        <!--password = #{record.password,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.realName != null" >-->
+        <!--real_name = #{record.realName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.department != null" >-->
+        <!--department = #{record.department,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.phone != null" >-->
+        <!--phone = #{record.phone,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.mail != null" >-->
+        <!--mail = #{record.mail,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.label != null" >-->
+        <!--label = #{record.label,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.birthday != null" >-->
+        <!--birthday = #{record.birthday,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.sex != null" >-->
+        <!--sex = #{record.sex,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.location != null" >-->
+        <!--location = #{record.location,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.school != null" >-->
+        <!--school = #{record.school,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.job != null" >-->
+        <!--job = #{record.job,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.identity != null" >-->
+        <!--identity = #{record.identity,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isAbleLogin != null" >-->
+        <!--is_able_login = #{record.isAbleLogin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.userImg != null" >-->
+        <!--user_img = #{record.userImg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.userBigImg != null" >-->
+        <!--user_big_img = #{record.userBigImg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.backImg != null" >-->
+        <!--back_img = #{record.backImg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.lastingNum != null" >-->
+        <!--lasting_num = #{record.lastingNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.lastLoginTime != null" >-->
+        <!--last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="record.socialGroupNum != null" >-->
+        <!--social_group_num = #{record.socialGroupNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.followNum != null" >-->
+        <!--follow_num = #{record.followNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.beConcernedNum != null" >-->
+        <!--be_concerned_num = #{record.beConcernedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.mySocialGroupNum != null" >-->
+        <!--my_social_group_num = #{record.mySocialGroupNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.createTime != null" >-->
+        <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="record.deleteTime != null" >-->
+        <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update tbl_users-->
+    <!--set users_id = #{record.usersId,jdbcType=INTEGER},-->
+      <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--username = #{record.username,jdbcType=VARCHAR},-->
+      <!--student_id = #{record.studentId,jdbcType=VARCHAR},-->
+      <!--password = #{record.password,jdbcType=VARCHAR},-->
+      <!--real_name = #{record.realName,jdbcType=VARCHAR},-->
+      <!--department = #{record.department,jdbcType=VARCHAR},-->
+      <!--phone = #{record.phone,jdbcType=VARCHAR},-->
+      <!--mail = #{record.mail,jdbcType=VARCHAR},-->
+      <!--label = #{record.label,jdbcType=VARCHAR},-->
+      <!--birthday = #{record.birthday,jdbcType=VARCHAR},-->
+      <!--sex = #{record.sex,jdbcType=VARCHAR},-->
+      <!--location = #{record.location,jdbcType=VARCHAR},-->
+      <!--school = #{record.school,jdbcType=VARCHAR},-->
+      <!--job = #{record.job,jdbcType=VARCHAR},-->
+      <!--identity = #{record.identity,jdbcType=VARCHAR},-->
+      <!--is_able_login = #{record.isAbleLogin,jdbcType=BIT},-->
+      <!--user_img = #{record.userImg,jdbcType=VARCHAR},-->
+      <!--user_big_img = #{record.userBigImg,jdbcType=VARCHAR},-->
+      <!--back_img = #{record.backImg,jdbcType=VARCHAR},-->
+      <!--lasting_num = #{record.lastingNum,jdbcType=INTEGER},-->
+      <!--last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},-->
+      <!--social_group_num = #{record.socialGroupNum,jdbcType=INTEGER},-->
+      <!--follow_num = #{record.followNum,jdbcType=INTEGER},-->
+      <!--be_concerned_num = #{record.beConcernedNum,jdbcType=INTEGER},-->
+      <!--my_social_group_num = #{record.mySocialGroupNum,jdbcType=INTEGER},-->
+      <!--create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shu.message.model.entity.Users" >-->
+    <!--update tbl_users-->
+    <!--<set >-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="username != null" >-->
+        <!--username = #{username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="studentId != null" >-->
+        <!--student_id = #{studentId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="password != null" >-->
+        <!--password = #{password,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="realName != null" >-->
+        <!--real_name = #{realName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="department != null" >-->
+        <!--department = #{department,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="phone != null" >-->
+        <!--phone = #{phone,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="mail != null" >-->
+        <!--mail = #{mail,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="label != null" >-->
+        <!--label = #{label,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="birthday != null" >-->
+        <!--birthday = #{birthday,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sex != null" >-->
+        <!--sex = #{sex,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="location != null" >-->
+        <!--location = #{location,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="school != null" >-->
+        <!--school = #{school,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="job != null" >-->
+        <!--job = #{job,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="identity != null" >-->
+        <!--identity = #{identity,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isAbleLogin != null" >-->
+        <!--is_able_login = #{isAbleLogin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="userImg != null" >-->
+        <!--user_img = #{userImg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="userBigImg != null" >-->
+        <!--user_big_img = #{userBigImg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="backImg != null" >-->
+        <!--back_img = #{backImg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="lastingNum != null" >-->
+        <!--lasting_num = #{lastingNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="lastLoginTime != null" >-->
+        <!--last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="socialGroupNum != null" >-->
+        <!--social_group_num = #{socialGroupNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="followNum != null" >-->
+        <!--follow_num = #{followNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="beConcernedNum != null" >-->
+        <!--be_concerned_num = #{beConcernedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="mySocialGroupNum != null" >-->
+        <!--my_social_group_num = #{mySocialGroupNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where users_id = #{usersId,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shu.message.model.entity.Users" >-->
+    <!--update tbl_users-->
+    <!--set type = #{type,jdbcType=INTEGER},-->
+      <!--username = #{username,jdbcType=VARCHAR},-->
+      <!--student_id = #{studentId,jdbcType=VARCHAR},-->
+      <!--password = #{password,jdbcType=VARCHAR},-->
+      <!--real_name = #{realName,jdbcType=VARCHAR},-->
+      <!--department = #{department,jdbcType=VARCHAR},-->
+      <!--phone = #{phone,jdbcType=VARCHAR},-->
+      <!--mail = #{mail,jdbcType=VARCHAR},-->
+      <!--label = #{label,jdbcType=VARCHAR},-->
+      <!--birthday = #{birthday,jdbcType=VARCHAR},-->
+      <!--sex = #{sex,jdbcType=VARCHAR},-->
+      <!--location = #{location,jdbcType=VARCHAR},-->
+      <!--school = #{school,jdbcType=VARCHAR},-->
+      <!--job = #{job,jdbcType=VARCHAR},-->
+      <!--identity = #{identity,jdbcType=VARCHAR},-->
+      <!--is_able_login = #{isAbleLogin,jdbcType=BIT},-->
+      <!--user_img = #{userImg,jdbcType=VARCHAR},-->
+      <!--user_big_img = #{userBigImg,jdbcType=VARCHAR},-->
+      <!--back_img = #{backImg,jdbcType=VARCHAR},-->
+      <!--lasting_num = #{lastingNum,jdbcType=INTEGER},-->
+      <!--last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},-->
+      <!--social_group_num = #{socialGroupNum,jdbcType=INTEGER},-->
+      <!--follow_num = #{followNum,jdbcType=INTEGER},-->
+      <!--be_concerned_num = #{beConcernedNum,jdbcType=INTEGER},-->
+      <!--my_social_group_num = #{mySocialGroupNum,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where users_id = #{usersId,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

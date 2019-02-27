@@ -4,7 +4,7 @@ schema {
 }
 
 type Query {
-    getNewsList(page: Int!, pageSize: Int!): [NewsResponseInfo]
+    getNewsList(page: Int!, pageSize: Int!, usersId: Int!): [NewsResponseInfo]
 }
 
 #type Mutation {

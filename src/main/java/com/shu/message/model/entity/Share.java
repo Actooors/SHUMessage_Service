@@ -12,11 +12,12 @@ public class Share {
 
     private Integer type;
 
-    private Integer userId;
-
-    private Boolean shared;
+    private Integer usersId;
 
     private Date createTime;
 
     private Date deleteTime;
+
+    private Boolean shared;
+
 }

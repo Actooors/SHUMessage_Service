@@ -12,8 +12,7 @@
     <!--<result column="reply_like_num" property="replyLikeNum" jdbcType="INTEGER" />-->
     <!--<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />-->
     <!--<result column="commented" property="commented" jdbcType="BIT" />-->
-
-  <!--<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />-->
+    <!--<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />-->
     <!--<result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />-->
   <!--</resultMap>-->
   <!--<sql id="Example_Where_Clause" >-->

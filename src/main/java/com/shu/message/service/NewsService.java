@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,10 +33,12 @@ public class NewsService implements BaseService {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public List<NewsResponseInfo> getNewsList(int pageNum, int pageSize) throws AllException {
+    public List<NewsResponseInfo> getNewsList(Integer page, Integer pageSize, Integer usersId) throws AllException {
         List<UserNewsInfo> newsList;
         try {
-            newsList = newsMapper.selectNewsList(pageNum * pageSize, pageSize);
+            // 第一个参数(page - 1) * pageSize 表示的是从排好序的哪条数据开始取
+            // 第二个参数表示现在一页有多少数据
+            newsList = newsMapper.selectNewsList((page - 1) * pageSize, pageSize, usersId);
         } catch (Exception e) {
             log.info("查询新闻列表报错，错误信息为 " + e.toString());
             throw new AllException(EmAllException.SELECT_ERROR);
@@ -51,13 +54,12 @@ public class NewsService implements BaseService {
             // type id
             res.setInfo(new Info(0, news.getNewsId()));
             res.setPublishTime(news.getCreateTime());
-            // TODO 这里需要和label表交互
+            // TODO 这里需要和label表交互，等待数据分析的结果
             res.setTopic(new Topic(1, "资源动态"));
             // like comment share
             res.setShareInfo(new ShareInfo(news.getLikeNum(), news.getCommentNum(), news.getShareNum()));
-            // TODO 这个似乎是写死的
+            // TODO 这个似乎是写死的，这个的确是写死的
             res.setExtraInfo("官方新闻");
-            // TODO 设置用户是否点赞，评论，分享
             //依次是点赞，评论，转发
             res.setFootprint(new Footprint(
                     news.getLiked() == null ? false : news.getLiked(),

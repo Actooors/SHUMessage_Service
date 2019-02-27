@@ -58,8 +58,11 @@
     FROM tbl_news LEFT JOIN tbl_discuss ON news_id = tbl_discuss.id
                   LEFT JOIN tbl_share ON news_id = tbl_share.id
                   LEFT JOIN tbl_like ON news_id = tbl_like.id
-    ORDER BY create_time DESC
-    LIMIT #{startRow,jdbcType=INTEGER} OFFSET #{endRow,jdbcType=INTEGER};
+    WHERE CASE WHEN tbl_discuss.id IS NOT NULL THEN tbl_discuss.users_id = #{usersId,jdbcType=INTEGER} ELSE TRUE END
+      AND CASE WHEN tbl_share.id IS NOT NULL THEN tbl_share.users_id = #{usersId,jdbcType=INTEGER} ELSE TRUE END
+      AND CASE WHEN tbl_like.id IS NOT NULL THEN tbl_like.users_id = #{usersId,jdbcType=INTEGER} ELSE TRUE END
+    ORDER BY tbl_news.create_time DESC
+    LIMIT #{num,jdbcType=INTEGER} OFFSET #{offset,jdbcType=INTEGER};
   </select>
 
 

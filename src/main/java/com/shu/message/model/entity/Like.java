@@ -12,11 +12,13 @@ public class Like {
 
     private Integer type;
 
-    private Integer userId;
+    private Integer usersId;
 
     private Boolean liked;
 
     private Date createTime;
 
     private Date deleteTime;
+
+
 }

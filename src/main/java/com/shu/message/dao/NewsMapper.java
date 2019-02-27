@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface NewsMapper {
 
-    List<UserNewsInfo> selectNewsList(@Param("startRow")Integer startRow,@Param("endRow") Integer endRow);
+    List<UserNewsInfo> selectNewsList(@Param("offset")Integer offset, @Param("num") Integer num,
+                                      @Param("usersId")Integer usersId);
 
 //    UserNewsInfo selectUserNewsInfo(Integer newsId);
 

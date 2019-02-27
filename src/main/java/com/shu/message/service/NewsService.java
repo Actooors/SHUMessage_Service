@@ -46,11 +46,9 @@ public class NewsService implements BaseService {
 
         List<NewsResponseInfo> resList = new LinkedList<>();
 
-        //TODO n+1问题需要解决
         for(UserNewsInfo news : newsList) {
             NewsResponseInfo res = new NewsResponseInfo();
-            Users users = usersMapper.selectByUsersId(news.getUsersId());
-            res.setAuthor(new UserInfo(users.getStudentId(), users.getUserImg(),users.getUsername()));
+            res.setAuthor(new UserInfo(news.getUsersId(), news.getUserImg(),news.getUsername()));
             // type id
             res.setInfo(new Info(0, news.getNewsId()));
             res.setPublishTime(news.getCreateTime());

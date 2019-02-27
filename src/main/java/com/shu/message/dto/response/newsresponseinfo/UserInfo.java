@@ -10,11 +10,11 @@ import lombok.Data;
  */
 @Data
 public class UserInfo {
-    private String id;
+    private Integer id;
     private String avatar;
     private String name;
     //TODO 这里
-    public UserInfo(String userId, String avatar, String name) {
+    public UserInfo(Integer userId, String avatar, String name) {
         this.id = userId;
         this.avatar = "https://avatars2.githubusercontent.com/u/30586220?s=460&v=4";
         this.name = name;

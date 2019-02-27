@@ -35,6 +35,9 @@
     <result column="liked" property="liked" jdbcType="BOOLEAN"/>
     <result column="commented" property="commented" jdbcType="BOOLEAN"/>
     <result column="shared" property="shared" jdbcType="BOOLEAN"/>
+    <!--用户工号、姓名、图标-->
+    <result column="username" property="username" jdbcType="VARCHAR"/>
+    <result column="user_img" property="userImg" jdbcType="VARCHAR"/>
   </resultMap>
 
 
@@ -54,8 +57,9 @@
       tbl_news.news_content, tbl_news.news_description, tbl_news.img_url,
       tbl_news.type, tbl_news.comment_num, tbl_news.like_num,
       tbl_news.share_num, tbl_news.create_time, tbl_news.delete_time,
-      liked, commented, shared
-    FROM tbl_news LEFT JOIN tbl_discuss ON news_id = tbl_discuss.id
+      liked, commented, shared, username, user_img
+    FROM tbl_news LEFT JOIN tbl_users ON tbl_news.users_id = tbl_users.users_id
+                  LEFT JOIN tbl_discuss ON news_id = tbl_discuss.id
                   LEFT JOIN tbl_share ON news_id = tbl_share.id
                   LEFT JOIN tbl_like ON news_id = tbl_like.id
     WHERE CASE WHEN tbl_discuss.id IS NOT NULL THEN tbl_discuss.users_id = #{usersId,jdbcType=INTEGER} ELSE TRUE END

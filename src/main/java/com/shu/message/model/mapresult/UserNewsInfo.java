@@ -16,4 +16,7 @@ public class UserNewsInfo extends News {
     private Boolean liked;
     private Boolean commented;
     private Boolean shared;
+
+    private String username;
+    private String userImg;
 }

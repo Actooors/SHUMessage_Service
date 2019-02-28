@@ -93,7 +93,7 @@ CREATE TABLE tbl_like(
   id INT NOT NULL, -- 对应新闻、动态、评论的主键id
   type INT NOT NULL, -- 1表示这是新闻的点赞，2表示这是动态的点赞，
                      -- 3表示这是评论的点赞
-  user_id INT NOT NULL, -- 对某一个新闻、动态、评论进行操作的人的主键id
+  users_id INT NOT NULL, -- 对某一个新闻、动态、评论进行操作的人的主键id
   liked BOOLEAN DEFAULT false, -- 是否对当前的内容进行点赞
   create_time TIMESTAMP(0) DEFAULT current_timestamp, -- 点赞的时间
   delete_time TIMESTAMP(0) -- 是否被删除如果，如果删了就不是null了
@@ -104,7 +104,7 @@ CREATE TABLE tbl_share(
   share_id SERIAL PRIMARY KEY, -- 主键
   id INT NOT NULL, -- 对应新闻、动态的主键id
   type INT NOT NULL, -- 1表示这是新闻的转发，2表示这是动态的转发
-  user_id INT NOT NULL, -- 对某一个新闻、动态进行操作的人的主键id
+  users_id INT NOT NULL, -- 对某一个新闻、动态进行操作的人的主键id
   shared BOOLEAN NOT NULL, -- 是否转发
   create_time TIMESTAMP(0) DEFAULT current_timestamp, -- 转发的时间
   delete_time TIMESTAMP(0) -- 是否被删除如果，如果删了就不是null了
@@ -123,7 +123,7 @@ CREATE TABLE tbl_discuss(
   reply_num INT DEFAULT 0, -- 你这条评论或者回复被别人回复的数目
   reply_like_num INT DEFAULT 0, -- 这条评论或者回复被点赞的数目
   img_url VARCHAR(2048), -- 评论或回复图片的地址
-  discussed BOOLEAN NOT NULL, -- 是否评论
+  commented BOOLEAN NOT NULL, -- 是否评论
   create_time TIMESTAMP(0) DEFAULT current_timestamp, -- 评论的时间
   delete_time TIMESTAMP(0) -- 是否被删除如果，如果删了就不是null了
 );

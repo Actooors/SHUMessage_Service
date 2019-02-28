@@ -7,13 +7,11 @@ import com.shu.message.dto.response.NewsResponseInfo;
 import com.shu.message.model.mapresult.UserNewsInfo;
 import com.shu.message.exception.AllException;
 import com.shu.message.exception.EmAllException;
-import com.shu.message.model.entity.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +43,6 @@ public class NewsService implements BaseService {
         }
 
         List<NewsResponseInfo> resList = new LinkedList<>();
-
         for(UserNewsInfo news : newsList) {
             NewsResponseInfo res = new NewsResponseInfo();
             res.setAuthor(new UserInfo(news.getUsersId(), news.getUserImg(),news.getUsername()));

@@ -2,6 +2,7 @@ package com.shu.message.service;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.shu.message.dao.*;
 import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
@@ -10,13 +11,17 @@ import com.shu.message.tools.AliMessage;
 import com.shu.message.tools.MD5;
 import com.shu.message.tools.ResultTool;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.annotation.Resource;
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * @program: message
@@ -86,6 +91,13 @@ public class NewsService {
         return ResultTool.success(new NewsResponse(resList, nums));
     }
 
+
+    public Result getInterestedNews(String userId) {
+        return null;
+    }
+
+
+
     public Result getNews(int type, int id, String userId) {
         if(type == 2) {
             Comment comment = commentMapper.selectByPrimaryKey(id);
@@ -143,15 +155,20 @@ public class NewsService {
             List<Label> labelList = labelMapper.getLabels(user.getUserId());
             if(labelList.isEmpty()) continue;
             StringBuilder res = new StringBuilder();
-//            for(UserInterestedNewsInfo news : list) {
+            StringBuilder str = new StringBuilder();
             for(Label label : labelList) {
+//            for(UserInterestedNewsInfo news : list) {
 //                str.append("0").append(",");
 //                str.append(news.getNewsId()).append("|");
 //                res.append(news.getTitle().length() > 10 ?
 //                        news.getTitle().substring(0, 10) + "...\n"
 //                        : news.getTitle() + "\n");
-                if(label.getLabelName().length() + res.length() > 20) break;
-                res.append(label.getLabelName()).append(",");
+                if(!(label.getLabelName().length() + res.length() > 20)) {
+                    res.append(label.getLabelName()).append(",");
+                } else {
+                    res.append("等");
+                }
+                str.append(label.getLabelName()).append(",");
             }
             log.info(res.toString());
 //            List<UserInterestedNewsInfo> newsList = newsMapper.selectMessageListByUserId(user.getUserId());
@@ -171,14 +188,31 @@ public class NewsService {
 //            String tmp1 = res.toString();
 //            log.info(tmp1);
             AliMessage aliMessage = new AliMessage();
-            SendSmsResponse response = aliMessage.sendSms(user.getPhone(), cou,res.toString().substring(0, res.length() - 1), "xx");
+//            String uuid = UUID.randomUUID().toString();
+//            log.info(uuid);
+            // Use a faster, but non-secure, random generator
+            Random random = new Random();
+            // Use a custom alphabet containing only a, b, and c
+            char[] alphabet = {'a','b','c','d','e','f','g','h','i',
+                               'j','k','l','m','n','o','p','q','r',
+                               's','t','u','v','w','x','y','z'};
+            String uuid = NanoIdUtils.randomNanoId(random, alphabet, 20); // "babbcaabcb"
+//            String uuid = NanoIdUtils.randomNanoId();
+            SendSmsResponse response = aliMessage.sendSms(user.getPhone(), cou,res.toString().substring(0, res.length() - 1), uuid);
             log.info("短信接口返回的数据----------------");
             log.info("Code=" + response.getCode());
             log.info("Message=" + response.getMessage());
             log.info("RequestId=" + response.getRequestId());
             log.info("BizId=" + response.getBizId());
-
-//            userInterestedNewsMapper.insert(new UserInterestedNews(str.toString(),  user.getUserId()));
+            UserInterestedNews userInterestedNews = new UserInterestedNews();
+            userInterestedNews.setContent(str.toString().substring(0, str.length() - 1));
+            userInterestedNews.setUserInterestedNewsId(uuid);
+            try {
+                userInterestedNewsMapper.insert(userInterestedNews);
+            } catch (DataAccessException e) {
+                log.info(e.toString());
+            }
+//                String uuid1 = NanoIdUtils.randomNanoId(random, alphabet, 20); // "babbcaabcb"
         }
         return ResultTool.success("发送完毕");
     }

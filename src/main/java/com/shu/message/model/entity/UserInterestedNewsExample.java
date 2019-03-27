@@ -115,52 +115,62 @@ public class UserInterestedNewsExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdEqualTo(Integer value) {
+        public Criteria andUserInterestedNewsIdEqualTo(String value) {
             addCriterion("user_interested_news_id =", value, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdNotEqualTo(Integer value) {
+        public Criteria andUserInterestedNewsIdNotEqualTo(String value) {
             addCriterion("user_interested_news_id <>", value, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdGreaterThan(Integer value) {
+        public Criteria andUserInterestedNewsIdGreaterThan(String value) {
             addCriterion("user_interested_news_id >", value, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUserInterestedNewsIdGreaterThanOrEqualTo(String value) {
             addCriterion("user_interested_news_id >=", value, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdLessThan(Integer value) {
+        public Criteria andUserInterestedNewsIdLessThan(String value) {
             addCriterion("user_interested_news_id <", value, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdLessThanOrEqualTo(Integer value) {
+        public Criteria andUserInterestedNewsIdLessThanOrEqualTo(String value) {
             addCriterion("user_interested_news_id <=", value, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdIn(List<Integer> values) {
+        public Criteria andUserInterestedNewsIdLike(String value) {
+            addCriterion("user_interested_news_id like", value, "userInterestedNewsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInterestedNewsIdNotLike(String value) {
+            addCriterion("user_interested_news_id not like", value, "userInterestedNewsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserInterestedNewsIdIn(List<String> values) {
             addCriterion("user_interested_news_id in", values, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdNotIn(List<Integer> values) {
+        public Criteria andUserInterestedNewsIdNotIn(List<String> values) {
             addCriterion("user_interested_news_id not in", values, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdBetween(Integer value1, Integer value2) {
+        public Criteria andUserInterestedNewsIdBetween(String value1, String value2) {
             addCriterion("user_interested_news_id between", value1, value2, "userInterestedNewsId");
             return (Criteria) this;
         }
 
-        public Criteria andUserInterestedNewsIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andUserInterestedNewsIdNotBetween(String value1, String value2) {
             addCriterion("user_interested_news_id not between", value1, value2, "userInterestedNewsId");
             return (Criteria) this;
         }
@@ -232,76 +242,6 @@ public class UserInterestedNewsExample {
 
         public Criteria andContentNotBetween(String value1, String value2) {
             addCriterion("content not between", value1, value2, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdEqualTo(String value) {
-            addCriterion("user_id =", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotEqualTo(String value) {
-            addCriterion("user_id <>", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdGreaterThan(String value) {
-            addCriterion("user_id >", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdGreaterThanOrEqualTo(String value) {
-            addCriterion("user_id >=", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLessThan(String value) {
-            addCriterion("user_id <", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLessThanOrEqualTo(String value) {
-            addCriterion("user_id <=", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLike(String value) {
-            addCriterion("user_id like", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotLike(String value) {
-            addCriterion("user_id not like", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIn(List<String> values) {
-            addCriterion("user_id in", values, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotIn(List<String> values) {
-            addCriterion("user_id not in", values, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdBetween(String value1, String value2) {
-            addCriterion("user_id between", value1, value2, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotBetween(String value1, String value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 

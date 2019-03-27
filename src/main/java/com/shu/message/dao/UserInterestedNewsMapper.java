@@ -10,7 +10,7 @@ public interface UserInterestedNewsMapper {
 
     int deleteByExample(UserInterestedNewsExample example);
 
-    int deleteByPrimaryKey(Integer userInterestedNewsId);
+    int deleteByPrimaryKey(String userInterestedNewsId);
 
     int insert(UserInterestedNews record);
 
@@ -18,7 +18,7 @@ public interface UserInterestedNewsMapper {
 
     List<UserInterestedNews> selectByExample(UserInterestedNewsExample example);
 
-    UserInterestedNews selectByPrimaryKey(Integer userInterestedNewsId);
+    UserInterestedNews selectByPrimaryKey(String userInterestedNewsId);
 
     int updateByExampleSelective(@Param("record") UserInterestedNews record, @Param("example") UserInterestedNewsExample example);
 

@@ -1,15 +1,15 @@
 package com.shu.message.service;
 
-import com.shu.message.dao.CommentMapper;
-import com.shu.message.dao.LikeMapper;
-import com.shu.message.dao.NewsMapper;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.shu.message.dao.*;
 import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
-import com.shu.message.model.ov.resultsetting.CommentInfo;
-import com.shu.message.model.ov.resultsetting.NewsResponse;
-import com.shu.message.model.ov.resultsetting.NewsResponseInfo;
-import com.shu.message.model.ov.resultsetting.ReplyInfo;
+import com.shu.message.model.ov.resultsetting.*;
+import com.shu.message.tools.AliMessage;
+import com.shu.message.tools.MD5;
 import com.shu.message.tools.ResultTool;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -25,6 +25,7 @@ import java.util.List;
  * @create: 2018-08-28 13:07
  */
 @Service
+@Slf4j
 public class NewsService {
 
     @Resource
@@ -41,6 +42,16 @@ public class NewsService {
 
     @Resource
     private LikeMapper likeMapper;
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Resource
+    private LabelMapper labelMapper;
+
+    @Resource
+    private UserInterestedNewsMapper userInterestedNewsMapper;
+
 
     /**
      * @Description: 获取新闻列表
@@ -104,5 +115,71 @@ public class NewsService {
             }
             return ResultTool.success(res);
         }
+    }
+
+    /**
+     * @Description: 对新闻或者动态或者评论点赞
+     * @Param: [likeInfo, userId]
+     * @Return: com.shu.message.model.ov.Result
+     * @Author: ggmr
+     * @Date: 18-8-31
+     */
+    public Result sendMsg() throws ClientException {
+
+        UserExample example = new UserExample();
+        example.createCriteria()
+                .andUserIdIsNotNull();
+        List<User> users = userMapper.selectByExample(example);
+
+        if(users.isEmpty()) return ResultTool.error("没有用户");
+        for(User user : users) {
+            // 对每一个user，查找他关注了哪些标签
+            log.info(user.getUserId());
+//            List<UserInterestedNewsInfo> list = newsMapper
+//                    .selectMessageListByUserId(user.getUserId());
+//            if(list.isEmpty()) continue;
+
+            // 找到有新闻的标签并排序好
+            List<Label> labelList = labelMapper.getLabels(user.getUserId());
+            if(labelList.isEmpty()) continue;
+            StringBuilder res = new StringBuilder();
+//            for(UserInterestedNewsInfo news : list) {
+            for(Label label : labelList) {
+//                str.append("0").append(",");
+//                str.append(news.getNewsId()).append("|");
+//                res.append(news.getTitle().length() > 10 ?
+//                        news.getTitle().substring(0, 10) + "...\n"
+//                        : news.getTitle() + "\n");
+                if(label.getLabelName().length() + res.length() > 20) break;
+                res.append(label.getLabelName()).append(",");
+            }
+            log.info(res.toString());
+//            List<UserInterestedNewsInfo> newsList = newsMapper.selectMessageListByUserId(user.getUserId());
+            List<Integer> newsList = labelMapper.getLabelNum(user.getUserId());
+            Integer cou = 0;
+            for(Integer one : newsList) {
+                cou += one == null ? 0 : one;
+            }
+            log.info(user.getUserName() + cou.toString());
+
+//            StringBuilder str = new StringBuilder();
+//            for(UserInterestedNewsInfo news : newsList) {
+//                str.append("0").append(",");
+//                str.append(news.getNewsId()).append("|");
+//            }
+//            String tmp = str.toString();
+//            String tmp1 = res.toString();
+//            log.info(tmp1);
+            AliMessage aliMessage = new AliMessage();
+            SendSmsResponse response = aliMessage.sendSms(user.getPhone(), cou,res.toString().substring(0, res.length() - 1), "xx");
+            log.info("短信接口返回的数据----------------");
+            log.info("Code=" + response.getCode());
+            log.info("Message=" + response.getMessage());
+            log.info("RequestId=" + response.getRequestId());
+            log.info("BizId=" + response.getBizId());
+
+//            userInterestedNewsMapper.insert(new UserInterestedNews(str.toString(),  user.getUserId()));
+        }
+        return ResultTool.success("发送完毕");
     }
 }

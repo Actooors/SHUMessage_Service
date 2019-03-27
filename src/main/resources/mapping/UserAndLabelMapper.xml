@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shu.message.dao.UserAndLabelMapper" >
+  <resultMap id="BaseResultMap" type="com.shu.message.model.entity.UserAndLabel" >
+    <id column="user_and_label_id" property="userAndLabelId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="label_id" property="labelId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_and_label_id, user_id, label_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.UserAndLabelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_UserAndLabel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_UserAndLabel
+    where user_and_label_id = #{userAndLabelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_UserAndLabel
+    where user_and_label_id = #{userAndLabelId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shu.message.model.entity.UserAndLabelExample" >
+    delete from tbl_UserAndLabel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shu.message.model.entity.UserAndLabel" >
+    insert into tbl_UserAndLabel (user_and_label_id, user_id, label_id
+      )
+    values (#{userAndLabelId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{labelId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shu.message.model.entity.UserAndLabel" >
+    insert into tbl_UserAndLabel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userAndLabelId != null" >
+        user_and_label_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="labelId != null" >
+        label_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userAndLabelId != null" >
+        #{userAndLabelId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shu.message.model.entity.UserAndLabelExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_UserAndLabel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_UserAndLabel
+    <set >
+      <if test="record.userAndLabelId != null" >
+        user_and_label_id = #{record.userAndLabelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelId != null" >
+        label_id = #{record.labelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_UserAndLabel
+    set user_and_label_id = #{record.userAndLabelId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      label_id = #{record.labelId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shu.message.model.entity.UserAndLabel" >
+    update tbl_UserAndLabel
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="labelId != null" >
+        label_id = #{labelId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_and_label_id = #{userAndLabelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shu.message.model.entity.UserAndLabel" >
+    update tbl_UserAndLabel
+    set user_id = #{userId,jdbcType=VARCHAR},
+      label_id = #{labelId,jdbcType=INTEGER}
+    where user_and_label_id = #{userAndLabelId,jdbcType=INTEGER}
+  </update>
+</mapper>

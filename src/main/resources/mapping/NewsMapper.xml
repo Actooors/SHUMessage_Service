@@ -20,6 +20,40 @@
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
+
+
+  <!--<resultMap id="getUserInterestedNews" type="com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo">-->
+    <!--<id column="news_id" property="newsId" jdbcType="INTEGER"/>-->
+    <!--<result column="title" property="title" jdbcType="VARCHAR" />-->
+    <!--<result property="likeNum" jdbcType="INTEGER"/>-->
+  <!--</resultMap>-->
+
+
+  <!--<select id="selectMessageListByUserId" resultMap="java.lang.Integer" parameterType="java.lang.String">-->
+  <!--select  count(distinct tbl_News.news_id)-->
+  <!--from tbl_UserAndLabel inner join tbl_NewsAndLabel-->
+  <!--where tbl_UserAndLabel.user_id = #{userId,jdbcType=VARCHAR} and create_date &gt;=(NOW() - interval 12 hour)-->
+  <!--order by tbl_News.like_num-->
+  <!--</select>-->
+
+  <!--<resultMap id="getUserInterestedNews" type="com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo">-->
+    <!--<id column="news_id" property="newsId" jdbcType="INTEGER"/>-->
+    <!--<result column="title" property="title" jdbcType="VARCHAR" />-->
+  <!--</resultMap>-->
+
+  <!--<select id="selectMessageListByUserId" resultMap="getUserInterestedNews" parameterType="java.lang.String">-->
+    <!--&lt;!&ndash;<![CDATA[&ndash;&gt;-->
+    <!--select distinct tbl_News.news_id, title-->
+    <!--from tbl_UserAndLabel join tbl_NewsAndLabel on tbl_NewsAndLabel.label_id = tbl_UserAndLabel.label_id-->
+    <!--join tbl_News on tbl_News.news_id = tbl_NewsAndLabel.news_id-->
+    <!--where tbl_UserAndLabel.user_id = #{userId,jdbcType=VARCHAR} and create_date &gt;=(NOW() - interval 12 hour)-->
+<!--&#45;&#45;     order by tbl_News.like_num asc-->
+    <!--LIMIT 10-->
+<!--&#45;&#45;         ]>-->
+  <!--</select>-->
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

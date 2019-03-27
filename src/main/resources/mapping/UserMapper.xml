@@ -87,7 +87,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from tbl_User
     where user_id = #{userId,jdbcType=VARCHAR}
@@ -103,11 +103,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.shu.message.model.entity.User" >
-    insert into tbl_User (user_id, user_name, department, 
-      phone, mail, big_img, 
+    insert into tbl_User (user_id, user_name, department,
+      phone, mail, big_img,
       img)
-    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{bigImg,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{bigImg,jdbcType=VARCHAR},
       #{img,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.shu.message.model.entity.User" >
@@ -197,12 +197,12 @@
   <update id="updateByExample" parameterType="map" >
     update tbl_User
     set user_id = #{record.userId,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      department = #{record.department,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      mail = #{record.mail,jdbcType=VARCHAR},
-      big_img = #{record.bigImg,jdbcType=VARCHAR},
-      img = #{record.img,jdbcType=VARCHAR}
+    user_name = #{record.userName,jdbcType=VARCHAR},
+    department = #{record.department,jdbcType=VARCHAR},
+    phone = #{record.phone,jdbcType=VARCHAR},
+    mail = #{record.mail,jdbcType=VARCHAR},
+    big_img = #{record.bigImg,jdbcType=VARCHAR},
+    img = #{record.img,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

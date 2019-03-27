@@ -3,6 +3,8 @@ package com.shu.message.dao;
 import com.shu.message.model.entity.Label;
 import com.shu.message.model.entity.LabelExample;
 import java.util.List;
+
+import com.shu.message.model.ov.resultsetting.LabelNewsNum;
 import org.apache.ibatis.annotations.Param;
 
 public interface LabelMapper {
@@ -27,4 +29,10 @@ public interface LabelMapper {
     int updateByPrimaryKeySelective(Label record);
 
     int updateByPrimaryKey(Label record);
+
+    List<Label> getLabels(String userId);
+
+//    List<LabelNewsNum> getLabelNum(String userId);
+    List<Integer> getLabelNum(String userId);
+
 }

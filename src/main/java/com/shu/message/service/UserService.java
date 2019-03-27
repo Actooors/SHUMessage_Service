@@ -1,5 +1,7 @@
 package com.shu.message.service;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import com.shu.message.dao.*;
 import com.shu.message.model.Json.LikeInfo;
 import com.shu.message.model.Json.LoginInfo;
@@ -7,9 +9,12 @@ import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.LoginResponse;
 import com.shu.message.model.ov.resultsetting.UserInfo;
+import com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo;
+import com.shu.message.tools.AliMessage;
 import com.shu.message.tools.AuthTool;
 import com.shu.message.tools.JwtUtil;
 import com.shu.message.tools.ResultTool;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,6 +28,7 @@ import java.util.List;
  * @create: 2018-08-24 10:41
  */
 @Service
+@Slf4j
 public class UserService {
 
     @Resource

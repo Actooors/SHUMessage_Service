@@ -1,5 +1,6 @@
 package com.shu.message.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.shu.message.model.ov.Result;
 import com.shu.message.service.NewsService;
 import com.shu.message.tools.JwtUtil;
@@ -31,4 +32,10 @@ public class NewsController {
         String userId = JwtUtil.parseJwt(token);
         return newsService.getNewsList(page, pageSize, userId);
     }
+
+    @GetMapping("/interestNews")
+    public Result getInterestedNews() throws ClientException {
+        return newsService.sendMsg();
+    }
+
 }

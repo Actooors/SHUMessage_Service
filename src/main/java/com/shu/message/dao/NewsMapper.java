@@ -3,6 +3,8 @@ package com.shu.message.dao;
 import com.shu.message.model.entity.News;
 import com.shu.message.model.entity.NewsExample;
 import java.util.List;
+
+import com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo;
 import org.apache.ibatis.annotations.Param;
 
 public interface NewsMapper {
@@ -27,4 +29,6 @@ public interface NewsMapper {
     int updateByPrimaryKeySelective(News record);
 
     int updateByPrimaryKey(News record);
+
+    int selectMessageListByUserId(String userId);
 }

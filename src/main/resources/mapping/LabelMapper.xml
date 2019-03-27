@@ -6,6 +6,47 @@
     <result column="label_name" property="labelName" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--&lt;!&ndash;这个是统计每一个标签有多少新闻&ndash;&gt;-->
+  <!--<resultMap id="LabelNumResultMap" type="com.shu.message.model.ov.resultsetting.LabelNewsNum" >-->
+  <!--<id column="label_id" property="labelId" jdbcType="VARCHAR" />-->
+  <!--<result column="label_name" property="labelName" jdbcType="VARCHAR" />-->
+  <!--<result property="num" jdbcType="INTEGER" />-->
+<!--</resultMap>-->
+  <!--根据userId查找他关注了哪些标签-->
+  <!--找到用户所有的标签中 今天有新闻的那部分-->
+  <!--然后对这些标签按照点赞数进行排序-->
+  <select id="getLabels" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select tbl_Label.label_id, label_name
+    from tbl_UserAndLabel join tbl_Label on tbl_Label.label_id = tbl_UserAndLabel.label_id
+                          join tbl_NewsAndLabel as x on x.label_id = tbl_UserAndLabel.label_id
+                          join tbl_News on x.news_id = tbl_News.news_id
+    where tbl_UserAndLabel.user_id = #{userId,jdbcType=VARCHAR}
+--  这里判断这个标签今天有没有新闻
+    and exists(select y.news_id
+               from tbl_News as y
+               where y.create_date &gt;=(NOW() - interval 12 hour)
+                  and x.news_id = y.news_id)
+    group by tbl_UserAndLabel.label_id
+    order by sum(like_num) desc
+  </select>
+  <!--获取到每一个标签有多少数量-->
+  <select id="getLabelNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) as num
+    from tbl_UserAndLabel join tbl_Label on tbl_Label.label_id = tbl_UserAndLabel.label_id
+                          join tbl_NewsAndLabel on tbl_NewsAndLabel.label_id = tbl_UserAndLabel.label_id
+                          join tbl_News on tbl_NewsAndLabel.news_id = tbl_News.news_id
+    where tbl_UserAndLabel.user_id = #{userId,jdbcType=VARCHAR} and tbl_News.create_date &gt;=(NOW() - interval 12 hour)
+    group by tbl_UserAndLabel.label_id
+  </select>
+
+
+
+
+
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

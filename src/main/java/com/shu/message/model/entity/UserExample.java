@@ -663,6 +663,316 @@ public class UserExample {
             addCriterion("department not between", value1, value2, "department");
             return (Criteria) this;
         }
+
+        public Criteria andFollowMeIsNull() {
+            addCriterion("follow_me is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeIsNotNull() {
+            addCriterion("follow_me is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeEqualTo(Integer value) {
+            addCriterion("follow_me =", value, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeNotEqualTo(Integer value) {
+            addCriterion("follow_me <>", value, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeGreaterThan(Integer value) {
+            addCriterion("follow_me >", value, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("follow_me >=", value, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeLessThan(Integer value) {
+            addCriterion("follow_me <", value, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeLessThanOrEqualTo(Integer value) {
+            addCriterion("follow_me <=", value, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeIn(List<Integer> values) {
+            addCriterion("follow_me in", values, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeNotIn(List<Integer> values) {
+            addCriterion("follow_me not in", values, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeBetween(Integer value1, Integer value2) {
+            addCriterion("follow_me between", value1, value2, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowMeNotBetween(Integer value1, Integer value2) {
+            addCriterion("follow_me not between", value1, value2, "followMe");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersIsNull() {
+            addCriterion("follow_others is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersIsNotNull() {
+            addCriterion("follow_others is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersEqualTo(Integer value) {
+            addCriterion("follow_others =", value, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersNotEqualTo(Integer value) {
+            addCriterion("follow_others <>", value, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersGreaterThan(Integer value) {
+            addCriterion("follow_others >", value, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersGreaterThanOrEqualTo(Integer value) {
+            addCriterion("follow_others >=", value, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersLessThan(Integer value) {
+            addCriterion("follow_others <", value, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersLessThanOrEqualTo(Integer value) {
+            addCriterion("follow_others <=", value, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersIn(List<Integer> values) {
+            addCriterion("follow_others in", values, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersNotIn(List<Integer> values) {
+            addCriterion("follow_others not in", values, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersBetween(Integer value1, Integer value2) {
+            addCriterion("follow_others between", value1, value2, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andFollowOthersNotBetween(Integer value1, Integer value2) {
+            addCriterion("follow_others not between", value1, value2, "followOthers");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumIsNull() {
+            addCriterion("join_group_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumIsNotNull() {
+            addCriterion("join_group_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumEqualTo(Integer value) {
+            addCriterion("join_group_num =", value, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumNotEqualTo(Integer value) {
+            addCriterion("join_group_num <>", value, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumGreaterThan(Integer value) {
+            addCriterion("join_group_num >", value, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("join_group_num >=", value, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumLessThan(Integer value) {
+            addCriterion("join_group_num <", value, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumLessThanOrEqualTo(Integer value) {
+            addCriterion("join_group_num <=", value, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumIn(List<Integer> values) {
+            addCriterion("join_group_num in", values, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumNotIn(List<Integer> values) {
+            addCriterion("join_group_num not in", values, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumBetween(Integer value1, Integer value2) {
+            addCriterion("join_group_num between", value1, value2, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andJoinGroupNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("join_group_num not between", value1, value2, "joinGroupNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupIsNull() {
+            addCriterion("concern_group is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupIsNotNull() {
+            addCriterion("concern_group is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupEqualTo(Integer value) {
+            addCriterion("concern_group =", value, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupNotEqualTo(Integer value) {
+            addCriterion("concern_group <>", value, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupGreaterThan(Integer value) {
+            addCriterion("concern_group >", value, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupGreaterThanOrEqualTo(Integer value) {
+            addCriterion("concern_group >=", value, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupLessThan(Integer value) {
+            addCriterion("concern_group <", value, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupLessThanOrEqualTo(Integer value) {
+            addCriterion("concern_group <=", value, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupIn(List<Integer> values) {
+            addCriterion("concern_group in", values, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupNotIn(List<Integer> values) {
+            addCriterion("concern_group not in", values, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupBetween(Integer value1, Integer value2) {
+            addCriterion("concern_group between", value1, value2, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernGroupNotBetween(Integer value1, Integer value2) {
+            addCriterion("concern_group not between", value1, value2, "concernGroup");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelIsNull() {
+            addCriterion("personal_label is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelIsNotNull() {
+            addCriterion("personal_label is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelEqualTo(String value) {
+            addCriterion("personal_label =", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelNotEqualTo(String value) {
+            addCriterion("personal_label <>", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelGreaterThan(String value) {
+            addCriterion("personal_label >", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelGreaterThanOrEqualTo(String value) {
+            addCriterion("personal_label >=", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelLessThan(String value) {
+            addCriterion("personal_label <", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelLessThanOrEqualTo(String value) {
+            addCriterion("personal_label <=", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelLike(String value) {
+            addCriterion("personal_label like", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelNotLike(String value) {
+            addCriterion("personal_label not like", value, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelIn(List<String> values) {
+            addCriterion("personal_label in", values, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelNotIn(List<String> values) {
+            addCriterion("personal_label not in", values, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelBetween(String value1, String value2) {
+            addCriterion("personal_label between", value1, value2, "personalLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andPersonalLabelNotBetween(String value1, String value2) {
+            addCriterion("personal_label not between", value1, value2, "personalLabel");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

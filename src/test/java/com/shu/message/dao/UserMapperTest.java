@@ -13,11 +13,11 @@ public class UserMapperTest {
     @Test
     public void selectByPrimaryKey() {
 
-        User existedUser = userMapper.selectByPrimaryKey("16122131");
-        if (existedUser == null){
-            System.out.print("null");
-        }else{
-            System.out.print("xxx");
-        }
+//        User existedUser = userMapper.selectByPrimaryKey("16122131");
+//        if (existedUser == null){
+//            System.out.print("null");
+//        }else{
+//            System.out.print("xxx");
+//        }
     }
 }

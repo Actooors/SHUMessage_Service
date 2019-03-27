@@ -27,6 +27,7 @@
       content, image_url_list, comment_num, like_num, shares_num, url, title, type
     from tbl_NewsAndLabel join tbl_News on tbl_News.news_id = tbl_NewsAndLabel.news_id
     where tbl_NewsAndLabel.label_id = #{labelId, jdbcType=INTEGER}
+    and create_date &gt;= (NOW() - interval 12 hour)
   </select>
 
   <!--<resultMap id="getUserInterestedNews" type="com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo">-->

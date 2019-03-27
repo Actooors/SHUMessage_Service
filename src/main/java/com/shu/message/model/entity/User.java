@@ -5,7 +5,7 @@ public class User {
 
     private String userName;
 
-    private String department;
+    private String password;
 
     private String phone;
 
@@ -14,6 +14,18 @@ public class User {
     private String bigImg;
 
     private String img;
+
+    private String department;
+
+    private Integer followMe;
+
+    private Integer followOthers;
+
+    private Integer joinGroupNum;
+
+    private Integer concernGroup;
+
+    private String personalLabel;
 
     public String getUserId() {
         return userId;
@@ -31,12 +43,12 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getDepartment() {
-        return department;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDepartment(String department) {
-        this.department = department == null ? null : department.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public String getPhone() {
@@ -69,5 +81,53 @@ public class User {
 
     public void setImg(String img) {
         this.img = img == null ? null : img.trim();
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department == null ? null : department.trim();
+    }
+
+    public Integer getFollowMe() {
+        return followMe;
+    }
+
+    public void setFollowMe(Integer followMe) {
+        this.followMe = followMe;
+    }
+
+    public Integer getFollowOthers() {
+        return followOthers;
+    }
+
+    public void setFollowOthers(Integer followOthers) {
+        this.followOthers = followOthers;
+    }
+
+    public Integer getJoinGroupNum() {
+        return joinGroupNum;
+    }
+
+    public void setJoinGroupNum(Integer joinGroupNum) {
+        this.joinGroupNum = joinGroupNum;
+    }
+
+    public Integer getConcernGroup() {
+        return concernGroup;
+    }
+
+    public void setConcernGroup(Integer concernGroup) {
+        this.concernGroup = concernGroup;
+    }
+
+    public String getPersonalLabel() {
+        return personalLabel;
+    }
+
+    public void setPersonalLabel(String personalLabel) {
+        this.personalLabel = personalLabel == null ? null : personalLabel.trim();
     }
 }

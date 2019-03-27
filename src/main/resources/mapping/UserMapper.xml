@@ -4,11 +4,17 @@
   <resultMap id="BaseResultMap" type="com.shu.message.model.entity.User" >
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="mail" property="mail" jdbcType="VARCHAR" />
     <result column="big_img" property="bigImg" jdbcType="VARCHAR" />
     <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="follow_me" property="followMe" jdbcType="INTEGER" />
+    <result column="follow_others" property="followOthers" jdbcType="INTEGER" />
+    <result column="join_group_num" property="joinGroupNum" jdbcType="INTEGER" />
+    <result column="concern_group" property="concernGroup" jdbcType="INTEGER" />
+    <result column="personal_label" property="personalLabel" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, user_name, department, phone, mail, big_img, img
+    user_id, user_name, password, phone, mail, big_img, img, department, follow_me, follow_others, 
+    join_group_num, concern_group, personal_label
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shu.message.model.entity.UserExample" >
     select
@@ -87,7 +94,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from tbl_User
     where user_id = #{userId,jdbcType=VARCHAR}
@@ -103,12 +110,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.shu.message.model.entity.User" >
-    insert into tbl_User (user_id, user_name, department,
-      phone, mail, big_img,
-      img)
-    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR},
-      #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{bigImg,jdbcType=VARCHAR},
-      #{img,jdbcType=VARCHAR})
+    insert into tbl_User (user_id, user_name, password, 
+      phone, mail, big_img, 
+      img, department, follow_me, 
+      follow_others, join_group_num, concern_group, 
+      personal_label)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{bigImg,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{followMe,jdbcType=INTEGER}, 
+      #{followOthers,jdbcType=INTEGER}, #{joinGroupNum,jdbcType=INTEGER}, #{concernGroup,jdbcType=INTEGER}, 
+      #{personalLabel,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.shu.message.model.entity.User" >
     insert into tbl_User
@@ -119,8 +130,8 @@
       <if test="userName != null" >
         user_name,
       </if>
-      <if test="department != null" >
-        department,
+      <if test="password != null" >
+        password,
       </if>
       <if test="phone != null" >
         phone,
@@ -134,6 +145,24 @@
       <if test="img != null" >
         img,
       </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="followMe != null" >
+        follow_me,
+      </if>
+      <if test="followOthers != null" >
+        follow_others,
+      </if>
+      <if test="joinGroupNum != null" >
+        join_group_num,
+      </if>
+      <if test="concernGroup != null" >
+        concern_group,
+      </if>
+      <if test="personalLabel != null" >
+        personal_label,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -142,8 +171,8 @@
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="department != null" >
-        #{department,jdbcType=VARCHAR},
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -156,6 +185,24 @@
       </if>
       <if test="img != null" >
         #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="followMe != null" >
+        #{followMe,jdbcType=INTEGER},
+      </if>
+      <if test="followOthers != null" >
+        #{followOthers,jdbcType=INTEGER},
+      </if>
+      <if test="joinGroupNum != null" >
+        #{joinGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="concernGroup != null" >
+        #{concernGroup,jdbcType=INTEGER},
+      </if>
+      <if test="personalLabel != null" >
+        #{personalLabel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -174,8 +221,8 @@
       <if test="record.userName != null" >
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.department != null" >
-        department = #{record.department,jdbcType=VARCHAR},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null" >
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -189,6 +236,24 @@
       <if test="record.img != null" >
         img = #{record.img,jdbcType=VARCHAR},
       </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.followMe != null" >
+        follow_me = #{record.followMe,jdbcType=INTEGER},
+      </if>
+      <if test="record.followOthers != null" >
+        follow_others = #{record.followOthers,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinGroupNum != null" >
+        join_group_num = #{record.joinGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.concernGroup != null" >
+        concern_group = #{record.concernGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.personalLabel != null" >
+        personal_label = #{record.personalLabel,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -197,12 +262,18 @@
   <update id="updateByExample" parameterType="map" >
     update tbl_User
     set user_id = #{record.userId,jdbcType=VARCHAR},
-    user_name = #{record.userName,jdbcType=VARCHAR},
-    department = #{record.department,jdbcType=VARCHAR},
-    phone = #{record.phone,jdbcType=VARCHAR},
-    mail = #{record.mail,jdbcType=VARCHAR},
-    big_img = #{record.bigImg,jdbcType=VARCHAR},
-    img = #{record.img,jdbcType=VARCHAR}
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      mail = #{record.mail,jdbcType=VARCHAR},
+      big_img = #{record.bigImg,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      follow_me = #{record.followMe,jdbcType=INTEGER},
+      follow_others = #{record.followOthers,jdbcType=INTEGER},
+      join_group_num = #{record.joinGroupNum,jdbcType=INTEGER},
+      concern_group = #{record.concernGroup,jdbcType=INTEGER},
+      personal_label = #{record.personalLabel,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,8 +284,8 @@
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="department != null" >
-        department = #{department,jdbcType=VARCHAR},
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
@@ -228,17 +299,41 @@
       <if test="img != null" >
         img = #{img,jdbcType=VARCHAR},
       </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="followMe != null" >
+        follow_me = #{followMe,jdbcType=INTEGER},
+      </if>
+      <if test="followOthers != null" >
+        follow_others = #{followOthers,jdbcType=INTEGER},
+      </if>
+      <if test="joinGroupNum != null" >
+        join_group_num = #{joinGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="concernGroup != null" >
+        concern_group = #{concernGroup,jdbcType=INTEGER},
+      </if>
+      <if test="personalLabel != null" >
+        personal_label = #{personalLabel,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shu.message.model.entity.User" >
     update tbl_User
     set user_name = #{userName,jdbcType=VARCHAR},
-      department = #{department,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       mail = #{mail,jdbcType=VARCHAR},
       big_img = #{bigImg,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR}
+      img = #{img,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      follow_me = #{followMe,jdbcType=INTEGER},
+      follow_others = #{followOthers,jdbcType=INTEGER},
+      join_group_num = #{joinGroupNum,jdbcType=INTEGER},
+      concern_group = #{concernGroup,jdbcType=INTEGER},
+      personal_label = #{personalLabel,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

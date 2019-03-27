@@ -10,6 +10,7 @@ import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.LoginResponse;
 import com.shu.message.model.ov.resultsetting.UserInfo;
 import com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo;
+import com.shu.message.model.ov.resultsetting.UserSpecialInfo;
 import com.shu.message.tools.AliMessage;
 import com.shu.message.tools.AuthTool;
 import com.shu.message.tools.JwtUtil;
@@ -184,6 +185,27 @@ public class UserService {
             commentMapper.updateByPrimaryKeySelective(comment);
         }
         return ResultTool.success();
+    }
+    
+    /**
+     * @Description: 根据用户id获取用户信息接口
+     * @Param: [userId]
+     * @Return: com.shu.message.model.ov.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-03-28
+     */
+    public Result getUserInfo(String userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        UserSpecialInfo info = new UserSpecialInfo();
+        info.setAvator(user.getImg());
+        info.setCreateGroupNum(user.getConcernGroup());
+        info.setFollowMe(user.getFollowMe());
+        info.setFollowOthers(user.getFollowOthers());
+        info.setJoinGroupNum(user.getJoinGroupNum());
+        info.setPersonalLabel(user.getPersonalLabel());
+        info.setName(user.getUserName());
+//        info.setPersonalLabelList();
+        return ResultTool.success(info);
     }
 
 }

@@ -35,4 +35,11 @@ public class GroupController {
         String userId = JwtUtil.parseJwt(token);
         return groupService.joinGroup(userId, groupId);
     }
+
+    @PostMapping("/quitGroup/{groupId}")
+    public Result quitGroup(@RequestHeader(value = "Authorization") String token,
+                            @PathVariable(value = "groupId") int groupId) {
+        String userId = JwtUtil.parseJwt(token);
+        return groupService.deleteGroup(userId, groupId);
+    }
 }

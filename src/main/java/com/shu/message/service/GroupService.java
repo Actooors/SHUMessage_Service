@@ -74,4 +74,16 @@ public class GroupService {
     }
 
 
+    public Result deleteGroup(String userId, int groupId) {
+        UserAndGroupExample example = new UserAndGroupExample();
+        example.createCriteria().andOtherGroupIdEqualTo(groupId)
+                                .andUserIdEqualTo(userId);
+        userAndGroupMapper.deleteByExample(example);
+        Group group = groupMapper.selectByPrimaryKey(groupId);
+        group.setPeopleNum(group.getPeopleNum() - 1);
+        groupMapper.updateByPrimaryKeySelective(group);
+        return ResultTool.success("退出圈子成功");
+    }
+
+
 }

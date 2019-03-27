@@ -21,6 +21,13 @@
     <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
 
+  <select id="selectNewsByLabelId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      tbl_News.news_id, md5_id, author, create_date, user_id, user_name, apartment, tag_id, tag,
+      content, image_url_list, comment_num, like_num, shares_num, url, title, type
+    from tbl_NewsAndLabel join tbl_News on tbl_News.news_id = tbl_NewsAndLabel.news_id
+    where tbl_NewsAndLabel.label_id = #{labelId, jdbcType=INTEGER}
+  </select>
 
   <!--<resultMap id="getUserInterestedNews" type="com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo">-->
     <!--<id column="news_id" property="newsId" jdbcType="INTEGER"/>-->

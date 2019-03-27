@@ -92,8 +92,28 @@ public class NewsService {
     }
 
 
-    public Result getInterestedNews(String userId) {
-        return null;
+    public Result getInterestedNews(String uuid, String userId) {
+        UserInterestedNews userInterestedNews = userInterestedNewsMapper.selectByPrimaryKey(uuid);
+        String labelContent = userInterestedNews.getContent();
+        String[] labelList = labelContent.split(",");
+        List<NewsResponseInfo> resList = new LinkedList<>();
+        int nums = 0;
+        for(String label : labelList) {
+            List<News> rList = newsMapper.selectNewsByLabelId(Integer.parseInt(label));
+            for(News news : rList) {
+                NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId(), userId);
+                res.setContent(news.getTitle());
+                int newsType = news.getType();
+                if(newsType == 1) {
+                    res.setMedia(newsType, news.getTitle(), news.getUrl());
+                } else {
+                    res.setMedia(newsType, news.getImageUrlList());
+                }
+                resList.add(res);
+                nums++;
+            }
+        }
+        return ResultTool.success(new NewsResponse(resList, nums));
     }
 
 
@@ -168,7 +188,7 @@ public class NewsService {
                 } else {
                     res.append("等");
                 }
-                str.append(label.getLabelName()).append(",");
+                str.append(label.getLabelId()).append(",");
             }
             log.info(res.toString());
 //            List<UserInterestedNewsInfo> newsList = newsMapper.selectMessageListByUserId(user.getUserId());
@@ -198,7 +218,8 @@ public class NewsService {
                                's','t','u','v','w','x','y','z'};
             String uuid = NanoIdUtils.randomNanoId(random, alphabet, 20); // "babbcaabcb"
 //            String uuid = NanoIdUtils.randomNanoId();
-            SendSmsResponse response = aliMessage.sendSms(user.getPhone(), cou,res.toString().substring(0, res.length() - 1), uuid);
+            SendSmsResponse response = aliMessage.sendSms(
+                    user.getPhone(), cou,res.toString().substring(0, res.length() - 1), uuid);
             log.info("短信接口返回的数据----------------");
             log.info("Code=" + response.getCode());
             log.info("Message=" + response.getMessage());
@@ -210,9 +231,9 @@ public class NewsService {
             try {
                 userInterestedNewsMapper.insert(userInterestedNews);
             } catch (DataAccessException e) {
+                // TODO 之后应该抽象函数出来，然后重复调用
                 log.info(e.toString());
             }
-//                String uuid1 = NanoIdUtils.randomNanoId(random, alphabet, 20); // "babbcaabcb"
         }
         return ResultTool.success("发送完毕");
     }

@@ -33,9 +33,16 @@ public class NewsController {
         return newsService.getNewsList(page, pageSize, userId);
     }
 
-    @GetMapping("/interestNews")
-    public Result getInterestedNews() throws ClientException {
+    @GetMapping("/sendNews")
+    public Result sendNews() throws ClientException {
         return newsService.sendMsg();
+    }
+
+    @GetMapping("/interestNews")
+    public Result getInterestedNews(@RequestParam(value = "wd") String uuid,
+                                    @RequestHeader(value = "Authorization") String token) {
+        String userId = JwtUtil.parseJwt(token);
+        return newsService.getInterestedNews(uuid, userId);
     }
 
 }

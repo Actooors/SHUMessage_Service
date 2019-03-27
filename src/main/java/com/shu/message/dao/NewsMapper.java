@@ -30,5 +30,7 @@ public interface NewsMapper {
 
     int updateByPrimaryKey(News record);
 
-    int selectMessageListByUserId(String userId);
+//    int selectMessageListByUserId(String userId);
+
+    List<News> selectNewsByLabelId(int labelId);
 }

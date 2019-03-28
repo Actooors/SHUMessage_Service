@@ -102,7 +102,8 @@ public class NewsService {
         List<NewsResponseInfo> resList = new LinkedList<>();
         int nums = 0;
         for(String label : labelList) {
-            List<News> rList = newsMapper.selectNewsByLabelId(Integer.parseInt(label));
+            log.info(userInterestedNews.getCreateDate().toString());
+            List<News> rList = newsMapper.selectNewsByLabelId(Integer.parseInt(label), userInterestedNews.getCreateDate());
             for(News news : rList) {
                 NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId(), userId);
                 res.setContent(news.getTitle());
@@ -116,7 +117,7 @@ public class NewsService {
                 nums++;
             }
         }
-        return ResultTool.success(new NewsResponse(resList, nums));
+        return ResultTool.success(new NewsResponseModify(resList, nums, userInterestedNews.getCreateDate()));
     }
 
 

@@ -22,9 +22,8 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/info")
-    public Result getUserInfo(@RequestHeader(value = "Authorization") String token) {
-        String userId = JwtUtil.parseJwt(token);
+    @GetMapping("/info/{userId}")
+    public Result getUserInfo(@PathVariable(value = "userId") String userId) {
         return userService.getUserInfo(userId);
     }
 

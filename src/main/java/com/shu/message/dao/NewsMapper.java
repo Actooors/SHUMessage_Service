@@ -2,6 +2,8 @@ package com.shu.message.dao;
 
 import com.shu.message.model.entity.News;
 import com.shu.message.model.entity.NewsExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo;
@@ -32,5 +34,5 @@ public interface NewsMapper {
 
 //    int selectMessageListByUserId(String userId);
 
-    List<News> selectNewsByLabelId(int labelId);
+    List<News> selectNewsByLabelId(@Param("labelId")int labelId, @Param("time") Date time);
 }

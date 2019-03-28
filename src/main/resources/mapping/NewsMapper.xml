@@ -21,13 +21,13 @@
     <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
 
-  <select id="selectNewsByLabelId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="selectNewsByLabelId" resultMap="BaseResultMap" parameterType="map">
     select
       tbl_News.news_id, md5_id, author, create_date, user_id, user_name, apartment, tag_id, tag,
       content, image_url_list, comment_num, like_num, shares_num, url, title, type
     from tbl_NewsAndLabel join tbl_News on tbl_News.news_id = tbl_NewsAndLabel.news_id
     where tbl_NewsAndLabel.label_id = #{labelId, jdbcType=INTEGER}
-    and create_date &gt;= (NOW() - interval 12 hour)
+    and (tbl_News.create_date between (#{time, jdbcType=DATE} - interval 12 hour) and (#{time, jdbcType=DATE} + interval 12 hour))
   </select>
 
   <!--<resultMap id="getUserInterestedNews" type="com.shu.message.model.ov.resultsetting.UserInterestedNewsInfo">-->

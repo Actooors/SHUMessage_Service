@@ -1,10 +1,7 @@
 package com.shu.message.service;
 
 import com.shu.message.dao.*;
-import com.shu.message.model.entity.Group;
-import com.shu.message.model.entity.GroupExample;
-import com.shu.message.model.entity.UserAndGroup;
-import com.shu.message.model.entity.UserAndGroupExample;
+import com.shu.message.model.entity.*;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.GroupInfo;
 import com.shu.message.model.ov.resultsetting.UserAndGroupInfo;
@@ -96,7 +93,23 @@ public class GroupService {
      * @Date: 2019-03-28
      */
     public Result searchUserGroups(String userId) {
+
         List<UserAndGroupInfo> resList = groupMapper.selectGroupsByUserId(userId);
+
+        for(UserAndGroupInfo tmp : resList) {
+            NewsExample example = new NewsExample();
+            example.setOrderByClause("`create_date` DESC");
+            example.setStartRow(0);
+            example.setPageSize(3);
+            example.createCriteria().andTagEqualTo(tmp.getName());
+            List<News> news = newsMapper.selectByExample(example);
+            String[] threeTitle = new String[3];
+            int i = 0;
+            for(News s : news) {
+                    threeTitle[i++] = s.getTitle();
+            }
+            tmp.setTitleList(threeTitle);
+        }
         return ResultTool.success(resList);
     }
 

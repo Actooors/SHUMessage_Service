@@ -2,6 +2,8 @@ package com.shu.message.model.ov.resultsetting;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @program: message
  * @description: 用户加入的圈子列表信息
@@ -15,5 +17,6 @@ public class UserAndGroupInfo {
     private String name;
     private String about;
     private Integer memberNum;
+    private String[] titleList;
 
 }

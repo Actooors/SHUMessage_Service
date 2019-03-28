@@ -60,8 +60,10 @@ public class NewsController {
     }
 
     @GetMapping("/userNews/{userId}")
-    public Result getUserNews(@PathVariable(value = "userId") String userId) {
-        return newsService.getUserNewsList(userId);
+    public Result getUserNews(@PathVariable(value = "userId") String userId,
+                              @RequestParam(value = "page") int page,
+                              @RequestParam(value = "pageSize") int pageSize) {
+        return newsService.getUserNewsList(page, pageSize, userId);
     }
 
 

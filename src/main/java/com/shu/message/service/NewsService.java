@@ -94,8 +94,11 @@ public class NewsService {
         return ResultTool.success(new NewsResponse(resList, nums));
     }
 
-    public Result getUserNewsList(String userId) {
+
+    public Result getUserNewsList(int pageNum, int pageSize, String userId) {
         NewsExample example = new NewsExample();
+        example.setStartRow(pageNum * pageSize);
+        example.setPageSize(pageSize);
         example.setOrderByClause("`create_date` DESC");
         example.createCriteria().andUserIdEqualTo(userId);
         List<News> list = newsMapper.selectByExample(example);

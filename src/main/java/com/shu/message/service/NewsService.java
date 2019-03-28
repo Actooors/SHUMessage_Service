@@ -94,6 +94,29 @@ public class NewsService {
         return ResultTool.success(new NewsResponse(resList, nums));
     }
 
+    public Result getUserNewsList(String userId) {
+        NewsExample example = new NewsExample();
+        example.setOrderByClause("`create_date` DESC");
+        example.createCriteria().andUserIdEqualTo(userId);
+        List<News> list = newsMapper.selectByExample(example);
+        if(list.isEmpty()) return ResultTool.error("此用户没有发布新闻");
+        List<NewsResponseInfo> resList = new LinkedList<>();
+        int nums = 0;
+        for(News news : list) {
+            NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId(), userId);
+            res.setContent(news.getTitle());
+            int newsType = news.getType();
+            if(newsType == 1) {
+                res.setMedia(newsType, news.getTitle(), news.getUrl());
+            } else {
+                res.setMedia(newsType, news.getImageUrlList());
+            }
+            resList.add(res);
+            nums++;
+        }
+        return ResultTool.success(new NewsResponse(resList, nums));
+    }
+
 
     public Result getInterestedNews(String uuid, String userId) {
         UserInterestedNews userInterestedNews = userInterestedNewsMapper.selectByPrimaryKey(uuid);

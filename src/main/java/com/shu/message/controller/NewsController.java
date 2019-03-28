@@ -59,4 +59,10 @@ public class NewsController {
         return newsService.getGroupMessageListByLike(groupId, userId);
     }
 
+    @GetMapping("/userNews/{userId}")
+    public Result getUserNews(@PathVariable(value = "userId") String userId) {
+        return newsService.getUserNewsList(userId);
+    }
+
+
 }

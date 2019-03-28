@@ -97,6 +97,9 @@ public class NewsService {
 
     public Result getInterestedNews(String uuid, String userId) {
         UserInterestedNews userInterestedNews = userInterestedNewsMapper.selectByPrimaryKey(uuid);
+        if(userInterestedNews == null) {
+            return ResultTool.error("您访问的时间太晚了，已经被删除了");
+        }
         String labelContent = userInterestedNews.getContent();
         String[] labelList = labelContent.split(",");
         List<NewsResponseInfo> resList = new LinkedList<>();

@@ -28,5 +28,12 @@ public class UserController {
         return userService.getUserInfo(userId);
     }
 
+    @PostMapping("/concernOthers/{userId}")
+    public Result concernOthers(@RequestHeader(value = "Authorization") String token,
+                                @PathVariable(value = "userId") String otherUserId) {
+        String userId = JwtUtil.parseJwt(token);
+        return userService.concernOthers(userId, otherUserId);
+    }
+
 
 }

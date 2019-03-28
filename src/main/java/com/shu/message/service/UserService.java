@@ -47,6 +47,9 @@ public class UserService {
     @Resource
     private CommentMapper commentMapper;
 
+    @Resource
+    private UserAndUserMapper userAndUserMapper;
+
     /**
      * @Description: 根据参数生成登录返回需要的信息
      * @Param: [userId, identity, userName]
@@ -206,6 +209,21 @@ public class UserService {
         info.setName(user.getUserName());
 //        info.setPersonalLabelList();
         return ResultTool.success(info);
+    }
+
+
+    public Result concernOthers(String userId, String otherUserId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        User otherUser = userMapper.selectByPrimaryKey(otherUserId);
+        user.setFollowOthers(user.getFollowOthers() + 1);
+        otherUser.setFollowMe(user.getFollowMe() + 1);
+        UserAndUser userAndUser = new UserAndUser();
+        userAndUser.setTargetUserId(otherUserId);
+        userAndUser.setUserId(userId);
+        userAndUserMapper.insert(userAndUser);
+        userMapper.updateByPrimaryKeySelective(user);
+        userMapper.updateByPrimaryKeySelective(otherUser);
+        return ResultTool.success("关注成功");
     }
 
 }

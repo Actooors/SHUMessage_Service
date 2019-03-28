@@ -3,9 +3,9 @@ package com.shu.message.model.entity;
 public class UserAndUser {
     private Integer userAndUserId;
 
-    private Integer userId;
+    private String userId;
 
-    private Integer targetUserId;
+    private String targetUserId;
 
     public Integer getUserAndUserId() {
         return userAndUserId;
@@ -15,19 +15,19 @@ public class UserAndUser {
         this.userAndUserId = userAndUserId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getTargetUserId() {
+    public String getTargetUserId() {
         return targetUserId;
     }
 
-    public void setTargetUserId(Integer targetUserId) {
-        this.targetUserId = targetUserId;
+    public void setTargetUserId(String targetUserId) {
+        this.targetUserId = targetUserId == null ? null : targetUserId.trim();
     }
 }

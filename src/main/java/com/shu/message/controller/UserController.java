@@ -35,5 +35,12 @@ public class UserController {
         return userService.concernOthers(userId, otherUserId);
     }
 
+    @PostMapping("/cancelConcernOthers/{userId}")
+    public Result cancelConcernOthers(@RequestHeader(value = "Authorization") String token,
+                                @PathVariable(value = "userId") String otherUserId) {
+        String userId = JwtUtil.parseJwt(token);
+        return userService.cancleconcernOthers(userId, otherUserId);
+    }
+
 
 }

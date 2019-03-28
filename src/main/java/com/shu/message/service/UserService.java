@@ -216,7 +216,7 @@ public class UserService {
         User user = userMapper.selectByPrimaryKey(userId);
         User otherUser = userMapper.selectByPrimaryKey(otherUserId);
         user.setFollowOthers(user.getFollowOthers() + 1);
-        otherUser.setFollowMe(user.getFollowMe() + 1);
+        otherUser.setFollowMe(otherUser.getFollowMe() + 1);
         UserAndUser userAndUser = new UserAndUser();
         userAndUser.setTargetUserId(otherUserId);
         userAndUser.setUserId(userId);
@@ -224,6 +224,19 @@ public class UserService {
         userMapper.updateByPrimaryKeySelective(user);
         userMapper.updateByPrimaryKeySelective(otherUser);
         return ResultTool.success("关注成功");
+    }
+
+    public Result cancleconcernOthers(String userId, String otherUserId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        User otherUser = userMapper.selectByPrimaryKey(otherUserId);
+        user.setFollowOthers(user.getFollowOthers() - 1);
+        otherUser.setFollowMe(otherUser.getFollowMe() - 1);
+        userMapper.updateByPrimaryKeySelective(user);
+        userMapper.updateByPrimaryKeySelective(otherUser);
+        UserAndUserExample example = new UserAndUserExample();
+        example.createCriteria().andUserIdEqualTo(userId).andTargetUserIdEqualTo(otherUserId);
+        userAndUserMapper.deleteByExample(example);
+        return ResultTool.success("取消关注成功");
     }
 
 }

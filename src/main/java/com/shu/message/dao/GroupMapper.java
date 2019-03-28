@@ -3,6 +3,8 @@ package com.shu.message.dao;
 import com.shu.message.model.entity.Group;
 import com.shu.message.model.entity.GroupExample;
 import java.util.List;
+
+import com.shu.message.model.ov.resultsetting.UserAndGroupInfo;
 import org.apache.ibatis.annotations.Param;
 
 public interface GroupMapper {
@@ -27,4 +29,6 @@ public interface GroupMapper {
     int updateByPrimaryKeySelective(Group record);
 
     int updateByPrimaryKey(Group record);
+
+    List<UserAndGroupInfo> selectGroupsByUserId(String userId);
 }

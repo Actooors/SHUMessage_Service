@@ -11,6 +11,20 @@
     <result column="message_num" property="messageNum" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="selectGroupsByUserIdMap" type="com.shu.message.model.ov.resultsetting.UserAndGroupInfo" >
+    <id column="groups_id" property="groupId" jdbcType="INTEGER" />
+    <result column="groups_name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="about" jdbcType="VARCHAR" />
+    <result column="people_num" property="memberNum" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="selectGroupsByUserId" resultMap="selectGroupsByUserIdMap" parameterType="java.lang.String">
+    select groups_id, groups_name, description, people_num
+    from tbl_UserAndGroup join tbl_group on groups_id = other_group_id
+    where user_id = #{userId, jdbcType=VARCHAR};
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

@@ -2,14 +2,17 @@ package com.shu.message.service;
 
 import com.shu.message.dao.*;
 import com.shu.message.model.entity.Group;
+import com.shu.message.model.entity.GroupExample;
 import com.shu.message.model.entity.UserAndGroup;
 import com.shu.message.model.entity.UserAndGroupExample;
 import com.shu.message.model.ov.Result;
 import com.shu.message.model.ov.resultsetting.GroupInfo;
+import com.shu.message.model.ov.resultsetting.UserAndGroupInfo;
 import com.shu.message.tools.ResultTool;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @program: message
@@ -83,6 +86,18 @@ public class GroupService {
         group.setPeopleNum(group.getPeopleNum() - 1);
         groupMapper.updateByPrimaryKeySelective(group);
         return ResultTool.success("退出圈子成功");
+    }
+
+    /**
+     * @Description: 获取用户关注的圈子列表
+     * @Param: [userId]
+     * @Return: com.shu.message.model.ov.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-03-28
+     */
+    public Result searchUserGroups(String userId) {
+        List<UserAndGroupInfo> resList = groupMapper.selectGroupsByUserId(userId);
+        return ResultTool.success(resList);
     }
 
 

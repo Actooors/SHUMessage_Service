@@ -3,6 +3,7 @@ package com.shu.message.controller;
 import com.shu.message.model.ov.Result;
 import com.shu.message.service.GroupService;
 import com.shu.message.tools.JwtUtil;
+import com.shu.message.tools.ResultTool;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,5 +42,10 @@ public class GroupController {
                             @PathVariable(value = "groupId") int groupId) {
         String userId = JwtUtil.parseJwt(token);
         return groupService.deleteGroup(userId, groupId);
+    }
+
+    @GetMapping("/groupList/{userId}")
+    public Result groupList(@PathVariable(value = "userId") String userId) {
+        return groupService.searchUserGroups(userId);
     }
 }

@@ -19,7 +19,7 @@ public class UserInfo {
 
     public UserInfo(String userId, String avatar, String name) {
         this.userId = userId;
-        this.avatar = "https://avatars2.githubusercontent.com/u/30586220?s=460&v=4";
+        this.avatar = avatar;
         this.name = name;
     }
 }

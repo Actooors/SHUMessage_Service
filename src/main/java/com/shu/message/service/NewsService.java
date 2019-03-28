@@ -57,6 +57,9 @@ public class NewsService {
     @Resource
     private UserInterestedNewsMapper userInterestedNewsMapper;
 
+    @Resource
+    private GroupMapper groupMapper;
+
 
     /**
      * @Description: 获取新闻列表
@@ -236,5 +239,70 @@ public class NewsService {
             }
         }
         return ResultTool.success("发送完毕");
+    }
+
+
+    /**
+     * @Description: 查询一个圈子的所有消息
+     * @Param: [groupId]
+     * @Return: com.shu.message.model.ov.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-03-28
+     */
+    public Result getGroupMessageList(int groupId, String userId) {
+        Group group = groupMapper.selectByPrimaryKey(groupId);
+        NewsExample example = new NewsExample();
+        example.setOrderByClause("`create_date` DESC");
+//        example.setOrderByClause("`like_num` DESC");
+        example.createCriteria().andTagEqualTo(group.getGroupsName());
+        List<News> list = newsMapper.selectByExample(example);
+
+        List<NewsResponseInfo> resList = new LinkedList<>();
+        int nums = 0;
+        for(News news : list) {
+            NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId(), userId);
+            res.setContent(news.getTitle());
+            int newsType = news.getType();
+            if(newsType == 1) {
+                res.setMedia(newsType, news.getTitle(), news.getUrl());
+            } else {
+                res.setMedia(newsType, news.getImageUrlList());
+            }
+            resList.add(res);
+            nums++;
+        }
+        return ResultTool.success(new NewsResponse(resList, nums));
+    }
+
+    /**
+     * @Description: 返回圈子新闻列表，但是是按照点赞排序
+     * @Param: [groupId, userId]
+     * @Return: com.shu.message.model.ov.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-03-28
+     */
+    public Result getGroupMessageListByLike(int groupId, String userId) {
+        Group group = groupMapper.selectByPrimaryKey(groupId);
+        NewsExample example = new NewsExample();
+        example.setOrderByClause("`like_num` DESC");
+//        example.setOrderByClause("`create_date` DESC");
+        example.createCriteria().andTagEqualTo(group.getGroupsName());
+        List<News> list = newsMapper.selectByExample(example);
+        List<NewsResponseInfo> resList = new LinkedList<>();
+
+        int nums = 0;
+        for(News news : list) {
+            NewsResponseInfo res = messageService.findCommonMessage(0, news.getNewsId(), news.getUserId(), userId);
+            res.setContent(news.getTitle());
+            int newsType = news.getType();
+            if(newsType == 1) {
+                res.setMedia(newsType, news.getTitle(), news.getUrl());
+            } else {
+                res.setMedia(newsType, news.getImageUrlList());
+            }
+            resList.add(res);
+            nums++;
+        }
+        return ResultTool.success(new NewsResponse(resList, nums));
     }
 }

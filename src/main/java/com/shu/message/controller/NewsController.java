@@ -45,4 +45,18 @@ public class NewsController {
         return newsService.getInterestedNews(uuid, userId);
     }
 
+    @GetMapping("/groupNews")
+    public Result getGroupMessageList(@RequestParam(value = "groupId") int groupId,
+                                      @RequestHeader(value = "Authorization") String token) {
+        String userId = JwtUtil.parseJwt(token);
+        return newsService.getGroupMessageList(groupId, userId);
+    }
+
+    @GetMapping("/groupNewsByLike")
+    public Result getGroupMessageListByLike(@RequestParam(value = "groupId") int groupId,
+                                      @RequestHeader(value = "Authorization") String token) {
+        String userId = JwtUtil.parseJwt(token);
+        return newsService.getGroupMessageListByLike(groupId, userId);
+    }
+
 }

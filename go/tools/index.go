@@ -1,6 +1,6 @@
 package tools
 
-import "github.com/Actooors/SHUMessage_Service_Go/go/config"
+import "github.com/Actooors/SHUMessage_Service/go/config"
 
 var secret, amapKey, tencentMapKey string
 

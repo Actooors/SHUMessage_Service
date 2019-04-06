@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/Actooors/SHUMessage_Service_Go/tools"
+	"github.com/Actooors/SHUMessage_Service/go/tools"
 )
 
 func Version(ctx *gin.Context) {

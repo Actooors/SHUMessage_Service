@@ -1,6 +1,6 @@
-package _go
+package main
 
-import "github.com/Actooors/SHUMessage_Service_Go/router"
+import "github.com/Actooors/SHUMessage_Service/go/router"
 
 func main()  {
 	router.Run()

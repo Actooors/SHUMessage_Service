@@ -3,8 +3,8 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
-	"github.com/Actooors/SHUMessage_Service_Go/go/config"
-	"github.com/Actooors/SHUMessage_Service_Go/go/handlers"
+	"github.com/Actooors/SHUMessage_Service/go/config"
+	"github.com/Actooors/SHUMessage_Service/go/handlers"
 	"fmt"
 	"log"
 )

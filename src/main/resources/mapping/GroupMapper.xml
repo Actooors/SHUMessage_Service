@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.Group" >
+    <id column="id" property="id" jdbcType="OTHER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="CHAR" />
+    <result column="background" property="background" jdbcType="CHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="OTHER" />
+    <result column="member_num" property="memberNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, name, description, avatar, background, creator_id, member_num, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_group-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >-->
+    <!--delete from tbl_group-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shumsg.model.entity.Group" >-->
+    <!--insert into tbl_group (id, name, description, -->
+      <!--avatar, background, creator_id, -->
+      <!--member_num, create_time, delete_time-->
+      <!--)-->
+    <!--values (#{id,jdbcType=OTHER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, -->
+      <!--#{avatar,jdbcType=CHAR}, #{background,jdbcType=CHAR}, #{creatorId,jdbcType=OTHER}, -->
+      <!--#{memberNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.Group" >-->
+    <!--insert into tbl_group-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="name != null" >-->
+        <!--name,-->
+      <!--</if>-->
+      <!--<if test="description != null" >-->
+        <!--description,-->
+      <!--</if>-->
+      <!--<if test="avatar != null" >-->
+        <!--avatar,-->
+      <!--</if>-->
+      <!--<if test="background != null" >-->
+        <!--background,-->
+      <!--</if>-->
+      <!--<if test="creatorId != null" >-->
+        <!--creator_id,-->
+      <!--</if>-->
+      <!--<if test="memberNum != null" >-->
+        <!--member_num,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="name != null" >-->
+        <!--#{name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="description != null" >-->
+        <!--#{description,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="avatar != null" >-->
+        <!--#{avatar,jdbcType=CHAR},-->
+      <!--</if>-->
+      <!--<if test="background != null" >-->
+        <!--#{background,jdbcType=CHAR},-->
+      <!--</if>-->
+      <!--<if test="creatorId != null" >-->
+        <!--#{creatorId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="memberNum != null" >-->
+        <!--#{memberNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.Group" >-->
+    <!--update tbl_group-->
+    <!--<set >-->
+      <!--<if test="name != null" >-->
+        <!--name = #{name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="description != null" >-->
+        <!--description = #{description,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="avatar != null" >-->
+        <!--avatar = #{avatar,jdbcType=CHAR},-->
+      <!--</if>-->
+      <!--<if test="background != null" >-->
+        <!--background = #{background,jdbcType=CHAR},-->
+      <!--</if>-->
+      <!--<if test="creatorId != null" >-->
+        <!--creator_id = #{creatorId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="memberNum != null" >-->
+        <!--member_num = #{memberNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.Group" >-->
+    <!--update tbl_group-->
+    <!--set name = #{name,jdbcType=VARCHAR},-->
+      <!--description = #{description,jdbcType=VARCHAR},-->
+      <!--avatar = #{avatar,jdbcType=CHAR},-->
+      <!--background = #{background,jdbcType=CHAR},-->
+      <!--creator_id = #{creatorId,jdbcType=OTHER},-->
+      <!--member_num = #{memberNum,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+</mapper>

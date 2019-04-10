@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.FollowRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.FollowRelation" >
+    <id column="id" property="id" jdbcType="OTHER" />
+    <result column="user_id" property="userId" jdbcType="OTHER" />
+    <result column="target_id" property="targetId" jdbcType="OTHER" />
+    <result column="target_nickname" property="targetNickname" jdbcType="VARCHAR" />
+    <result column="target_avatar" property="targetAvatar" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, user_id, target_id, target_nickname, target_avatar, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_follow_relation-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >-->
+    <!--delete from tbl_follow_relation-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shumsg.model.entity.FollowRelation" >-->
+    <!--insert into tbl_follow_relation (id, user_id, target_id, -->
+      <!--target_nickname, target_avatar, create_time, -->
+      <!--delete_time)-->
+    <!--values (#{id,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, #{targetId,jdbcType=OTHER}, -->
+      <!--#{targetNickname,jdbcType=VARCHAR}, #{targetAvatar,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, -->
+      <!--#{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.FollowRelation" >-->
+    <!--insert into tbl_follow_relation-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--user_id,-->
+      <!--</if>-->
+      <!--<if test="targetId != null" >-->
+        <!--target_id,-->
+      <!--</if>-->
+      <!--<if test="targetNickname != null" >-->
+        <!--target_nickname,-->
+      <!--</if>-->
+      <!--<if test="targetAvatar != null" >-->
+        <!--target_avatar,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--#{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="targetId != null" >-->
+        <!--#{targetId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="targetNickname != null" >-->
+        <!--#{targetNickname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="targetAvatar != null" >-->
+        <!--#{targetAvatar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.FollowRelation" >-->
+    <!--update tbl_follow_relation-->
+    <!--<set >-->
+      <!--<if test="userId != null" >-->
+        <!--user_id = #{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="targetId != null" >-->
+        <!--target_id = #{targetId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="targetNickname != null" >-->
+        <!--target_nickname = #{targetNickname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="targetAvatar != null" >-->
+        <!--target_avatar = #{targetAvatar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.FollowRelation" >-->
+    <!--update tbl_follow_relation-->
+    <!--set user_id = #{userId,jdbcType=OTHER},-->
+      <!--target_id = #{targetId,jdbcType=OTHER},-->
+      <!--target_nickname = #{targetNickname,jdbcType=VARCHAR},-->
+      <!--target_avatar = #{targetAvatar,jdbcType=VARCHAR},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+</mapper>

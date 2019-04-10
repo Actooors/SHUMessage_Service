@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.UserMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.UserMessage" >
+    <id column="id" property="id" jdbcType="OTHER" />
+    <result column="user_id" property="userId" jdbcType="OTHER" />
+    <result column="notice_type" property="noticeType" jdbcType="VARCHAR" />
+    <result column="message_type" property="messageType" jdbcType="VARCHAR" />
+    <result column="message_id" property="messageId" jdbcType="OTHER" />
+    <result column="have_read" property="haveRead" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, user_id, notice_type, message_type, message_id, have_read, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_user_message-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >-->
+    <!--delete from tbl_user_message-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shumsg.model.entity.UserMessage" >-->
+    <!--insert into tbl_user_message (id, user_id, notice_type, -->
+      <!--message_type, message_id, have_read, -->
+      <!--create_time, delete_time)-->
+    <!--values (#{id,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, #{noticeType,jdbcType=VARCHAR}, -->
+      <!--#{messageType,jdbcType=VARCHAR}, #{messageId,jdbcType=OTHER}, #{haveRead,jdbcType=BIT}, -->
+      <!--#{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.UserMessage" >-->
+    <!--insert into tbl_user_message-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--user_id,-->
+      <!--</if>-->
+      <!--<if test="noticeType != null" >-->
+        <!--notice_type,-->
+      <!--</if>-->
+      <!--<if test="messageType != null" >-->
+        <!--message_type,-->
+      <!--</if>-->
+      <!--<if test="messageId != null" >-->
+        <!--message_id,-->
+      <!--</if>-->
+      <!--<if test="haveRead != null" >-->
+        <!--have_read,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--#{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="noticeType != null" >-->
+        <!--#{noticeType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="messageType != null" >-->
+        <!--#{messageType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="messageId != null" >-->
+        <!--#{messageId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="haveRead != null" >-->
+        <!--#{haveRead,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.UserMessage" >-->
+    <!--update tbl_user_message-->
+    <!--<set >-->
+      <!--<if test="userId != null" >-->
+        <!--user_id = #{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="noticeType != null" >-->
+        <!--notice_type = #{noticeType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="messageType != null" >-->
+        <!--message_type = #{messageType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="messageId != null" >-->
+        <!--message_id = #{messageId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="haveRead != null" >-->
+        <!--have_read = #{haveRead,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.UserMessage" >-->
+    <!--update tbl_user_message-->
+    <!--set user_id = #{userId,jdbcType=OTHER},-->
+      <!--notice_type = #{noticeType,jdbcType=VARCHAR},-->
+      <!--message_type = #{messageType,jdbcType=VARCHAR},-->
+      <!--message_id = #{messageId,jdbcType=OTHER},-->
+      <!--have_read = #{haveRead,jdbcType=BIT},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+</mapper>

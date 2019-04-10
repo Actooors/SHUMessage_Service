@@ -1,0 +1,24 @@
+server:
+  #  servlet:
+  #    context-path: /api
+  port: 9999
+
+spring:
+  #  jackson:
+  #    time-zone: GMT+8
+
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 0ggmr0
+    url: jdbc:postgresql://localhost:5432/msg?useSSL=false
+
+  devtools:
+    restart:
+      additional-paths: ./src/main
+      enabled: true
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.shumsg.model.entity

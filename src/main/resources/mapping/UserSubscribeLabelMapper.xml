@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.UserSubscribeLabelMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.UserSubscribeLabel" >
+    <id column="id" property="id" jdbcType="OTHER" />
+    <result column="user_id" property="userId" jdbcType="OTHER" />
+    <result column="label_id" property="labelId" jdbcType="OTHER" />
+    <result column="need_send_msg" property="needSendMsg" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, user_id, label_id, need_send_msg, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_user_subscribe_label-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >-->
+    <!--delete from tbl_user_subscribe_label-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shumsg.model.entity.UserSubscribeLabel" >-->
+    <!--insert into tbl_user_subscribe_label (id, user_id, label_id, -->
+      <!--need_send_msg, create_time, delete_time-->
+      <!--)-->
+    <!--values (#{id,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, #{labelId,jdbcType=OTHER}, -->
+      <!--#{needSendMsg,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.UserSubscribeLabel" >-->
+    <!--insert into tbl_user_subscribe_label-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--user_id,-->
+      <!--</if>-->
+      <!--<if test="labelId != null" >-->
+        <!--label_id,-->
+      <!--</if>-->
+      <!--<if test="needSendMsg != null" >-->
+        <!--need_send_msg,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--#{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="labelId != null" >-->
+        <!--#{labelId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="needSendMsg != null" >-->
+        <!--#{needSendMsg,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.UserSubscribeLabel" >-->
+    <!--update tbl_user_subscribe_label-->
+    <!--<set >-->
+      <!--<if test="userId != null" >-->
+        <!--user_id = #{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="labelId != null" >-->
+        <!--label_id = #{labelId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="needSendMsg != null" >-->
+        <!--need_send_msg = #{needSendMsg,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.UserSubscribeLabel" >-->
+    <!--update tbl_user_subscribe_label-->
+    <!--set user_id = #{userId,jdbcType=OTHER},-->
+      <!--label_id = #{labelId,jdbcType=OTHER},-->
+      <!--need_send_msg = #{needSendMsg,jdbcType=BIT},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+</mapper>

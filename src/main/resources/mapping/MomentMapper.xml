@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.MomentMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.Moment" >
+    <id column="id" property="id" jdbcType="OTHER" />
+    <result column="user_id" property="userId" jdbcType="OTHER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="pre_content" property="preContent" jdbcType="VARCHAR" />
+    <result column="moment_type" property="momentType" jdbcType="BIT" />
+    <result column="re_post_target_id" property="rePostTargetId" jdbcType="OTHER" />
+    <result column="re_post_type" property="rePostType" jdbcType="VARCHAR" />
+    <result column="media_imgs" property="mediaImgs" jdbcType="ARRAY" />
+    <result column="location" property="location" jdbcType="OTHER" />
+    <result column="location_place" property="locationPlace" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="OTHER" />
+    <result column="discuss_num" property="discussNum" jdbcType="INTEGER" />
+    <result column="discuss_liked_num" property="discussLikedNum" jdbcType="INTEGER" />
+    <result column="liked_num" property="likedNum" jdbcType="INTEGER" />
+    <result column="re_post_num" property="rePostNum" jdbcType="INTEGER" />
+    <result column="views_num" property="viewsNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="discuss_update_time" property="discussUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, user_id, content, pre_content, moment_type, re_post_target_id, re_post_type, -->
+    <!--media_imgs, location, location_place, group_id, discuss_num, discuss_liked_num, liked_num, -->
+    <!--re_post_num, views_num, create_time, discuss_update_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_moment-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >-->
+    <!--delete from tbl_moment-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shumsg.model.entity.Moment" >-->
+    <!--insert into tbl_moment (id, user_id, content, -->
+      <!--pre_content, moment_type, re_post_target_id, -->
+      <!--re_post_type, media_imgs, location, -->
+      <!--location_place, group_id, discuss_num, -->
+      <!--discuss_liked_num, liked_num, re_post_num, -->
+      <!--views_num, create_time, discuss_update_time, -->
+      <!--delete_time)-->
+    <!--values (#{id,jdbcType=OTHER}, #{userId,jdbcType=OTHER}, #{content,jdbcType=VARCHAR}, -->
+      <!--#{preContent,jdbcType=VARCHAR}, #{momentType,jdbcType=BIT}, #{rePostTargetId,jdbcType=OTHER}, -->
+      <!--#{rePostType,jdbcType=VARCHAR}, #{mediaImgs,jdbcType=ARRAY}, #{location,jdbcType=OTHER}, -->
+      <!--#{locationPlace,jdbcType=VARCHAR}, #{groupId,jdbcType=OTHER}, #{discussNum,jdbcType=INTEGER}, -->
+      <!--#{discussLikedNum,jdbcType=INTEGER}, #{likedNum,jdbcType=INTEGER}, #{rePostNum,jdbcType=INTEGER}, -->
+      <!--#{viewsNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{discussUpdateTime,jdbcType=TIMESTAMP}, -->
+      <!--#{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.Moment" >-->
+    <!--insert into tbl_moment-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--user_id,-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content,-->
+      <!--</if>-->
+      <!--<if test="preContent != null" >-->
+        <!--pre_content,-->
+      <!--</if>-->
+      <!--<if test="momentType != null" >-->
+        <!--moment_type,-->
+      <!--</if>-->
+      <!--<if test="rePostTargetId != null" >-->
+        <!--re_post_target_id,-->
+      <!--</if>-->
+      <!--<if test="rePostType != null" >-->
+        <!--re_post_type,-->
+      <!--</if>-->
+      <!--<if test="mediaImgs != null" >-->
+        <!--media_imgs,-->
+      <!--</if>-->
+      <!--<if test="location != null" >-->
+        <!--location,-->
+      <!--</if>-->
+      <!--<if test="locationPlace != null" >-->
+        <!--location_place,-->
+      <!--</if>-->
+      <!--<if test="groupId != null" >-->
+        <!--group_id,-->
+      <!--</if>-->
+      <!--<if test="discussNum != null" >-->
+        <!--discuss_num,-->
+      <!--</if>-->
+      <!--<if test="discussLikedNum != null" >-->
+        <!--discuss_liked_num,-->
+      <!--</if>-->
+      <!--<if test="likedNum != null" >-->
+        <!--liked_num,-->
+      <!--</if>-->
+      <!--<if test="rePostNum != null" >-->
+        <!--re_post_num,-->
+      <!--</if>-->
+      <!--<if test="viewsNum != null" >-->
+        <!--views_num,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="discussUpdateTime != null" >-->
+        <!--discuss_update_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="userId != null" >-->
+        <!--#{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--#{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="preContent != null" >-->
+        <!--#{preContent,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="momentType != null" >-->
+        <!--#{momentType,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="rePostTargetId != null" >-->
+        <!--#{rePostTargetId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="rePostType != null" >-->
+        <!--#{rePostType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="mediaImgs != null" >-->
+        <!--#{mediaImgs,jdbcType=ARRAY},-->
+      <!--</if>-->
+      <!--<if test="location != null" >-->
+        <!--#{location,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="locationPlace != null" >-->
+        <!--#{locationPlace,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="groupId != null" >-->
+        <!--#{groupId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="discussNum != null" >-->
+        <!--#{discussNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="discussLikedNum != null" >-->
+        <!--#{discussLikedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="likedNum != null" >-->
+        <!--#{likedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="rePostNum != null" >-->
+        <!--#{rePostNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="viewsNum != null" >-->
+        <!--#{viewsNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="discussUpdateTime != null" >-->
+        <!--#{discussUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.Moment" >-->
+    <!--update tbl_moment-->
+    <!--<set >-->
+      <!--<if test="userId != null" >-->
+        <!--user_id = #{userId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="preContent != null" >-->
+        <!--pre_content = #{preContent,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="momentType != null" >-->
+        <!--moment_type = #{momentType,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="rePostTargetId != null" >-->
+        <!--re_post_target_id = #{rePostTargetId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="rePostType != null" >-->
+        <!--re_post_type = #{rePostType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="mediaImgs != null" >-->
+        <!--media_imgs = #{mediaImgs,jdbcType=ARRAY},-->
+      <!--</if>-->
+      <!--<if test="location != null" >-->
+        <!--location = #{location,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="locationPlace != null" >-->
+        <!--location_place = #{locationPlace,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="groupId != null" >-->
+        <!--group_id = #{groupId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="discussNum != null" >-->
+        <!--discuss_num = #{discussNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="discussLikedNum != null" >-->
+        <!--discuss_liked_num = #{discussLikedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="likedNum != null" >-->
+        <!--liked_num = #{likedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="rePostNum != null" >-->
+        <!--re_post_num = #{rePostNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="viewsNum != null" >-->
+        <!--views_num = #{viewsNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="discussUpdateTime != null" >-->
+        <!--discuss_update_time = #{discussUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.Moment" >-->
+    <!--update tbl_moment-->
+    <!--set user_id = #{userId,jdbcType=OTHER},-->
+      <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--pre_content = #{preContent,jdbcType=VARCHAR},-->
+      <!--moment_type = #{momentType,jdbcType=BIT},-->
+      <!--re_post_target_id = #{rePostTargetId,jdbcType=OTHER},-->
+      <!--re_post_type = #{rePostType,jdbcType=VARCHAR},-->
+      <!--media_imgs = #{mediaImgs,jdbcType=ARRAY},-->
+      <!--location = #{location,jdbcType=OTHER},-->
+      <!--location_place = #{locationPlace,jdbcType=VARCHAR},-->
+      <!--group_id = #{groupId,jdbcType=OTHER},-->
+      <!--discuss_num = #{discussNum,jdbcType=INTEGER},-->
+      <!--discuss_liked_num = #{discussLikedNum,jdbcType=INTEGER},-->
+      <!--liked_num = #{likedNum,jdbcType=INTEGER},-->
+      <!--re_post_num = #{rePostNum,jdbcType=INTEGER},-->
+      <!--views_num = #{viewsNum,jdbcType=INTEGER},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--discuss_update_time = #{discussUpdateTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+</mapper>

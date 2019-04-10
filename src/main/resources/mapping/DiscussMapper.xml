@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.DiscussMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.Discuss" >
+    <id column="id" property="id" jdbcType="OTHER" />
+    <result column="target_type" property="targetType" jdbcType="VARCHAR" />
+    <result column="target_id" property="targetId" jdbcType="OTHER" />
+    <result column="ancestor_id" property="ancestorId" jdbcType="OTHER" />
+    <result column="operator_id" property="operatorId" jdbcType="OTHER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="discuss_num" property="discussNum" jdbcType="INTEGER" />
+    <result column="liked_num" property="likedNum" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, target_type, target_id, ancestor_id, operator_id, content, discuss_num, liked_num, -->
+    <!--img, create_time, delete_time-->
+  <!--</sql>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_discuss-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >-->
+    <!--delete from tbl_discuss-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shumsg.model.entity.Discuss" >-->
+    <!--insert into tbl_discuss (id, target_type, target_id, -->
+      <!--ancestor_id, operator_id, content, -->
+      <!--discuss_num, liked_num, img, -->
+      <!--create_time, delete_time)-->
+    <!--values (#{id,jdbcType=OTHER}, #{targetType,jdbcType=VARCHAR}, #{targetId,jdbcType=OTHER}, -->
+      <!--#{ancestorId,jdbcType=OTHER}, #{operatorId,jdbcType=OTHER}, #{content,jdbcType=VARCHAR}, -->
+      <!--#{discussNum,jdbcType=INTEGER}, #{likedNum,jdbcType=INTEGER}, #{img,jdbcType=CHAR}, -->
+      <!--#{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.Discuss" >-->
+    <!--insert into tbl_discuss-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="targetType != null" >-->
+        <!--target_type,-->
+      <!--</if>-->
+      <!--<if test="targetId != null" >-->
+        <!--target_id,-->
+      <!--</if>-->
+      <!--<if test="ancestorId != null" >-->
+        <!--ancestor_id,-->
+      <!--</if>-->
+      <!--<if test="operatorId != null" >-->
+        <!--operator_id,-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content,-->
+      <!--</if>-->
+      <!--<if test="discussNum != null" >-->
+        <!--discuss_num,-->
+      <!--</if>-->
+      <!--<if test="likedNum != null" >-->
+        <!--liked_num,-->
+      <!--</if>-->
+      <!--<if test="img != null" >-->
+        <!--img,-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="targetType != null" >-->
+        <!--#{targetType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="targetId != null" >-->
+        <!--#{targetId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="ancestorId != null" >-->
+        <!--#{ancestorId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="operatorId != null" >-->
+        <!--#{operatorId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--#{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="discussNum != null" >-->
+        <!--#{discussNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="likedNum != null" >-->
+        <!--#{likedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="img != null" >-->
+        <!--#{img,jdbcType=CHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.Discuss" >-->
+    <!--update tbl_discuss-->
+    <!--<set >-->
+      <!--<if test="targetType != null" >-->
+        <!--target_type = #{targetType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="targetId != null" >-->
+        <!--target_id = #{targetId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="ancestorId != null" >-->
+        <!--ancestor_id = #{ancestorId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="operatorId != null" >-->
+        <!--operator_id = #{operatorId,jdbcType=OTHER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="discussNum != null" >-->
+        <!--discuss_num = #{discussNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="likedNum != null" >-->
+        <!--liked_num = #{likedNum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="img != null" >-->
+        <!--img = #{img,jdbcType=CHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null" >-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="deleteTime != null" >-->
+        <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.Discuss" >-->
+    <!--update tbl_discuss-->
+    <!--set target_type = #{targetType,jdbcType=VARCHAR},-->
+      <!--target_id = #{targetId,jdbcType=OTHER},-->
+      <!--ancestor_id = #{ancestorId,jdbcType=OTHER},-->
+      <!--operator_id = #{operatorId,jdbcType=OTHER},-->
+      <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--discuss_num = #{discussNum,jdbcType=INTEGER},-->
+      <!--liked_num = #{likedNum,jdbcType=INTEGER},-->
+      <!--img = #{img,jdbcType=CHAR},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--delete_time = #{deleteTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=OTHER}-->
+  <!--</update>-->
+</mapper>

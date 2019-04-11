@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.shumsg.dao.DiscussMapper" >
   <resultMap id="BaseResultMap" type="com.shumsg.model.entity.Discuss" >
-    <id column="id" property="id" jdbcType="OTHER" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="target_type" property="targetType" jdbcType="VARCHAR" />
-    <result column="target_id" property="targetId" jdbcType="OTHER" />
-    <result column="ancestor_id" property="ancestorId" jdbcType="OTHER" />
-    <result column="operator_id" property="operatorId" jdbcType="OTHER" />
+    <result column="target_id" property="targetId" jdbcType="VARCHAR" />
+    <result column="ancestor_id" property="ancestorId" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="discuss_num" property="discussNum" jdbcType="INTEGER" />
     <result column="liked_num" property="likedNum" jdbcType="INTEGER" />

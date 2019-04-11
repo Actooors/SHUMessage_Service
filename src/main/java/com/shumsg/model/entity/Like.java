@@ -1,15 +1,18 @@
 package com.shumsg.model.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Like {
-    private Object id;
+    private String id;
 
     private String targetType;
 
-    private Object targetId;
+    private String targetId;
 
-    private Object operatorId;
+    private String operatorId;
 
     private Boolean liked;
 
@@ -17,59 +20,4 @@ public class Like {
 
     private Date deleteTime;
 
-    public Object getId() {
-        return id;
-    }
-
-    public void setId(Object id) {
-        this.id = id;
-    }
-
-    public String getTargetType() {
-        return targetType;
-    }
-
-    public void setTargetType(String targetType) {
-        this.targetType = targetType == null ? null : targetType.trim();
-    }
-
-    public Object getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(Object targetId) {
-        this.targetId = targetId;
-    }
-
-    public Object getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(Object operatorId) {
-        this.operatorId = operatorId;
-    }
-
-    public Boolean getLiked() {
-        return liked;
-    }
-
-    public void setLiked(Boolean liked) {
-        this.liked = liked;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getDeleteTime() {
-        return deleteTime;
-    }
-
-    public void setDeleteTime(Date deleteTime) {
-        this.deleteTime = deleteTime;
-    }
 }

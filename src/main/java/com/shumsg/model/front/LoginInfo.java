@@ -13,4 +13,5 @@ import lombok.Data;
 public class LoginInfo {
     private String userId;
     private String password;
+    private String loginType;
 }

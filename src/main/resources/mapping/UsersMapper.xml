@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shumsg.dao.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.shumsg.model.entity.Users" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="register_way" property="registerWay" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="editable_nickname_times" property="editableNicknameTimes" jdbcType="INTEGER" />
+    <result column="last_modify_nickname_time" property="lastModifyNicknameTime" jdbcType="TIMESTAMP" />
+    <result column="student_card_id" property="studentCardId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="actual_name" property="actualName" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="about" property="about" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="invalid" property="invalid" jdbcType="BIT" />
+    <result column="avatar" property="avatar" jdbcType="CHAR" />
+    <result column="background" property="background" jdbcType="CHAR" />
+    <result column="consequent_login_days" property="consequentLoginDays" jdbcType="INTEGER" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="push_interval" property="pushInterval" jdbcType="SMALLINT" />
+    <result column="last_push_time" property="lastPushTime" jdbcType="TIMESTAMP" />
+    <result column="social_group_num" property="socialGroupNum" jdbcType="INTEGER" />
+    <result column="following_num" property="followingNum" jdbcType="INTEGER" />
+    <result column="follower_num" property="followerNum" jdbcType="INTEGER" />
+    <result column="my_groups_num" property="myGroupsNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, register_way, nickname, editable_nickname_times, last_modify_nickname_time, student_card_id, 
+    password, actual_name, department, phone, mail, birthday, gender, about, location, 
+    school, job, identity, invalid, avatar, background, consequent_login_days, last_login_time, 
+    push_interval, last_push_time, social_group_num, following_num, follower_num, my_groups_num, 
+    create_time, delete_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tbl_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shumsg.model.entity.Users" >
+    insert into tbl_user (id, register_way, nickname, 
+      editable_nickname_times, last_modify_nickname_time, 
+      student_card_id, password, actual_name, 
+      department, phone, mail, 
+      birthday, gender, about, 
+      location, school, job, 
+      identity, invalid, avatar, 
+      background, consequent_login_days, last_login_time, 
+      push_interval, last_push_time, social_group_num, 
+      following_num, follower_num, my_groups_num, 
+      create_time, delete_time)
+    values (#{id,jdbcType=VARCHAR}, #{registerWay,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{editableNicknameTimes,jdbcType=INTEGER}, #{lastModifyNicknameTime,jdbcType=TIMESTAMP}, 
+      #{studentCardId,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{actualName,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{gender,jdbcType=CHAR}, #{about,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{invalid,jdbcType=BIT}, #{avatar,jdbcType=CHAR}, 
+      #{background,jdbcType=CHAR}, #{consequentLoginDays,jdbcType=INTEGER}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{pushInterval,jdbcType=SMALLINT}, #{lastPushTime,jdbcType=TIMESTAMP}, #{socialGroupNum,jdbcType=INTEGER}, 
+      #{followingNum,jdbcType=INTEGER}, #{followerNum,jdbcType=INTEGER}, #{myGroupsNum,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shumsg.model.entity.Users" >
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="registerWay != null" >
+        register_way,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="editableNicknameTimes != null" >
+        editable_nickname_times,
+      </if>
+      <if test="lastModifyNicknameTime != null" >
+        last_modify_nickname_time,
+      </if>
+      <if test="studentCardId != null" >
+        student_card_id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="actualName != null" >
+        actual_name,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="about != null" >
+        about,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="invalid != null" >
+        invalid,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="background != null" >
+        background,
+      </if>
+      <if test="consequentLoginDays != null" >
+        consequent_login_days,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="pushInterval != null" >
+        push_interval,
+      </if>
+      <if test="lastPushTime != null" >
+        last_push_time,
+      </if>
+      <if test="socialGroupNum != null" >
+        social_group_num,
+      </if>
+      <if test="followingNum != null" >
+        following_num,
+      </if>
+      <if test="followerNum != null" >
+        follower_num,
+      </if>
+      <if test="myGroupsNum != null" >
+        my_groups_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="deleteTime != null" >
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="registerWay != null" >
+        #{registerWay,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="editableNicknameTimes != null" >
+        #{editableNicknameTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lastModifyNicknameTime != null" >
+        #{lastModifyNicknameTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentCardId != null" >
+        #{studentCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="actualName != null" >
+        #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="about != null" >
+        #{about,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="invalid != null" >
+        #{invalid,jdbcType=BIT},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=CHAR},
+      </if>
+      <if test="background != null" >
+        #{background,jdbcType=CHAR},
+      </if>
+      <if test="consequentLoginDays != null" >
+        #{consequentLoginDays,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushInterval != null" >
+        #{pushInterval,jdbcType=SMALLINT},
+      </if>
+      <if test="lastPushTime != null" >
+        #{lastPushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="socialGroupNum != null" >
+        #{socialGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="followingNum != null" >
+        #{followingNum,jdbcType=INTEGER},
+      </if>
+      <if test="followerNum != null" >
+        #{followerNum,jdbcType=INTEGER},
+      </if>
+      <if test="myGroupsNum != null" >
+        #{myGroupsNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.Users" >
+    update tbl_user
+    <set >
+      <if test="registerWay != null" >
+        register_way = #{registerWay,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="editableNicknameTimes != null" >
+        editable_nickname_times = #{editableNicknameTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lastModifyNicknameTime != null" >
+        last_modify_nickname_time = #{lastModifyNicknameTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentCardId != null" >
+        student_card_id = #{studentCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="actualName != null" >
+        actual_name = #{actualName,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="about != null" >
+        about = #{about,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="invalid != null" >
+        invalid = #{invalid,jdbcType=BIT},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=CHAR},
+      </if>
+      <if test="background != null" >
+        background = #{background,jdbcType=CHAR},
+      </if>
+      <if test="consequentLoginDays != null" >
+        consequent_login_days = #{consequentLoginDays,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushInterval != null" >
+        push_interval = #{pushInterval,jdbcType=SMALLINT},
+      </if>
+      <if test="lastPushTime != null" >
+        last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="socialGroupNum != null" >
+        social_group_num = #{socialGroupNum,jdbcType=INTEGER},
+      </if>
+      <if test="followingNum != null" >
+        following_num = #{followingNum,jdbcType=INTEGER},
+      </if>
+      <if test="followerNum != null" >
+        follower_num = #{followerNum,jdbcType=INTEGER},
+      </if>
+      <if test="myGroupsNum != null" >
+        my_groups_num = #{myGroupsNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shumsg.model.entity.Users" >
+    update tbl_user
+    set register_way = #{registerWay,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      editable_nickname_times = #{editableNicknameTimes,jdbcType=INTEGER},
+      last_modify_nickname_time = #{lastModifyNicknameTime,jdbcType=TIMESTAMP},
+      student_card_id = #{studentCardId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      actual_name = #{actualName,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      gender = #{gender,jdbcType=CHAR},
+      about = #{about,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      invalid = #{invalid,jdbcType=BIT},
+      avatar = #{avatar,jdbcType=CHAR},
+      background = #{background,jdbcType=CHAR},
+      consequent_login_days = #{consequentLoginDays,jdbcType=INTEGER},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      push_interval = #{pushInterval,jdbcType=SMALLINT},
+      last_push_time = #{lastPushTime,jdbcType=TIMESTAMP},
+      social_group_num = #{socialGroupNum,jdbcType=INTEGER},
+      following_num = #{followingNum,jdbcType=INTEGER},
+      follower_num = #{followerNum,jdbcType=INTEGER},
+      my_groups_num = #{myGroupsNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -10,7 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import static com.shumsg.model.ConstRepository.LOGIN_WITH_SCHOOL;
+import static com.shumsg.model.UserConstRepository.LOGIN_WITH_SCHOOL;
 
 /**
  * @program: management

@@ -6,14 +6,16 @@ CREATE TABLE tbl_user (
   id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- 主键
   register_way          LoginType  NOT NULL, -- 1是学校接口， 2是手机登录(校外编制特殊注册方式)
   nickname              VARCHAR(32) UNIQUE, -- 昵称
+  editable_nickname_times INT DEFAULT 2, -- 可修改昵称次数
+  last_modify_nickname_time TIMESTAMP(0) DEFAULT current_timestamp, -- 上次修改昵称时间
   student_card_id       VARCHAR(32) UNIQUE, -- 学号
   password              CHAR(256) , -- 密码
   actual_name           VARCHAR(32), -- 真实姓名
   department            VARCHAR(20), -- 学院
   phone                 VARCHAR(16), -- 手机号
   mail                  VARCHAR(100), -- 邮箱
-  birthday              DATE, -- 生日
-  gender                CHAR(2), -- 性别
+  birthday              DATE,         -- 生日
+  gender                CHAR(2),    -- 性别
   about                 VARCHAR(100), -- 个性签名
   location              VARCHAR(100), -- 用户所在地
   school                VARCHAR(100), -- 用户学校
@@ -23,9 +25,9 @@ CREATE TABLE tbl_user (
   avatar                CHAR(32), -- 用户头像
   background            CHAR(32), -- 背景图
   consequent_login_days INT              DEFAULT 0, -- 连续登陆的日期，默认为0
-  last_login_time       TIMESTAMP(0) NOT NULL, -- 上次登录的时间
+  last_login_time       TIMESTAMP(0) DEFAULT current_timestamp, -- 上次登录的时间
   push_interval         SMALLINT DEFAULT 1, -- 推送的间隔，默认一日两推，2是一日一推
-  last_push_time        TIMESTAMP(0) NOT NULL,  -- 上次推送的时间                           -- 3是两日一推， 4是一周一推
+  last_push_time        TIMESTAMP(0) DEFAULT current_timestamp,  -- 上次推送的时间                           -- 3是两日一推， 4是一周一推
   social_group_num      INT              DEFAULT 0, -- 我加入的圈子数
   following_num         INT              DEFAULT 0, -- 我关注人的数量
   follower_num          INT              DEFAULT 0, -- 关注我的人的数目
@@ -103,8 +105,8 @@ content             VARCHAR(2000) NOT NULL, -- 动态的内容，最多2000字
 pre_content          VARCHAR(141)  NOT NULL, -- 文章前140字会存到这里，如果该值长度为141，则表示字数大于140字。请爬虫将新闻主体前140字写入这里，超出140字的，在第140字后标'#'共计141字存到这里。
 ---------------*
 moment_type         BIT NOT NULL, -- 动态的种类，转发的还是原创的
-re_post_target_id   UUID NOT NULL, -- 转发的内容的主键
-re_post_type        MessageType NOT NULL, -- 转发的消息的种类，动态或者新闻
+re_post_target_id   UUID, -- 转发的内容的主键
+re_post_type        MessageType, -- 转发的消息的种类，动态或者新闻
 
 media_imgs          CHAR(32) [], -- 动态的图片
 location            point, -- 定位经纬度

@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.shumsg.dao.UserMessageMapper" >
   <resultMap id="BaseResultMap" type="com.shumsg.model.entity.UserMessage" >
-    <id column="id" property="id" jdbcType="OTHER" />
-    <result column="user_id" property="userId" jdbcType="OTHER" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="notice_type" property="noticeType" jdbcType="VARCHAR" />
     <result column="message_type" property="messageType" jdbcType="VARCHAR" />
-    <result column="message_id" property="messageId" jdbcType="OTHER" />
+    <result column="message_id" property="messageId" jdbcType="VARCHAR" />
     <result column="have_read" property="haveRead" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />

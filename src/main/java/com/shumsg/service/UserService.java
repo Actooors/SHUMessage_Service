@@ -1,5 +1,6 @@
 package com.shumsg.service;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.shumsg.dao.UserMapper;
 import com.shumsg.exception.AllException;
 import com.shumsg.exception.EmAllException;
@@ -8,6 +9,7 @@ import com.shumsg.model.back.info.LoginResponse;
 import com.shumsg.model.entity.User;
 import com.shumsg.model.front.LoginInfo;
 import com.shumsg.tools.AuthTool;
+import com.shumsg.tools.HS256;
 import com.shumsg.tools.ResultTool;
 import com.shumsg.tools.jwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +17,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import java.io.UnsupportedEncodingException;
+import java.util.Random;
 
-import static com.shumsg.model.UserConstRepository.STUDENT;
+import static com.shumsg.model.UserConstRepository.*;
 
 /**
  * @program: shumsg
@@ -34,7 +36,7 @@ public class UserService {
 
 
     private LoginResponse setLoginResponse(String userId, String studentCardId, String actualName,
-                                           String identity, String nickname) throws UnsupportedEncodingException {
+                                           String identity, String nickname) {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setUserId(userId); // UUID
         loginResponse.setStudentCardId(studentCardId); // 工号
@@ -47,7 +49,40 @@ public class UserService {
         return loginResponse;
     }
 
-    public Result loginWithSchool(LoginInfo loginUser) throws AllException, UnsupportedEncodingException {
+    public Result login(LoginInfo info) throws AllException {
+        switch (info.getLoginType()) {
+            case LOGIN_WITH_SCHOOL:
+                return loginWithSchool(info);
+            case LOGIN_WITH_NORMAL:
+                return loginWithNormal(info);
+            case LOGIN_WITH_PHONE:
+                // TODO 暂时没有考虑电话登录方式
+                throw new AllException(EmAllException.FUNCTION_HAS_NOT_BEEN_DEVELOPED);
+            default:
+                throw new AllException(EmAllException.NO_SUCH_LOGIN_TYPE);
+        }
+    }
+
+    private Result loginWithNormal(LoginInfo loginUser) throws AllException {
+        User user = userMapper.selectUserByNormalLoginId(loginUser.getUserId());
+        if(user == null) {
+            throw new AllException(EmAllException.NO_SUCH_USER);
+        }
+        if(HS256.encryptionPassword(
+                loginUser.getPassword(), user.getPasswordSalt()).equals(user.getPassword())) {
+            ResultTool.success(
+                    setLoginResponse(
+                            user.getId(),
+                            user.getStudentCardId(),
+                            user.getActualName(),
+                            user.getIdentity(),
+                            user.getNickname()
+                    ));
+        }
+        throw new AllException(EmAllException.PASSWORD_ERROR);
+    }
+
+    private Result loginWithSchool(LoginInfo loginUser) throws AllException {
         //先判断账号和密码是否输入为空
         if (loginUser.getUserId() == null || "".equals(loginUser.getUserId())
                 || "".equals(loginUser.getPassword()) || loginUser.getPassword() == null) {

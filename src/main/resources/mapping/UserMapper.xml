@@ -8,7 +8,9 @@
     <result column="editable_nickname_times" property="editableNicknameTimes" jdbcType="INTEGER" />
     <result column="last_modify_nickname_time" property="lastModifyNicknameTime" jdbcType="TIMESTAMP" />
     <result column="student_card_id" property="studentCardId" jdbcType="VARCHAR" />
+    <result column="normal_login_id" property="normalLoginId" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="CHAR" />
+    <result column="password_salt" property="passwordSalt" jdbcType="VARCHAR" />
     <result column="actual_name" property="actualName" jdbcType="VARCHAR" />
     <result column="department" property="department" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -36,7 +38,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, register_way, nickname, editable_nickname_times, last_modify_nickname_time, student_card_id,
-    password, actual_name, department, phone, mail, birthday, gender, about, location,
+    normal_login_id, password,password_salt, actual_name, department, phone, mail, birthday, gender, about, location,
     school, job, identity, invalid, avatar, background, consequent_login_days, last_login_time,
     push_interval, last_push_time, social_group_num, following_num, follower_num, my_groups_num,
     create_time, delete_time
@@ -57,6 +59,13 @@
     where id = #{uuid,jdbcType=VARCHAR}::uuid
   </select>
 
+  <select id="selectUserByNormalLoginId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where normal_login_id = #{normalLoginId,jdbcType=VARCHAR}
+  </select>
+
   <insert id="insert" parameterType="com.shumsg.model.entity.User" keyProperty="id" useGeneratedKeys="true">
     insert into tbl_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -75,8 +84,14 @@
       <if test="studentCardId != null" >
         student_card_id,
       </if>
+      <if test="normalLoginId != null" >
+        normal_login_id,
+      </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="passwordSalt != null" >
+        password_salt,
       </if>
       <if test="actualName != null" >
         actual_name,
@@ -167,8 +182,14 @@
       <if test="studentCardId != null" >
         #{studentCardId,jdbcType=VARCHAR},
       </if>
+      <if test="normalLoginId != null" >
+        #{normalLoginId,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         #{password,jdbcType=CHAR},
+      </if>
+      <if test="passwordSalt != null" >
+        #{passwordSalt,jdbcType=VARCHAR},
       </if>
       <if test="actualName != null" >
         #{actualName,jdbcType=VARCHAR},
@@ -260,6 +281,7 @@
       <!--</if>-->
       <!--<if test="editableNicknameTimes != null" >-->
         <!--editable_nickname_times,-->
+      <!--</if>-->
       <!--</if>-->
       <!--<if test="lastModifyNicknameTime != null" >-->
         <!--last_modify_nickname_time,-->

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
 
 /**
  * @program: shumsg
@@ -27,7 +26,8 @@ public class LoginController extends HandlerException{
     private UserService userService;
 
     @PostMapping("")
-    public Result loginWithStudentCard(@RequestBody LoginInfo loginInfo) throws UnsupportedEncodingException, AllException {
-        return userService.loginWithSchool(loginInfo);
+    public Result login(@RequestBody LoginInfo loginInfo) throws AllException {
+        return userService.login(loginInfo);
     }
+
 }

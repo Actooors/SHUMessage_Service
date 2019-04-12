@@ -10,6 +10,8 @@ public interface UserMapper {
 
     User selectUserByUUId(String uuid);
 
+    User selectUserByNormalLoginId(String normalLoginId);
+
     int insert(User user);
 
 }

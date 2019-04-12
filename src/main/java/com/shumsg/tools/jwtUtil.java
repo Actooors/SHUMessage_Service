@@ -19,7 +19,7 @@ public class jwtUtil {
     private final static byte[] ENCODE_KEY = "message".getBytes();
     private static JWTVerifier jwtVerifier;
 
-    public static String createJwt(String subject, String nickname) throws UnsupportedEncodingException {
+    public static String createJwt(String subject, String nickname) {
         Date currentDate = new Date();
         // 过期时间5天
         Calendar calendar = Calendar.getInstance();
@@ -29,8 +29,7 @@ public class jwtUtil {
                 .withIssuedAt(currentDate)
                 .withExpiresAt(calendar.getTime())
                 .withSubject(subject)
-                .withClaim("nickname",
-                        nickname == null ? "" : URLEncoder.encode( nickname, "UTF-8" ))
+                .withClaim("nickname", nickname == null ? "" : encode(nickname))
                 .sign(algorithm);
     }
 
@@ -43,15 +42,15 @@ public class jwtUtil {
         return JWT.decode(jwt).getSubject();
     }
 
-//    private static String encode(String url)
-//    {
-//        try {
-//            return URLEncoder.encode( url, "UTF-8" );
-//        } catch (UnsupportedEncodingException e) {
-//            return "Issue while encoding" +e.getMessage();
-//
-//        }
-//
-//    }
+    private static String encode(String url)
+    {
+        try {
+            return URLEncoder.encode( url, "UTF-8" );
+        } catch (UnsupportedEncodingException e) {
+            return "Issue while encoding" +e.getMessage();
+
+        }
+
+    }
 
 }

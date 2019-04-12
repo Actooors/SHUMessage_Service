@@ -18,7 +18,11 @@ public class User {
 
     private String studentCardId;
 
+    private String normalLoginId;
+
     private String password;
+
+    private String passwordSalt;
 
     private String actualName;
 

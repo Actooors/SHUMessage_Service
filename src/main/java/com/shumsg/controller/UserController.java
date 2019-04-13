@@ -33,4 +33,11 @@ public class UserController extends HandlerException {
         return userService.modifyUserInfo(id, modifyUserInfo);
     }
 
+
+    @GetMapping("/normal/{normalLoginId}")
+    public Result verificationNormalLoginId(@PathVariable("normalLoginId") String normalLoginId) throws AllException {
+
+        return userService.verifyUserNormalLoginId(normalLoginId);
+    }
+
 }

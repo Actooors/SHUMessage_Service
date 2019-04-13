@@ -36,8 +36,6 @@ public class UserService {
 
     /**
      * @Description: 登录接口
-     * @Param: [info]
-     * @Return: com.shumsg.model.back.Result
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */
@@ -57,8 +55,6 @@ public class UserService {
     
     /**
      * @Description: 修改用户的个人信息
-     * @Param: [id, modifyUserInfo]
-     * @Return: com.shumsg.model.back.Result
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */
@@ -104,13 +100,30 @@ public class UserService {
         }
         return ResultTool.success("数据更新成功");
     }
-
-
+    
 
     /**
+     * @Description: 验证用户自定义账号是否已存在
+     * @Author: 0GGmr0
+     * @Date: 2019-04-13
+     */
+    public Result verifyUserNormalLoginId(String normalLoginId) throws AllException {
+        User user;
+        try {
+            user = userMapper.selectUserByNormalLoginId(normalLoginId);
+        } catch (Exception e) {
+            log.info("在verifyUserNormalLoginId方法下验证用户自定义登录账号是否重复失败，失败原因是{}", e.toString());
+            throw new AllException(EmAllException.SELECT_ERROR);
+        }
+        if(user != null) {
+            return ResultTool.error(400, "用户已经存在");
+        } else {
+            return ResultTool.success("该账号可以使用");
+        }
+    }
+    
+    /**
      * @Description: 使用自定义账号密码登录
-     * @Param: [loginUser]
-     * @Return: com.shumsg.model.back.Result
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */
@@ -119,7 +132,6 @@ public class UserService {
         if(user == null) {
             throw new AllException(EmAllException.NO_SUCH_USER);
         }
-
         if(HS256.encryptionPassword(loginUser.getPassword(), user.getPasswordSalt())
                 .equals(user.getPassword())) {
             return ResultTool.success(
@@ -131,13 +143,11 @@ public class UserService {
                             user.getNickname()
                     ));
         }
-        throw new AllException(EmAllException.PASSWORD_ERROR);
+        return ResultTool.error(400, "密码错误");
     }
 
     /**
      * @Description: 使用上海大学学号登录
-     * @Param: [loginUser]
-     * @Return: com.shumsg.model.back.Result
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */
@@ -189,7 +199,7 @@ public class UserService {
                                         newUser.getNickname()
                                 ));
                     } catch (Exception e) {
-                        log.info("插入用户时出现错误，错误为 " + e.toString());
+                        log.info("在login方法插入用户时出现错误，错误为 " + e.toString());
                         throw new AllException(EmAllException.INSERT_ERROR);
                     }
                     //如果没有得到newUser，说明验证异常
@@ -205,8 +215,6 @@ public class UserService {
 
     /**
      * @Description: 设置登录接口的返回信息
-     * @Param: [userId, studentCardId, actualName, identity, nickname]
-     * @Return: com.shumsg.model.back.info.LoginResponse
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */

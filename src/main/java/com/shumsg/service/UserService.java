@@ -119,9 +119,10 @@ public class UserService {
         if(user == null) {
             throw new AllException(EmAllException.NO_SUCH_USER);
         }
-        if(HS256.encryptionPassword(
-                loginUser.getPassword(), user.getPasswordSalt()).equals(user.getPassword())) {
-            ResultTool.success(
+
+        if(HS256.encryptionPassword(loginUser.getPassword(), user.getPasswordSalt())
+                .equals(user.getPassword())) {
+            return ResultTool.success(
                     setLoginResponse(
                             user.getId(),
                             user.getStudentCardId(),

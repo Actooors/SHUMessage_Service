@@ -8,7 +8,7 @@
     <result column="editable_nickname_times" property="editableNicknameTimes" jdbcType="INTEGER" />
     <result column="student_card_id" property="studentCardId" jdbcType="VARCHAR" />
     <result column="normal_login_id" property="normalLoginId" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="password_salt" property="passwordSalt" jdbcType="VARCHAR" />
     <result column="actual_name" property="actualName" jdbcType="VARCHAR" />
     <result column="department" property="department" jdbcType="VARCHAR" />

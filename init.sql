@@ -24,8 +24,8 @@ CREATE TABLE tbl_user (
   job                   VARCHAR(100), -- 用户行业
   identity              UserIdentity, --用户的身份，1是学生，2是官方账户， 3是管理员， 4是超管
   invalid               BOOLEAN          DEFAULT false, -- 是否禁止登陆
-  avatar                CHAR(32), -- 用户头像
-  background            CHAR(32), -- 背景图
+  avatar                VARCHAR(128), -- 用户头像
+  background            VARCHAR(128), -- 背景图
   consequent_login_days INT              DEFAULT 0, -- 连续登陆的日期，默认为0
   last_login_time       TIMESTAMP(0) DEFAULT current_timestamp, -- 上次登录的时间
   push_interval         SMALLINT DEFAULT 1, -- 推送的间隔，默认一日两推，2是一日一推
@@ -79,14 +79,14 @@ content             VARCHAR(2000) , -- 新闻的内容，最多2000字。此键�
 pre_content          VARCHAR(141) , -- 文章前140字会存到这里，如果该值长度为141，则表示字数大于140字。请爬虫将新闻主体前140字写入这里，超出140字的，在第140字后标'#'共计141字存到这里。
 
 media_type          MediaType, -- 这里是设置新闻附带的多媒体类型。url由标题和地址组成，imgs可以为多个
-media_imgs          CHAR(32) [], -- 新闻的图片
+media_imgs          VARCHAR(128) [], -- 新闻的图片
 media_title         VARCHAR(50)   NOT NULL, -- 新闻标题
 news_url            VARCHAR(256), -- 新闻的URL
-news_labels         CHAR(32) [], -- 新闻的标签          ---------------------*
+news_labels         VARCHAR(128) [], -- 新闻的标签          ---------------------*
 discuss_num         INT              DEFAULT 0, -- 评论数
 discuss_liked_num   INT              DEFAULT 0, -- 评论的总赞数
 liked_num           INT              DEFAULT 0, -- 点赞数
-re_post_num          INT              DEFAULT 0, -- 转发数
+re_post_num         INT              DEFAULT 0, -- 转发数
 views_num           INT              DEFAULT 0, -- 浏览数
 
 content_from_scrapy TEXT, -- 爬取的新闻的内容，做分析用，不限字数。
@@ -110,7 +110,7 @@ moment_type         BIT NOT NULL, -- 动态的种类，转发的还是原创的
 re_post_target_id   UUID, -- 转发的内容的主键
 re_post_type        MessageType, -- 转发的消息的种类，动态或者新闻
 
-media_imgs          CHAR(32) [], -- 动态的图片
+media_imgs          VARCHAR(128) [], -- 动态的图片
 location            point, -- 定位经纬度
 location_place      VARCHAR(50), -- 具体地点
 group_id            UUID, -- 如果发布到了某个圈子，则非空
@@ -172,7 +172,7 @@ operator_id UUID        NOT NULL, -- 对某一个新闻、动态、评论、回�
 content     VARCHAR(140), -- 评论的内容不能超过140字
 discuss_num INT              DEFAULT 0, -- 被评论数
 liked_num   INT              DEFAULT 0, -- 被点赞的数目
-img         CHAR(32), -- discuss携带的img只能有一个
+img         VARCHAR(128), -- discuss携带的img只能有一个
 create_time TIMESTAMP(0)     DEFAULT current_timestamp, -- 评论的时间
 delete_time TIMESTAMP(0) -- 标记删除日期，被删除的元组不应出现在检索结果中
 );
@@ -183,8 +183,8 @@ id          UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- 主键
 name        VARCHAR(16) UNIQUE, -- 圈子名字
 description VARCHAR(256), -- 圈子的简介
 
-avatar      CHAR(32),
-background  CHAR(32),
+avatar      VARCHAR(128),
+background  VARCHAR(128),
 
 creator_id  UUID NOT NULL, -- 创建圈子的人的主键id
 member_num  INT              DEFAULT 1, -- 圈子内人的数目，如果是系统创建，则为0
@@ -235,7 +235,3 @@ CREATE TABLE tbl_user_interest_news (
     content VARCHAR(128), -- 推送的内容
     create_time TIMESTAMP(0)     DEFAULT current_timestamp -- 创建时间
 );
-
-
-update tbl_user
-set editable_nickname_times = 2;

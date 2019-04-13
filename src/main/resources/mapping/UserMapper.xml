@@ -23,8 +23,8 @@
     <result column="job" property="job" jdbcType="VARCHAR" />
     <result column="identity" property="identity" jdbcType="VARCHAR" />
     <result column="invalid" property="invalid" jdbcType="BIT" />
-    <result column="avatar" property="avatar" jdbcType="CHAR" />
-    <result column="background" property="background" jdbcType="CHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="background" property="background" jdbcType="VARCHAR" />
     <result column="consequent_login_days" property="consequentLoginDays" jdbcType="INTEGER" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="push_interval" property="pushInterval" jdbcType="SMALLINT" />

@@ -10,7 +10,7 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="discuss_num" property="discussNum" jdbcType="INTEGER" />
     <result column="liked_num" property="likedNum" jdbcType="INTEGER" />
-    <result column="img" property="img" jdbcType="CHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
   </resultMap>

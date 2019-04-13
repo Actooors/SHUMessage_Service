@@ -5,8 +5,8 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="avatar" property="avatar" jdbcType="CHAR" />
-    <result column="background" property="background" jdbcType="CHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="background" property="background" jdbcType="VARCHAR" />
     <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
     <result column="member_num" property="memberNum" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />

@@ -27,10 +27,7 @@ public class UserController extends HandlerException {
     public Result modifyUserInfo(@RequestHeader(value = "Authorization") String token,
             @RequestBody ModifyUserInfo modifyUserInfo) throws AllException {
 
-        // TODO 用户的id之后改一下，从threadlocal里面拿
-        String id = JwtUtil.parseJwt(token.substring(7));
-
-        return userService.modifyUserInfo(id, modifyUserInfo);
+        return userService.modifyUserInfo(modifyUserInfo);
     }
 
 

@@ -5,6 +5,7 @@ import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.shumsg.dao.UserMapper;
 import com.shumsg.exception.AllException;
 import com.shumsg.exception.EmAllException;
+import com.shumsg.interceptor.UserContext;
 import com.shumsg.model.back.Result;
 import com.shumsg.model.back.info.LoginResponse;
 import com.shumsg.model.entity.User;
@@ -58,12 +59,11 @@ public class UserService {
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */
-    public Result modifyUserInfo(String id, ModifyUserInfo modifyUserInfo) throws AllException {
+    public Result modifyUserInfo(ModifyUserInfo modifyUserInfo) throws AllException {
 
-        modifyUserInfo.setId(id);
 
-        // TODO 过几天加了权限控制后切换成 ThreadLocal 来获取用户
-        User user = userMapper.selectUserByUUId(id);
+        User user = UserContext.getCurrentUser();
+        modifyUserInfo.setId(user.getId());
 
         // 当用户企图修改昵称时
         if(modifyUserInfo.getNickname() != null) {
@@ -79,6 +79,7 @@ public class UserService {
 //                }
                 return ResultTool.error(400, "在今年内您已经没有修改昵称的次数了");
             } else {
+                // TODO 如果用户修改了昵称，那么应该refresh token
                 modifyUserInfo.setEditableNicknameTimes(editableNicknameTimes - 1);
             }
         }

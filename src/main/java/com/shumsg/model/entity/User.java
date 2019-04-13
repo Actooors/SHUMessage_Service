@@ -14,8 +14,6 @@ public class User {
 
     private Integer editableNicknameTimes;
 
-    private Date lastModifyNicknameTime;
-
     private String studentCardId;
 
     private String normalLoginId;
@@ -39,6 +37,8 @@ public class User {
     private String about;
 
     private String location;
+
+    private String birthplace;
 
     private String school;
 

@@ -7,6 +7,9 @@ spring:
   #  jackson:
   #    time-zone: GMT+8
 
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
   datasource:
     driver-class-name: org.postgresql.Driver

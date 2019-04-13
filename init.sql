@@ -7,7 +7,6 @@ CREATE TABLE tbl_user (
   register_way          LoginType  NOT NULL, -- 1是学校接口， 2是手机登录(校外编制特殊注册方式)
   nickname              VARCHAR(32) UNIQUE, -- 昵称
   editable_nickname_times INT DEFAULT 2, -- 可修改昵称次数
-  last_modify_nickname_time TIMESTAMP(0) DEFAULT current_timestamp, -- 上次修改昵称时间
   student_card_id       VARCHAR(32) UNIQUE, -- 学号
   normal_login_id       VARCHAR(32), -- 自定义登录方式
   password              CHAR(256) , -- 密码
@@ -20,6 +19,7 @@ CREATE TABLE tbl_user (
   gender                CHAR(2),    -- 性别
   about                 VARCHAR(100), -- 个性签名
   location              VARCHAR(100), -- 用户所在地
+  birthplace            VARCHAR(8), -- 用户籍贯
   school                VARCHAR(100), -- 用户学校
   job                   VARCHAR(100), -- 用户行业
   identity              UserIdentity, --用户的身份，1是学生，2是官方账户， 3是管理员， 4是超管
@@ -235,3 +235,7 @@ CREATE TABLE tbl_user_interest_news (
     content VARCHAR(128), -- 推送的内容
     create_time TIMESTAMP(0)     DEFAULT current_timestamp -- 创建时间
 );
+
+
+update tbl_user
+set editable_nickname_times = 2;

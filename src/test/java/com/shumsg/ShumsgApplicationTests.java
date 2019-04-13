@@ -1,6 +1,5 @@
 package com.shumsg;
 
-import com.shumsg.model.common.LoginType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +11,6 @@ public class ShumsgApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println(LoginType.SCHOOL);
     }
 
 

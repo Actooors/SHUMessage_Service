@@ -17,6 +17,9 @@ public enum EmAllException implements CommonError {
 
     SELECT_ERROR(500, "获取数据失败"),
 
+    UPDATE_ERROR(500, "更新数据出错"),
+
+    QUERY_TIME_OUT(500, "请求超时，请确定您是否使用校园网登录"),
     // token验证相关
     USER_AND_PASSWORD_BLANK_ERROR(400, "账号或密码不能为空"),
 

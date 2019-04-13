@@ -1,8 +1,8 @@
 package com.shumsg.dao;
 
 import com.shumsg.model.entity.User;
+import com.shumsg.model.front.ModifyUserInfo;
 
-import java.util.UUID;
 
 public interface UserMapper {
 
@@ -13,5 +13,9 @@ public interface UserMapper {
     User selectUserByNormalLoginId(String normalLoginId);
 
     int insert(User user);
+
+    void updateUserByModifyUserInfo(ModifyUserInfo info);
+
+    void updateEditableNicknameTimes(int editableNicknameTimes);
 
 }

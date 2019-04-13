@@ -15,8 +15,9 @@ import java.util.Date;
  * @author: 0GGmr0
  * @create: 2019-04-11 10:37
  */
-public class jwtUtil {
+public class JwtUtil {
     private final static byte[] ENCODE_KEY = "message".getBytes();
+    private final static String TOKEN_HEADER = "Bearer ";
     private static JWTVerifier jwtVerifier;
 
     public static String createJwt(String subject, String nickname) {
@@ -25,7 +26,7 @@ public class jwtUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 36500);
         Algorithm algorithm = Algorithm.HMAC256(ENCODE_KEY);
-        return JWT.create()
+        return TOKEN_HEADER + JWT.create()
                 .withIssuedAt(currentDate)
                 .withExpiresAt(calendar.getTime())
                 .withSubject(subject)

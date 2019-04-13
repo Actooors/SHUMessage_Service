@@ -1,7 +1,11 @@
 package com.shumsg.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.shumsg.exception.AllException;
+import com.shumsg.model.back.Result;
+import com.shumsg.model.front.ModifyUserInfo;
+import com.shumsg.service.UserService;
+import com.shumsg.tools.JwtUtil;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -13,8 +17,20 @@ import javax.annotation.Resource;
  */
 @RestController
 @Resource
-@RequestMapping("/news")
+@RequestMapping("/user")
 public class UserController extends HandlerException {
 
+    @Resource
+    private UserService userService;
+
+    @PutMapping("/info")
+    public Result modifyUserInfo(@RequestHeader(value = "Authorization") String token,
+            @RequestBody ModifyUserInfo modifyUserInfo) throws AllException {
+
+        // TODO 用户的id之后改一下，从threadlocal里面拿
+        String id = JwtUtil.parseJwt(token.substring(7));
+
+        return userService.modifyUserInfo(id, modifyUserInfo);
+    }
 
 }

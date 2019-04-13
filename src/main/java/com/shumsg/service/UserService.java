@@ -1,4 +1,5 @@
 package com.shumsg.service;
+import java.util.Random;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
 import com.shumsg.dao.UserMapper;
@@ -8,16 +9,15 @@ import com.shumsg.model.back.Result;
 import com.shumsg.model.back.info.LoginResponse;
 import com.shumsg.model.entity.User;
 import com.shumsg.model.front.LoginInfo;
+import com.shumsg.model.front.ModifyUserInfo;
 import com.shumsg.tools.AuthTool;
 import com.shumsg.tools.HS256;
 import com.shumsg.tools.ResultTool;
-import com.shumsg.tools.jwtUtil;
+import com.shumsg.tools.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
-import java.util.Random;
 
 import static com.shumsg.model.UserConstRepository.*;
 
@@ -34,21 +34,13 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-
-    private LoginResponse setLoginResponse(String userId, String studentCardId, String actualName,
-                                           String identity, String nickname) {
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setUserId(userId); // UUID
-        loginResponse.setStudentCardId(studentCardId); // 工号
-        loginResponse.setActualName(actualName); // 真实姓名
-        loginResponse.setIdentity(identity); // 用户身份
-        loginResponse.setToken(jwtUtil.createJwt(
-                userId, //学号
-                nickname   //昵称
-        ));
-        return loginResponse;
-    }
-
+    /**
+     * @Description: 登录接口
+     * @Param: [info]
+     * @Return: com.shumsg.model.back.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-04-12
+     */
     public Result login(LoginInfo info) throws AllException {
         switch (info.getLoginType()) {
             case LOGIN_WITH_SCHOOL:
@@ -62,7 +54,66 @@ public class UserService {
                 throw new AllException(EmAllException.NO_SUCH_LOGIN_TYPE);
         }
     }
+    
+    /**
+     * @Description: 修改用户的个人信息
+     * @Param: [id, modifyUserInfo]
+     * @Return: com.shumsg.model.back.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-04-12
+     */
+    public Result modifyUserInfo(String id, ModifyUserInfo modifyUserInfo) throws AllException {
 
+        modifyUserInfo.setId(id);
+
+        // TODO 过几天加了权限控制后切换成 ThreadLocal 来获取用户
+        User user = userMapper.selectUserByUUId(id);
+
+        // 当用户企图修改昵称时
+        if(modifyUserInfo.getNickname() != null) {
+            int editableNicknameTimes = user.getEditableNicknameTimes();
+            // 因为昵称每年只允许修改两次，如果用户现在的修改剩余次数已经没有了
+            if(editableNicknameTimes == 0) {
+//                Date lastModifyNicknameTime = modifyUserInfo.getLastModifyNicknameTime();
+//                Calendar cal = Calendar.getInstance();
+//                int nowYear = cal.get(Calendar.YEAR);
+//                cal.setTime(lastModifyNicknameTime);
+//                int originalYear = cal.get(Calendar.YEAR)；
+//                if (nowYear - originalYear == 0) {
+//                }
+                return ResultTool.error(400, "在今年内您已经没有修改昵称的次数了");
+            } else {
+                modifyUserInfo.setEditableNicknameTimes(editableNicknameTimes - 1);
+            }
+        }
+
+        // 当用户企图创建自己的登录账号和密码时
+        if(modifyUserInfo.getNormalLoginId() != null) {
+            Random random = new Random();
+            String uuid = NanoIdUtils.randomNanoId(random, ALPHABET, 20);
+            String dbPassword = HS256.encryptionPassword(modifyUserInfo.getPassword(), uuid);
+            modifyUserInfo.setPassword(dbPassword);
+            modifyUserInfo.setPasswordSalt(uuid);
+        }
+
+        try {
+            userMapper.updateUserByModifyUserInfo(modifyUserInfo);
+        }catch (Exception e) {
+            log.info("执行修改用户信息，错误{}", e.toString());
+            throw new AllException(EmAllException.UPDATE_ERROR);
+        }
+        return ResultTool.success("数据更新成功");
+    }
+
+
+
+    /**
+     * @Description: 使用自定义账号密码登录
+     * @Param: [loginUser]
+     * @Return: com.shumsg.model.back.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-04-12
+     */
     private Result loginWithNormal(LoginInfo loginUser) throws AllException {
         User user = userMapper.selectUserByNormalLoginId(loginUser.getUserId());
         if(user == null) {
@@ -82,6 +133,13 @@ public class UserService {
         throw new AllException(EmAllException.PASSWORD_ERROR);
     }
 
+    /**
+     * @Description: 使用上海大学学号登录
+     * @Param: [loginUser]
+     * @Return: com.shumsg.model.back.Result
+     * @Author: 0GGmr0
+     * @Date: 2019-04-12
+     */
     private Result loginWithSchool(LoginInfo loginUser) throws AllException {
         //先判断账号和密码是否输入为空
         if (loginUser.getUserId() == null || "".equals(loginUser.getUserId())
@@ -94,9 +152,9 @@ public class UserService {
         if (existedUser != null) {
             //如果该账户的账号密码验证正确并且可以登录
             boolean auth = AuthTool.getAuth(loginUser.getUserId(), loginUser.getPassword());
-
-            User user = userMapper.selectUserByUUId(existedUser.getId());
-            if ( auth && !existedUser.getInvalid()) {
+            if(!auth) {
+                throw new AllException(EmAllException.QUERY_TIME_OUT);
+            } else if (!existedUser.getInvalid()) {
                 return ResultTool.success(
                         setLoginResponse(
                                 existedUser.getId(),
@@ -106,9 +164,6 @@ public class UserService {
                                 existedUser.getNickname()
                         ));
                 //如果密码输入错误
-            } else if (!auth) {
-                throw new AllException(EmAllException.USER_AND_PASSWORD_ERROR);
-                //如果该账户登录权限为禁止登陆
             } else {
                 throw new AllException(EmAllException.NO_LOGIN_AUTHORIZATION);
             }
@@ -145,5 +200,26 @@ public class UserService {
                 throw new AllException(EmAllException.USER_AND_PASSWORD_ERROR);
             }
         }
+    }
+
+    /**
+     * @Description: 设置登录接口的返回信息
+     * @Param: [userId, studentCardId, actualName, identity, nickname]
+     * @Return: com.shumsg.model.back.info.LoginResponse
+     * @Author: 0GGmr0
+     * @Date: 2019-04-12
+     */
+    private LoginResponse setLoginResponse(String userId, String studentCardId, String actualName,
+                                           String identity, String nickname) {
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setUserId(userId); // UUID
+        loginResponse.setStudentCardId(studentCardId); // 工号
+        loginResponse.setActualName(actualName); // 真实姓名
+        loginResponse.setIdentity(identity); // 用户身份
+        loginResponse.setToken(JwtUtil.createJwt(
+                userId, //学号
+                nickname   //昵称
+        ));
+        return loginResponse;
     }
 }

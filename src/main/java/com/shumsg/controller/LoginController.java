@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @Resource
 @RequestMapping("/login")
-public class LoginController extends HandlerException{
+public class LoginController {
 
     @Resource
     private UserService userService;

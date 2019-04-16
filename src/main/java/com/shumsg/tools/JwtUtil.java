@@ -8,6 +8,8 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.shumsg.dao.UserMapper;
+import com.shumsg.exception.AllException;
+import com.shumsg.exception.EmAllException;
 import com.shumsg.interceptor.UserContext;
 import com.shumsg.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -15,10 +17,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
-
 import static com.shumsg.model.UserConstRepository.*;
 
 /**
@@ -44,7 +46,7 @@ public class JwtUtil {
      * @Date: 2019-04-15
      */
 
-    public String createJwt(String subject, String nickname) {
+    public String createJwt(String subject, String nickname) throws AllException {
         Date currentDate = new Date();
         // 过期时间5天
         Calendar calendar = Calendar.getInstance();
@@ -70,7 +72,7 @@ public class JwtUtil {
      * @Author: 0GGmr0
      * @Date: 2019-04-15
      */
-    public int validateToken(String token) {
+    public int validateToken(String token) throws UnsupportedEncodingException {
         // 除去 Bearer 开头
         token = token.substring(7);
         Algorithm algorithm  = Algorithm.HMAC256(ENCODE_KEY);
@@ -99,7 +101,8 @@ public class JwtUtil {
         new UserContext(user);
 
         // 如果获取到的nickname为空，说明此用户目前是临时token
-        String nickname = decodedJWT.getClaim("nickname").asString();
+        String nickname = URLDecoder.decode(
+                decodedJWT.getClaim("nickname").asString(), "UTF-8");
         if(nickname.equals("")) {
             // 如果nickname为空，说明是一个临时的token
             return TEMPORARY_TOKEN;
@@ -113,12 +116,13 @@ public class JwtUtil {
 
     }
 
-    private static String encode(String url)
-    {
+
+    private static String encode(String str) throws AllException {
         try {
-            return URLEncoder.encode( url, "UTF-8" );
+            return URLEncoder.encode( str, "UTF-8" );
         } catch (UnsupportedEncodingException e) {
-            return "Issue while encoding" +e.getMessage();
+            log.info("Issue while encoding" +e.getMessage());
+            throw new AllException(EmAllException.ENCODE_ERROR);
 
         }
 

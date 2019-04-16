@@ -19,6 +19,7 @@ public final class UserConstRepository {
     public static final String OFFICIAL = "official";
     public static final String ADMIN = "admin";
     public static final String SUPERADMIN = "superAdmin";
+    public static final String SPIDER = "spider";
 
     // 生成20位不重复密码所需的字母表
     public final static char[] ALPHABET = {'a','b','c','d','e','f','g','h','i',

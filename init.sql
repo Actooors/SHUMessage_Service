@@ -1,7 +1,7 @@
 -- CREATE EXTENSION pgcrypto;
 
 CREATE TYPE LoginType AS ENUM ('school', 'phone');
-CREATE TYPE UserIdentity AS ENUM ('student', 'official', 'admin', 'superAdmin');
+CREATE TYPE UserIdentity AS ENUM ('student', 'official', 'admin', 'superAdmin', 'spider');
 CREATE TABLE tbl_user (
   id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- 主键
   register_way          LoginType  NOT NULL, -- 1是学校接口， 2是手机登录(校外编制特殊注册方式)
@@ -90,7 +90,7 @@ re_post_num         INT              DEFAULT 0, -- 转发数
 views_num           INT              DEFAULT 0, -- 浏览数
 
 content_from_scrapy TEXT, -- 爬取的新闻的内容，做分析用，不限字数。
-md5                 varchar(256), -- 为了新闻唯一而添加的字段
+md5                 VARCHAR(256), -- 为了新闻唯一而添加的字段
 
 create_time         TIMESTAMP(0)     DEFAULT current_timestamp, -- 发布新闻的时间
 discuss_update_time TIMESTAMP(0), -- 最后一个回复的时间

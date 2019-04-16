@@ -77,6 +77,15 @@ public class NewsService {
         return null;
     }
 
+    /**
+     * @Description: 提供给爬虫端的数据插入接口
+     * @Author: 0GGmr0
+     * @Date: 2019-04-16
+     */
+    public Result spiderInsertNews() {
+        return null;
+    }
+
 }
 
 

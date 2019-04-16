@@ -35,7 +35,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 //    private static final String ADD_IFRAME = "/common";
     private static final String TOKEN_NAME = "Authorization";
     private static final String REQUEST_METHOD = "/OPTIONS";
-    private static final String MODIFY_USERINFO = "/user/info";
+    private static final String MODIFY_USER_INFO = "/user/info";
 
 
 
@@ -69,7 +69,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                     returnErrorMessage(response, "虚假token", 401);
                     return false;
                 case TEMPORARY_TOKEN:
-                    if (requestUri.equals(contextPath + MODIFY_USERINFO)) {
+                    if (requestUri.equals(contextPath + MODIFY_USER_INFO)) {
                         return true;
                     } else {
                         returnErrorMessage(response, "临时token不能访该url", 403);

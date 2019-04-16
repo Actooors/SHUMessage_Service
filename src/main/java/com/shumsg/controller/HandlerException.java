@@ -3,7 +3,9 @@ package com.shumsg.controller;
 import com.shumsg.exception.AllException;
 import com.shumsg.exception.EmAllException;
 import com.shumsg.model.back.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author: 0GGmr0
  * @create: 2019-04-10 19:48
  */
+@ControllerAdvice
+@Slf4j
 public class HandlerException {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)

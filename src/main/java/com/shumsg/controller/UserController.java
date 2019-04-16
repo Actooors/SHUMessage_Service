@@ -18,14 +18,13 @@ import javax.annotation.Resource;
 @RestController
 @Resource
 @RequestMapping("/user")
-public class UserController extends HandlerException {
+public class UserController  {
 
     @Resource
     private UserService userService;
 
     @PutMapping("/info")
-    public Result modifyUserInfo(@RequestHeader(value = "Authorization") String token,
-            @RequestBody ModifyUserInfo modifyUserInfo) throws AllException {
+    public Result modifyUserInfo(@RequestBody ModifyUserInfo modifyUserInfo) throws AllException {
 
         return userService.modifyUserInfo(modifyUserInfo);
     }

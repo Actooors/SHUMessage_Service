@@ -29,7 +29,7 @@ public enum EmAllException implements CommonError {
 
     PASSWORD_ERROR(400, "密码错误"),
 
-    NO_LOGIN_AUTHORIZATION(400, "没有登录权限"),
+    NO_LOGIN_AUTHORIZATION(403, "没有登录权限"),
 
     LOGIN_VERIFICATION_ERROR(500, "上海大学登录接口出现异常"),
 
@@ -37,8 +37,11 @@ public enum EmAllException implements CommonError {
 
     TOKEN_PHASE_ERROR(500, "解析token出错"),
 
-    FUNCTION_HAS_NOT_BEEN_DEVELOPED(500, "功能尚未开发完"),
+    FUNCTION_HAS_NOT_BEEN_DEVELOPED_ERROR(500, "功能尚未开发完"),
 
+    SPIDER_FUNCTION_ERROR(403, "没有调用爬虫接口的权限"),
+
+    ENCODE_ERROR(500, "token编码错误"),
     ;
 
     // 错误码

@@ -52,7 +52,7 @@ public class UserService {
                 return loginWithNormal(info);
             case LOGIN_WITH_PHONE:
                 // TODO 暂时没有考虑电话登录方式
-                throw new AllException(EmAllException.FUNCTION_HAS_NOT_BEEN_DEVELOPED);
+                throw new AllException(EmAllException.FUNCTION_HAS_NOT_BEEN_DEVELOPED_ERROR);
             default:
                 throw new AllException(EmAllException.NO_SUCH_LOGIN_TYPE);
         }
@@ -226,7 +226,7 @@ public class UserService {
      * @Date: 2019-04-12
      */
     private LoginResponse setLoginResponse(String userId, String studentCardId, String actualName,
-                                           String identity, String nickname) {
+                                           String identity, String nickname) throws AllException {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setUserId(userId); // UUID
         loginResponse.setStudentCardId(studentCardId); // 工号

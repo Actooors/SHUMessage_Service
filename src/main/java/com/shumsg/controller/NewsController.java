@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @RestController
 @Resource
 @RequestMapping("/news")
-public class NewsController extends HandlerException {
+public class NewsController {
 
 
 }

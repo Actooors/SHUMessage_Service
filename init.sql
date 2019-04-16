@@ -8,7 +8,7 @@ CREATE TABLE tbl_user (
   nickname              VARCHAR(32) UNIQUE, -- 昵称
   editable_nickname_times INT DEFAULT 2, -- 可修改昵称次数
   student_card_id       VARCHAR(32) UNIQUE, -- 学号
-  normal_login_id       VARCHAR(32), -- 自定义登录方式
+  normal_login_id       VARCHAR(32) UNIQUE, -- 自定义登录方式
   password              VARCHAR(256) , -- 密码
   password_salt         VARCHAR(20), -- 加盐密码
   actual_name           VARCHAR(32), -- 真实姓名

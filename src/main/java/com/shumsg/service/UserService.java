@@ -1,4 +1,5 @@
 package com.shumsg.service;
+import java.util.HashMap;
 import java.util.Random;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
@@ -35,6 +36,9 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private JwtUtil jwtUtil;
+
     /**
      * @Description: 登录接口
      * @Author: 0GGmr0
@@ -64,28 +68,27 @@ public class UserService {
 
         User user = UserContext.getCurrentUser();
         modifyUserInfo.setId(user.getId());
-
         // 当用户企图修改昵称时
+        boolean judge = false;
         if(modifyUserInfo.getNickname() != null) {
             int editableNicknameTimes = user.getEditableNicknameTimes();
             // 因为昵称每年只允许修改两次，如果用户现在的修改剩余次数已经没有了
             if(editableNicknameTimes == 0) {
-//                Date lastModifyNicknameTime = modifyUserInfo.getLastModifyNicknameTime();
-//                Calendar cal = Calendar.getInstance();
-//                int nowYear = cal.get(Calendar.YEAR);
-//                cal.setTime(lastModifyNicknameTime);
-//                int originalYear = cal.get(Calendar.YEAR)；
-//                if (nowYear - originalYear == 0) {
-//                }
                 return ResultTool.error(400, "在今年内您已经没有修改昵称的次数了");
             } else {
                 // TODO 如果用户修改了昵称，那么应该refresh token
                 modifyUserInfo.setEditableNicknameTimes(editableNicknameTimes - 1);
+                // 用户是临时token 需要更新一下他的token
+                judge = user.getNickname() == null;
             }
         }
 
         // 当用户企图创建自己的登录账号和密码时
         if(modifyUserInfo.getNormalLoginId() != null) {
+            if(user.getNormalLoginId()!= null &&
+                    !user.getNormalLoginId().equals(modifyUserInfo.getNormalLoginId())) {
+                return ResultTool.error(400, "您不能修改自己的账号");
+            }
             Random random = new Random();
             String uuid = NanoIdUtils.randomNanoId(random, ALPHABET, 20);
             String dbPassword = HS256.encryptionPassword(modifyUserInfo.getPassword(), uuid);
@@ -95,11 +98,14 @@ public class UserService {
 
         try {
             userMapper.updateUserByModifyUserInfo(modifyUserInfo);
-        }catch (Exception e) {
+        }catch (RuntimeException e) {
             log.info("执行修改用户信息，错误{}", e.toString());
             throw new AllException(EmAllException.UPDATE_ERROR);
         }
-        return ResultTool.success("数据更新成功");
+        return ResultTool.success(judge ?
+                new HashMap<String, String>(){{
+                    put("token", jwtUtil.createJwt(user.getId(), modifyUserInfo.getNickname()));
+                }} : null);
     }
     
 
@@ -226,7 +232,7 @@ public class UserService {
         loginResponse.setStudentCardId(studentCardId); // 工号
         loginResponse.setActualName(actualName); // 真实姓名
         loginResponse.setIdentity(identity); // 用户身份
-        loginResponse.setToken(JwtUtil.createJwt(
+        loginResponse.setToken(jwtUtil.createJwt(
                 userId, //学号
                 nickname   //昵称
         ));

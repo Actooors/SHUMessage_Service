@@ -22,10 +22,20 @@ public final class UserConstRepository {
 
     // 生成20位不重复密码所需的字母表
     public final static char[] ALPHABET = {'a','b','c','d','e','f','g','h','i',
-            'j','k','l','m','n','o','p','q','r',
-            's','t','u','v','w','x','y','z'};
+                                            'j','k','l','m','n','o','p','q','r',
+                                            's','t','u','v','w','x','y','z'};
 
     // 每年用户可以修改昵称的次数
     public final static int EDITABLE_NICKNAME_TIMES = 2;
 
+    // TOKEN返回值
+    public final static int SIGNATURE_VERIFICATION_EXCEPTION = -3;
+    public final static int TOKEN_EXPIRED_EXCEPTION = -2;
+    public final static int FAKE_TOKEN = -1;
+    public final static int TEMPORARY_TOKEN = 1;
+    public final static int NORMAL_TOKEN = 2;
+
+    // TOKEN时间有效期
+    public final static int TEMPORARY_TOKEN_VALIDITY_MINUTE = 10;
+    public final static int NORMAL_TOKEN_VALIDITY_DAY = 36500;
 }

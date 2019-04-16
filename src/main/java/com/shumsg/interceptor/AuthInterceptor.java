@@ -1,9 +1,7 @@
 package com.shumsg.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shumsg.dao.UserMapper;
 import com.shumsg.model.back.Result;
-import com.shumsg.model.entity.User;
 import com.shumsg.tools.JwtUtil;
 import com.shumsg.tools.ResultTool;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static com.shumsg.model.UserConstRepository.*;
+
 /**
  * @program: shumsg
  * @description: 拦截器
@@ -26,7 +26,7 @@ import java.io.PrintWriter;
 public class AuthInterceptor implements HandlerInterceptor {
 
     @Resource
-    private UserMapper userMapper;
+    private JwtUtil jwtUtil;
 
     @Value("${server.servlet.context-path}")
     private String contextPath;
@@ -35,6 +35,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 //    private static final String ADD_IFRAME = "/common";
     private static final String TOKEN_NAME = "Authorization";
     private static final String REQUEST_METHOD = "/OPTIONS";
+    private static final String MODIFY_USERINFO = "/user/info";
+
 
 
     @Override
@@ -43,29 +45,46 @@ public class AuthInterceptor implements HandlerInterceptor {
         // 登陆接口不做拦截及解决跨域问题
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-        response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+        response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
         String requestUri = request.getRequestURI();
-//        if (requestUri.equals(contextPath + ADD_IFRAME)
-        if(requestUri.equals(contextPath + LOGIN_URL)
+        if (requestUri.equals(contextPath + LOGIN_URL)
                 || request.getMethod().equals(REQUEST_METHOD)) {
-            response.setStatus(200);
             return true;
         }
         // TODO 暂时只做了一个很简单的TOKEN验证，只判断有无，不判断是否过期或者修改过某些内容，也没有吊销token的操作
         String token = request.getHeader(TOKEN_NAME);
-        if(token == null) {
-            returnErrorMessage(response);
+        if (token == null) {
+            returnErrorMessage(response, "请登录后再访问页面", 401);
             return false;
+        } else {
+            // 验证tokne是否是临时token
+            switch (jwtUtil.validateToken(token)) {
+                case SIGNATURE_VERIFICATION_EXCEPTION:
+                    returnErrorMessage(response, "token签名内容失效", 401);
+                    return false;
+                case TOKEN_EXPIRED_EXCEPTION:
+                    returnErrorMessage(response, "token已超时", 401);
+                    return false;
+                case FAKE_TOKEN:
+                    returnErrorMessage(response, "虚假token", 401);
+                    return false;
+                case TEMPORARY_TOKEN:
+                    if (requestUri.equals(contextPath + MODIFY_USERINFO)) {
+                        return true;
+                    } else {
+                        returnErrorMessage(response, "临时token不能访该url", 403);
+                        return false;
+                    }
+                case NORMAL_TOKEN:
+                    return true;
+                default:
+                    return true;
+            }
         }
-        String uuid = JwtUtil.parseJwt(token.substring(7));
-        User user = userMapper.selectUserByUUId(uuid);
-        // 创建一个线程级的变量 专门存储user
-        new UserContext(user);
-        return true;
     }
 
-    private void returnErrorMessage(HttpServletResponse response) throws IOException {
-        Result result = ResultTool.error(401, "请登录后再访问页面");
+    private void returnErrorMessage(HttpServletResponse response, String msg, int code) throws IOException {
+        Result result = ResultTool.error(code, msg);
         response.setContentType("application.yml/json;charset=utf-8");
         response.setStatus(200);
         PrintWriter out = response.getWriter();

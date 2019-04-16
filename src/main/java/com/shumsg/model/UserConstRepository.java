@@ -37,6 +37,17 @@ public final class UserConstRepository {
     public final static int NORMAL_TOKEN = 2;
 
     // TOKEN时间有效期
-    public final static int TEMPORARY_TOKEN_VALIDITY_MINUTE = 10;
+    public final static int TEMPORARY_TOKEN_VALIDITY_MINUTE = 15;
     public final static int NORMAL_TOKEN_VALIDITY_DAY = 36500;
+
+    // 验证唯一性的两个标识符
+    public final static int VERIFY_NORMAL_ID =  1;
+    public final static int VERIFY_NICKNAME =  2;
+
+    // 根据用户某信息查询用户的枚举
+    public final static int SELECT_USER_BY_NORMAL_ID =  1;
+    public final static int SELECT_USER_BY_UUID =  2;
+    public final static int SELECT_USER_BY_NICKNAME =  3;
+    public final static int SELECT_USER_BY_STUDENT_CARD_ID =  4;
+
 }

@@ -4,10 +4,13 @@ import com.shumsg.exception.AllException;
 import com.shumsg.model.back.Result;
 import com.shumsg.model.front.ModifyUserInfo;
 import com.shumsg.service.UserService;
-import com.shumsg.tools.JwtUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+
+import static com.shumsg.model.UserConstRepository.VERIFY_NICKNAME;
+import static com.shumsg.model.UserConstRepository.VERIFY_NORMAL_ID;
+
 
 /**
  * @program: shumsg
@@ -33,7 +36,13 @@ public class UserController  {
     @GetMapping("/normal/{normalLoginId}")
     public Result verificationNormalLoginId(@PathVariable("normalLoginId") String normalLoginId) throws AllException {
 
-        return userService.verifyUserNormalLoginId(normalLoginId);
+        return userService.verifyUserInfoUnique(normalLoginId, VERIFY_NORMAL_ID);
+    }
+
+    @GetMapping("/nickname/{nickname}")
+    public Result verificationNickname(@PathVariable("nickname") String nickname) throws AllException {
+
+        return userService.verifyUserInfoUnique(nickname, VERIFY_NICKNAME);
     }
 
 }

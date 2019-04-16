@@ -96,7 +96,7 @@ public class JwtUtil {
         }
         DecodedJWT decodedJWT = JWT.decode(token);
         String uuid = decodedJWT.getSubject();
-        User user = userMapper.selectUserByUUId(uuid);
+        User user = userMapper.selectUserByUserInfo(uuid, SELECT_USER_BY_UUID);
         // 创建一个线程级的变量 专门存储user
         new UserContext(user);
 

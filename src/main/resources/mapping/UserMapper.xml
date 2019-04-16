@@ -141,28 +141,52 @@
     </set>
   </update>
 
-  <!--根据学生学号查找用户-->
-  <select id="selectUserByStudentCardId" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from tbl_user
-    where student_card_id = #{studentCardId,jdbcType=VARCHAR}
-  </select>
+  <!--&lt;!&ndash;根据学生学号查找用户&ndash;&gt;-->
+  <!--<select id="selectUserByStudentCardId" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_user-->
+    <!--where student_card_id = #{studentCardId,jdbcType=VARCHAR}-->
+  <!--</select>-->
 
-  <!--根据UUID查找用户-->
-  <select id="selectUserByUUId" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from tbl_user
-    where id = #{uuid,jdbcType=VARCHAR}::uuid
-  </select>
+  <!--&lt;!&ndash;根据UUID查找用户&ndash;&gt;-->
+  <!--<select id="selectUserByUUId" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_user-->
+    <!--where id = #{uuid,jdbcType=VARCHAR}::uuid-->
+  <!--</select>-->
 
-  <!--根据用户自定义登录账号查找用户-->
-  <select id="selectUserByNormalLoginId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <!--&lt;!&ndash;根据用户自定义登录账号查找用户&ndash;&gt;-->
+  <!--<select id="selectUserByNormalLoginId" resultMap="BaseResultMap" parameterType="java.lang.String">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tbl_user-->
+    <!--where normal_login_id = #{normalLoginId,jdbcType=VARCHAR}-->
+  <!--</select>-->
+
+  <select id="selectUserByUserInfo" resultMap="BaseResultMap" parameterType="map">
     select
     <include refid="Base_Column_List" />
     from tbl_user
-    where normal_login_id = #{normalLoginId,jdbcType=VARCHAR}
+    where
+    <!--用户自定义登录id-->
+    <if test="type == 1" >
+      normal_login_id = #{info,jdbcType=VARCHAR}
+    </if>
+    <!--用户uuid-->
+    <if test="type == 2" >
+      id = #{info,jdbcType=VARCHAR}::uuid
+    </if>
+    <!--用户昵称-->
+    <if test="type == 3" >
+      nickname = #{info,jdbcType=VARCHAR}
+    </if>
+    <!--用户学号-->
+    <if test="type == 4" >
+      student_card_id = #{info,jdbcType=VARCHAR}
+    </if>
+
   </select>
 
   <!--插入一个新的用户-->

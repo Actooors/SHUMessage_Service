@@ -110,32 +110,39 @@ public class UserService {
     
 
     /**
-     * @Description: 验证用户自定义账号是否已存在
+     * @Description: 验证用户的自定义账号的唯一性
      * @Author: 0GGmr0
      * @Date: 2019-04-13
      */
-    public Result verifyUserNormalLoginId(String normalLoginId) throws AllException {
-        User user;
+    public Result verifyUserInfoUnique(String info, int type) throws AllException {
+        User user = null;
         try {
-            user = userMapper.selectUserByNormalLoginId(normalLoginId);
+            // 验证用户自定义登录账号唯一性
+            if(type == VERIFY_NORMAL_ID) {
+                user = userMapper.selectUserByUserInfo(info, SELECT_USER_BY_NORMAL_ID);
+            // 验证用户昵称唯一性
+            } else if(type == VERIFY_NICKNAME) {
+                user = userMapper.selectUserByUserInfo(info, SELECT_USER_BY_NICKNAME);
+            }
         } catch (Exception e) {
             log.info("在verifyUserNormalLoginId方法下验证用户自定义登录账号是否重复失败，失败原因是{}", e.toString());
             throw new AllException(EmAllException.SELECT_ERROR);
         }
         if(user != null) {
-            return ResultTool.error(400, "用户已经存在");
+            return ResultTool.error(
+                    400, type == VERIFY_NORMAL_ID ? "用户已存在" : "昵称已存在");
         } else {
-            return ResultTool.success("该账号可以使用");
+            return ResultTool.success();
         }
     }
-    
+
     /**
      * @Description: 使用自定义账号密码登录
      * @Author: 0GGmr0
      * @Date: 2019-04-12
      */
     private Result loginWithNormal(LoginInfo loginUser) throws AllException {
-        User user = userMapper.selectUserByNormalLoginId(loginUser.getUserId());
+        User user = userMapper.selectUserByUserInfo(loginUser.getUserId(), SELECT_USER_BY_NORMAL_ID);
         if(user == null) {
             throw new AllException(EmAllException.NO_SUCH_USER);
         }
@@ -165,7 +172,7 @@ public class UserService {
             throw new AllException(EmAllException.USER_AND_PASSWORD_BLANK_ERROR);
         }
         // 根据学号获取到用户
-        User existedUser = userMapper.selectUserByStudentCardId(loginUser.getUserId());
+        User existedUser = userMapper.selectUserByUserInfo(loginUser.getUserId(), SELECT_USER_BY_STUDENT_CARD_ID);
         //如果该账户在数据库已经存在
         if (existedUser != null) {
             //如果该账户的账号密码验证正确并且可以登录

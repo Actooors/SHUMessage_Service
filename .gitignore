@@ -31,5 +31,5 @@ HELP.md
 
 ### Config ###
 /src/main/resources/generator.xml
-/src/main/resources/application.xml
+/src/main/resources/application.yml
 .DS_Store

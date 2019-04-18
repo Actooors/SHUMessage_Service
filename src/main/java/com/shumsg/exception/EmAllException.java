@@ -3,7 +3,6 @@ package com.shumsg.exception;
 
 
 /**
- * @program: message
  * @description: 数据库mapper操作相关的错误
  * @author: 0GGmr0
  * @create: 2019-01-19 16:58

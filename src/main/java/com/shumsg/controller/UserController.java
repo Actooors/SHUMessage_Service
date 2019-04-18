@@ -13,7 +13,6 @@ import static com.shumsg.model.UserConstRepository.VERIFY_NORMAL_ID;
 
 
 /**
- * @program: shumsg
  * @description: 用户控制层
  * @author: 0GGmr0
  * @create: 2019-04-11 16:45

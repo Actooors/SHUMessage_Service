@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import static com.shumsg.model.UserConstRepository.SPIDER;
 
 /**
- * @program: shumsg
  * @description: 为爬虫单独提供的接口的权限验证
  * @author: 0GGmr0
  * @create: 2019-04-16 20:52

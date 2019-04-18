@@ -1,7 +1,6 @@
 package com.shumsg.exception;
 
 /**
- * @program: message
  * @description: 数据库操作相关错误
  * @author: 0GGmr0
  * @create: 2019-01-19 20:13

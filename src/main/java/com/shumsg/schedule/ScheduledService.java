@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import static com.shumsg.model.UserConstRepository.EDITABLE_NICKNAME_TIMES;
 
 /**
- * @program: shumsg
  * @description: 定义了所有需要定时执行的操作
  * @author: 0GGmr0
  * @create: 2019-04-12 20:57

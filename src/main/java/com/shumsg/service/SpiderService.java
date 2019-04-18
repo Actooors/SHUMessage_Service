@@ -22,7 +22,6 @@ import javax.annotation.Resource;
 import static com.shumsg.model.UserConstRepository.*;
 
 /**
- * @program: shumsg
  * @description: 爬虫相关service
  * @author: 0GGmr0
  * @create: 2019-04-16 20:59
@@ -76,7 +75,7 @@ public class SpiderService {
         news.setMediaType(MEDIA_TYPE_NEWS);
         news.setMediaTitle(info.getMediaTitle());
         news.setNewsUrl(info.getNewsUrl());
-        news.setNewsLabels(new String[] {info.getNewsLabel()});
+        news.setNewsLabels(new String[] {info.getNewsLabelId()});
         news.setContentFromScrapy(info.getContentFromScrapy());
         news.setMd5(info.getMd5());
         news.setCreateTime(info.getCreateTime());

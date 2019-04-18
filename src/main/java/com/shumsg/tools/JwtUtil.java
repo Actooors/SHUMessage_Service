@@ -24,7 +24,6 @@ import java.util.Date;
 import static com.shumsg.model.UserConstRepository.*;
 
 /**
- * @program: shumsg
  * @description: token工具
  * @author: 0GGmr0
  * @create: 2019-04-11 10:37

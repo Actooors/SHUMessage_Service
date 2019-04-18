@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * @program: shumsg
  * @description: 爬虫端控制器
  * @author: 0GGmr0
  * @create: 2019-04-16 21:17

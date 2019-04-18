@@ -1,7 +1,6 @@
 package com.shumsg.model;
 
 /**
- * @program: shumsg
  * @description: 常量存储类
  * @author: 0GGmr0
  * @create: 2019-04-10 21:31

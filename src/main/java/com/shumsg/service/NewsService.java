@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @program: shumsg
  * @description:
  * @author: 0GGmr0
  * @create: 2019-04-10 18:20
@@ -23,8 +22,6 @@ public class NewsService {
 
     /**
      * @Description: 获取新闻列表，按照时间排序
-     * @Param: []
-     * @Return: com.shumsg.model.back.Result
      * @Author: 0GGmr0
      * @Date: 2019-04-10
      */

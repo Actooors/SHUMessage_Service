@@ -5,7 +5,6 @@ import com.shumsg.model.back.Result;
 import java.util.List;
 
 /**
- * @program: shumsg
  * @description: 统一返回格式工具
  * @author: 0GGmr0
  * @create: 2019-04-10 18:28

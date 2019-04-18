@@ -24,7 +24,6 @@ import javax.annotation.Resource;
 import static com.shumsg.model.UserConstRepository.*;
 
 /**
- * @program: shumsg
  * @description: 定义了用户相关的操作
  * @author: 0GGmr0
  * @create: 2019-04-10 21:49

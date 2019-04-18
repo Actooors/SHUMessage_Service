@@ -7,7 +7,6 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 /**
- * @program: shumsg
  * @description: HS256加密
  * @author: 0GGmr0
  * @create: 2019-04-11 12:44

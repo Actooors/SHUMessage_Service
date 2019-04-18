@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * @program: shumsg
  * @description: controller层异常处理类
  * @author: 0GGmr0
  * @create: 2019-04-10 19:48

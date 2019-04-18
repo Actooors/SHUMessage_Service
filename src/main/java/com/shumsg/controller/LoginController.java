@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @program: shumsg
  * @description: 登录控制器
  * @author: 0GGmr0
  * @create: 2019-04-11 16:47

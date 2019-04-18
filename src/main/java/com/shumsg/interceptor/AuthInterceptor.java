@@ -17,7 +17,6 @@ import java.io.PrintWriter;
 import static com.shumsg.model.UserConstRepository.*;
 
 /**
- * @program: shumsg
  * @description: 拦截器
  * @author: 0GGmr0
  * @create: 2019-04-13 21:45

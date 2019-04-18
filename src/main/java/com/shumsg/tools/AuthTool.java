@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import static com.shumsg.model.UserConstRepository.LOGIN_WITH_SCHOOL;
 
 /**
- * @program: management
  * @description: 上海大学登录接口
  * @author: ggmr
  * @create: 2018-07-29 17:45

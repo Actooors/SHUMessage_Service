@@ -75,8 +75,8 @@ CREATE TABLE tbl_news (
 id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- 主键
 user_id             UUID   NOT NULL, -- 发布者的主键id
 
-content             VARCHAR(2000) , -- 新闻的内容，最多2000字。此键值的作用是在发布新闻的人想要直接发布新闻的时候书写的内容。请爬虫将新闻主体前140字写入这里，超出140字的在第140字后标'...'存在这里。
-pre_content          VARCHAR(141) , -- 文章前140字会存到这里，如果该值长度为141，则表示字数大于140字。请爬虫将新闻主体前140字写入这里，超出140字的，在第140字后标'#'共计141字存到这里。
+content             VARCHAR(2000), -- 新闻的内容，最多2000字。此键值的作用是在发布新闻的人想要直接发布新闻的时候书写的内容。请爬虫将新闻主体前140字写入这里，超出140字的在第140字后标'...'存在这里。
+pre_content          VARCHAR(141), -- 文章前140字会存到这里，如果该值长度为141，则表示字数大于140字。请爬虫将新闻主体前140字写入这里，超出140字的，在第140字后标'#'共计141字存到这里。
 
 media_type          MediaType, -- 这里是设置新闻附带的多媒体类型。url由标题和地址组成，imgs可以为多个
 media_imgs          VARCHAR(128)[], -- 新闻的图片
@@ -90,7 +90,7 @@ re_post_num         INT              DEFAULT 0, -- 转发数
 views_num           INT              DEFAULT 0, -- 浏览数
 
 content_from_scrapy TEXT, -- 爬取的新闻的内容，做分析用，不限字数。
-md5                 VARCHAR(256), -- 为了新闻唯一而添加的字段
+md5                 VARCHAR(256) UNIQUE, -- 为了新闻唯一而添加的字段
 
 create_time         TIMESTAMP(0)     DEFAULT current_timestamp, -- 发布新闻的时间
 discuss_update_time TIMESTAMP(0), -- 最后一个回复的时间
@@ -110,7 +110,7 @@ moment_type         BIT NOT NULL, -- 动态的种类，转发的还是原创的
 re_post_target_id   UUID, -- 转发的内容的主键
 re_post_type        MessageType, -- 转发的消息的种类，动态或者新闻
 
-media_imgs          VARCHAR(128) [], -- 动态的图片
+media_imgs          VARCHAR(128)[], -- 动态的图片
 location            point, -- 定位经纬度
 location_place      VARCHAR(50), -- 具体地点
 group_id            UUID, -- 如果发布到了某个圈子，则非空
@@ -118,7 +118,7 @@ group_id            UUID, -- 如果发布到了某个圈子，则非空
 discuss_num         INT              DEFAULT 0, -- 评论数
 discuss_liked_num   INT              DEFAULT 0, -- 评论的总赞数
 liked_num           INT              DEFAULT 0, -- 点赞数
-re_post_num          INT              DEFAULT 0, -- 转发数
+re_post_num         INT              DEFAULT 0, -- 转发数
 views_num           INT              DEFAULT 0, -- 浏览数
 
 create_time         TIMESTAMP(0)     DEFAULT current_timestamp, -- 发布动态的时间

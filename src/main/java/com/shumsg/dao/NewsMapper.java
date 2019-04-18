@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface NewsMapper {
+    int insert(News news);
+
+
 //    List<UserNewsInfo> selectNewsList(@Param("offset")Integer offset, @Param("num") Integer num,
 //                                      @Param("usersId")Integer usersId);
 }

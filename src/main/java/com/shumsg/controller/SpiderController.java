@@ -2,6 +2,8 @@ package com.shumsg.controller;
 
 import com.shumsg.exception.AllException;
 import com.shumsg.model.back.Result;
+import com.shumsg.model.front.SpiderLabelInfo;
+import com.shumsg.model.front.SpiderNewsInfo;
 import com.shumsg.model.front.SpiderUserInfo;
 import com.shumsg.service.SpiderService;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +30,17 @@ public class SpiderController {
         
         return spiderService.insertUser(info);
     }
+
+    @PostMapping("news")
+    public Result insertUser(@RequestBody SpiderNewsInfo info) throws AllException {
+
+        return spiderService.insertNews(info);
+    }
+
+    @PostMapping("label")
+    public Result insertUser(@RequestBody SpiderLabelInfo info) throws AllException {
+
+        return spiderService.insertLabel(info);
+    }
+
 }

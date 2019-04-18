@@ -10,7 +10,7 @@
     <result column="media_imgs" property="mediaImgs" jdbcType="ARRAY" />
     <result column="media_title" property="mediaTitle" jdbcType="VARCHAR" />
     <result column="news_url" property="newsUrl" jdbcType="VARCHAR" />
-    <result column="news_labels" property="newsLabels" jdbcType="ARRAY" />
+    <result column="news_labels" property="newsLabels" typeHandler="com.shumsg.dao.handler.ArrayTypeHandler"/>
     <result column="discuss_num" property="discussNum" jdbcType="INTEGER" />
     <result column="discuss_liked_num" property="discussLikedNum" jdbcType="INTEGER" />
     <result column="liked_num" property="likedNum" jdbcType="INTEGER" />
@@ -22,6 +22,122 @@
     <result column="discuss_update_time" property="discussUpdateTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <insert id="insert" parameterType="com.shumsg.model.entity.News" keyProperty="id" useGeneratedKeys="true">
+    insert into tbl_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="preContent != null" >
+        pre_content,
+      </if>
+      <if test="mediaType != null" >
+        media_type,
+      </if>
+      <if test="mediaImgs != null" >
+        media_imgs,
+      </if>
+      <if test="mediaTitle != null" >
+        media_title,
+      </if>
+      <if test="newsUrl != null" >
+        news_url,
+      </if>
+      <if test="newsLabels != null" >
+        news_labels,
+      </if>
+      <if test="discussNum != null" >
+        discuss_num,
+      </if>
+      <if test="discussLikedNum != null" >
+        discuss_liked_num,
+      </if>
+      <if test="likedNum != null" >
+        liked_num,
+      </if>
+      <if test="rePostNum != null" >
+        re_post_num,
+      </if>
+      <if test="viewsNum != null" >
+        views_num,
+      </if>
+      <if test="contentFromScrapy != null" >
+        content_from_scrapy,
+      </if>
+      <if test="md5 != null" >
+        md5,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="discussUpdateTime != null" >
+        discuss_update_time,
+      </if>
+      <if test="deleteTime != null" >
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR}::uuid,
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="preContent != null" >
+        #{preContent,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaType != null" >
+        #{mediaType,jdbcType=VARCHAR}::mediatype,
+      </if>
+      <if test="mediaImgs != null" >
+        #{mediaImgs,jdbcType=ARRAY},
+      </if>
+      <if test="mediaTitle != null" >
+        #{mediaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsUrl != null" >
+        #{newsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="newsLabels != null" >
+        #{newsLabels,typeHandler=com.shumsg.dao.handler.ArrayTypeHandler},
+      </if>
+      <if test="discussNum != null" >
+        #{discussNum,jdbcType=INTEGER},
+      </if>
+      <if test="discussLikedNum != null" >
+        #{discussLikedNum,jdbcType=INTEGER},
+      </if>
+      <if test="likedNum != null" >
+        #{likedNum,jdbcType=INTEGER},
+      </if>
+      <if test="rePostNum != null" >
+        #{rePostNum,jdbcType=INTEGER},
+      </if>
+      <if test="viewsNum != null" >
+        #{viewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="contentFromScrapy != null" >
+        #{contentFromScrapy,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discussUpdateTime != null" >
+        #{discussUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
   <!--<sql id="Base_Column_List" >-->
     <!--id, user_id, content, pre_content, media_type, media_imgs, media_title, news_url, -->
     <!--news_labels, discuss_num, discuss_liked_num, liked_num, re_post_num, views_num, content_from_scrapy, -->
@@ -37,143 +153,7 @@
     <!--delete from tbl_news-->
     <!--where id = #{id,jdbcType=OTHER}-->
   <!--</delete>-->
-  <!--<insert id="insert" parameterType="com.shumsg.model.entity.News" >-->
-    <!--insert into tbl_news (id, user_id, content, -->
-      <!--pre_content, media_type, media_imgs, -->
-      <!--media_title, news_url, news_labels, -->
-      <!--discuss_num, discuss_liked_num, liked_num, -->
-      <!--re_post_num, views_num, content_from_scrapy, -->
-      <!--md5, create_time, discuss_update_time, -->
-      <!--delete_time)-->
-    <!--values (#{id,jdbcType=OTHER}, #{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, -->
-      <!--#{preContent,jdbcType=VARCHAR}, #{mediaType,jdbcType=VARCHAR}, #{mediaImgs,jdbcType=ARRAY}, -->
-      <!--#{mediaTitle,jdbcType=VARCHAR}, #{newsUrl,jdbcType=VARCHAR}, #{newsLabels,jdbcType=ARRAY}, -->
-      <!--#{discussNum,jdbcType=INTEGER}, #{discussLikedNum,jdbcType=INTEGER}, #{likedNum,jdbcType=INTEGER}, -->
-      <!--#{rePostNum,jdbcType=INTEGER}, #{viewsNum,jdbcType=INTEGER}, #{contentFromScrapy,jdbcType=VARCHAR}, -->
-      <!--#{md5,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{discussUpdateTime,jdbcType=TIMESTAMP}, -->
-      <!--#{deleteTime,jdbcType=TIMESTAMP})-->
-  <!--</insert>-->
-  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.News" >-->
-    <!--insert into tbl_news-->
-    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
-      <!--<if test="id != null" >-->
-        <!--id,-->
-      <!--</if>-->
-      <!--<if test="userId != null" >-->
-        <!--user_id,-->
-      <!--</if>-->
-      <!--<if test="content != null" >-->
-        <!--content,-->
-      <!--</if>-->
-      <!--<if test="preContent != null" >-->
-        <!--pre_content,-->
-      <!--</if>-->
-      <!--<if test="mediaType != null" >-->
-        <!--media_type,-->
-      <!--</if>-->
-      <!--<if test="mediaImgs != null" >-->
-        <!--media_imgs,-->
-      <!--</if>-->
-      <!--<if test="mediaTitle != null" >-->
-        <!--media_title,-->
-      <!--</if>-->
-      <!--<if test="newsUrl != null" >-->
-        <!--news_url,-->
-      <!--</if>-->
-      <!--<if test="newsLabels != null" >-->
-        <!--news_labels,-->
-      <!--</if>-->
-      <!--<if test="discussNum != null" >-->
-        <!--discuss_num,-->
-      <!--</if>-->
-      <!--<if test="discussLikedNum != null" >-->
-        <!--discuss_liked_num,-->
-      <!--</if>-->
-      <!--<if test="likedNum != null" >-->
-        <!--liked_num,-->
-      <!--</if>-->
-      <!--<if test="rePostNum != null" >-->
-        <!--re_post_num,-->
-      <!--</if>-->
-      <!--<if test="viewsNum != null" >-->
-        <!--views_num,-->
-      <!--</if>-->
-      <!--<if test="contentFromScrapy != null" >-->
-        <!--content_from_scrapy,-->
-      <!--</if>-->
-      <!--<if test="md5 != null" >-->
-        <!--md5,-->
-      <!--</if>-->
-      <!--<if test="createTime != null" >-->
-        <!--create_time,-->
-      <!--</if>-->
-      <!--<if test="discussUpdateTime != null" >-->
-        <!--discuss_update_time,-->
-      <!--</if>-->
-      <!--<if test="deleteTime != null" >-->
-        <!--delete_time,-->
-      <!--</if>-->
-    <!--</trim>-->
-    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
-      <!--<if test="id != null" >-->
-        <!--#{id,jdbcType=OTHER},-->
-      <!--</if>-->
-      <!--<if test="userId != null" >-->
-        <!--#{userId,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="content != null" >-->
-        <!--#{content,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="preContent != null" >-->
-        <!--#{preContent,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="mediaType != null" >-->
-        <!--#{mediaType,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="mediaImgs != null" >-->
-        <!--#{mediaImgs,jdbcType=ARRAY},-->
-      <!--</if>-->
-      <!--<if test="mediaTitle != null" >-->
-        <!--#{mediaTitle,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="newsUrl != null" >-->
-        <!--#{newsUrl,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="newsLabels != null" >-->
-        <!--#{newsLabels,jdbcType=ARRAY},-->
-      <!--</if>-->
-      <!--<if test="discussNum != null" >-->
-        <!--#{discussNum,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="discussLikedNum != null" >-->
-        <!--#{discussLikedNum,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="likedNum != null" >-->
-        <!--#{likedNum,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="rePostNum != null" >-->
-        <!--#{rePostNum,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="viewsNum != null" >-->
-        <!--#{viewsNum,jdbcType=INTEGER},-->
-      <!--</if>-->
-      <!--<if test="contentFromScrapy != null" >-->
-        <!--#{contentFromScrapy,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="md5 != null" >-->
-        <!--#{md5,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="createTime != null" >-->
-        <!--#{createTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="discussUpdateTime != null" >-->
-        <!--#{discussUpdateTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="deleteTime != null" >-->
-        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-    <!--</trim>-->
-  <!--</insert>-->
+
   <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.News" >-->
     <!--update tbl_news-->
     <!--<set >-->

@@ -7,12 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
-//    User selectUserByStudentCardId(String studentCardId);
-
-//    User selectUserByUUId(String uuid);
-
-//    User selectUserByNormalLoginId(String normalLoginId);
-
     User selectUserByUserInfo(@Param("info") String info,@Param("type") int type);
 
     int insert(User user);

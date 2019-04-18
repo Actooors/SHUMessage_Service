@@ -7,9 +7,10 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <!--<sql id="Base_Column_List" >-->
-    <!--id, name, create_time, delete_time-->
-  <!--</sql>-->
+
+  <sql id="Base_Column_List" >
+    id, name, create_time, delete_time
+  </sql>
   <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >-->
     <!--select -->
     <!--<include refid="Base_Column_List" />-->
@@ -26,37 +27,46 @@
     <!--values (#{id,jdbcType=OTHER}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, -->
       <!--#{deleteTime,jdbcType=TIMESTAMP})-->
   <!--</insert>-->
-  <!--<insert id="insertSelective" parameterType="com.shumsg.model.entity.Label" >-->
-    <!--insert into tbl_label-->
-    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
-      <!--<if test="id != null" >-->
-        <!--id,-->
-      <!--</if>-->
-      <!--<if test="name != null" >-->
-        <!--name,-->
-      <!--</if>-->
-      <!--<if test="createTime != null" >-->
-        <!--create_time,-->
-      <!--</if>-->
-      <!--<if test="deleteTime != null" >-->
-        <!--delete_time,-->
-      <!--</if>-->
-    <!--</trim>-->
-    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
-      <!--<if test="id != null" >-->
-        <!--#{id,jdbcType=OTHER},-->
-      <!--</if>-->
-      <!--<if test="name != null" >-->
-        <!--#{name,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="createTime != null" >-->
-        <!--#{createTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-      <!--<if test="deleteTime != null" >-->
-        <!--#{deleteTime,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-    <!--</trim>-->
-  <!--</insert>-->
+  <insert id="insert" parameterType="com.shumsg.model.entity.Label" keyProperty="id" useGeneratedKeys="true">
+    insert into tbl_label
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="deleteTime != null" >
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectLabelByLabelInfo" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_label
+    where
+    <!--标签名-->
+    <if test="type == 1" >
+      name = #{info,jdbcType=VARCHAR}
+    </if>
+    <!--标签uuid-->
+    <if test="type == 2" >
+      id = #{info,jdbcType=VARCHAR}::uuid
+    </if>
+  </select>
   <!--<update id="updateByPrimaryKeySelective" parameterType="com.shumsg.model.entity.Label" >-->
     <!--update tbl_label-->
     <!--<set >-->

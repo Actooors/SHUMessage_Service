@@ -12,7 +12,7 @@ import java.sql.*;
 @MappedJdbcTypes(JdbcType.ARRAY)
 @MappedTypes(String[].class)
 public class ArrayTypeHandler extends BaseTypeHandler<Object[]> {
-    private static final String TYPE_NAME_VARCHAR = "varchar";
+    private static final String TYPE_NAME_VARCHAR = "uuid";
     private static final String TYPE_NAME_INTEGER = "integer";
     private static final String TYPE_NAME_BOOLEAN = "boolean";
     private static final String TYPE_NAME_NUMERIC = "numeric";

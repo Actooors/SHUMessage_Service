@@ -2,15 +2,11 @@ package com.shumsg.service;
 
 import com.shumsg.dao.NewsMapper;
 import com.shumsg.exception.AllException;
-import com.shumsg.exception.EmAllException;
 import com.shumsg.model.back.Result;
-import com.shumsg.model.back.info.*;
 import com.shumsg.model.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @program: shumsg
@@ -76,16 +72,6 @@ public class NewsService {
 //        return resList;
         return null;
     }
-
-    /**
-     * @Description: 提供给爬虫端的数据插入接口
-     * @Author: 0GGmr0
-     * @Date: 2019-04-16
-     */
-    public Result spiderInsertNews() {
-        return null;
-    }
-
 }
 
 

@@ -73,16 +73,16 @@ CREATE TYPE MessageType AS ENUM ('news', 'moment', 'discuss');
 --[自冗余precontent]
 CREATE TABLE tbl_news (
 id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- 主键
-user_id             VARCHAR(16)   NOT NULL, -- 发布者的主键id
+user_id             UUID   NOT NULL, -- 发布者的主键id
 
 content             VARCHAR(2000) , -- 新闻的内容，最多2000字。此键值的作用是在发布新闻的人想要直接发布新闻的时候书写的内容。请爬虫将新闻主体前140字写入这里，超出140字的在第140字后标'...'存在这里。
 pre_content          VARCHAR(141) , -- 文章前140字会存到这里，如果该值长度为141，则表示字数大于140字。请爬虫将新闻主体前140字写入这里，超出140字的，在第140字后标'#'共计141字存到这里。
 
 media_type          MediaType, -- 这里是设置新闻附带的多媒体类型。url由标题和地址组成，imgs可以为多个
-media_imgs          VARCHAR(128) [], -- 新闻的图片
+media_imgs          VARCHAR(128)[], -- 新闻的图片
 media_title         VARCHAR(50)   NOT NULL, -- 新闻标题
 news_url            VARCHAR(256), -- 新闻的URL
-news_labels         VARCHAR(128) [], -- 新闻的标签          ---------------------*
+news_labels         UUID[], -- 新闻的标签          ---------------------*
 discuss_num         INT              DEFAULT 0, -- 评论数
 discuss_liked_num   INT              DEFAULT 0, -- 评论的总赞数
 liked_num           INT              DEFAULT 0, -- 点赞数

@@ -54,7 +54,7 @@ public class SpiderService {
         user.setRegisterWay(LOGIN_WITH_SCHOOL);
         try {
             userMapper.insert(user);
-        } catch (UnsupportedOperationException e) {
+        } catch (DataAccessException e) {
             log.info("SpiderService -> insertUser接口出错，错误信息为:{}",e.toString());
             return ResultTool.error(400, e.toString());
         }
@@ -82,7 +82,7 @@ public class SpiderService {
         news.setCreateTime(info.getCreateTime());
         try {
             newsMapper.insert(news);
-        } catch (UnsupportedOperationException e) {
+        } catch (DataAccessException e) {
             log.info("SpiderService -> insertNews接口出错，错误信息为:{}",e.toString());
             return ResultTool.error(400, e.toString());
         }

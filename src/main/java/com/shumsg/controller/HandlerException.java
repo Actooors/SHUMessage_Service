@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -45,7 +46,7 @@ public class HandlerException {
             result.setCode(EmAllException.BAD_REQUEST.getErrCode());
         } else if(ex instanceof HttpMessageNotReadableException) {
             HttpMessageNotReadableException exception = (HttpMessageNotReadableException) ex;
-            if(exception.getMessage().contains("java.util.Date")) {
+            if(Objects.requireNonNull(exception.getMessage()).contains("java.util.Date")) {
                 result.setMessage("时间格式有误");
             } else {
                 result.setMessage(exception.getMessage());
@@ -54,7 +55,7 @@ public class HandlerException {
         } else {
             // 未知错误
             result.setCode(EmAllException.UN_KNOWN_ERROR.getErrCode());
-            result.setMessage(EmAllException.UN_KNOWN_ERROR.getMsg());
+            result.setMessage(ex.getMessage());
         }
         return result;
 

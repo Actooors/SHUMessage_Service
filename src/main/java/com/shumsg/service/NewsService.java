@@ -2,11 +2,16 @@ package com.shumsg.service;
 
 import com.shumsg.dao.NewsMapper;
 import com.shumsg.exception.AllException;
+import com.shumsg.exception.EmAllException;
 import com.shumsg.model.back.Result;
+import com.shumsg.model.back.info.NewsResponseInfo;
+import com.shumsg.model.back.info.UserInfo;
 import com.shumsg.model.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @description:
@@ -26,8 +31,8 @@ public class NewsService {
      * @Date: 2019-04-10
      */
     public Result getNewsList(Integer page, Integer pageSize, Integer usersId) throws AllException {
-        User user = new User();
-
+//        User user = new User();
+//
 //        List<UserNewsInfo> newsList;
 //        try {
 //            // 第一个参数(page - 1) * pageSize 表示的是从排好序的哪条数据开始取

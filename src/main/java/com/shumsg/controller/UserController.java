@@ -18,8 +18,8 @@ import static com.shumsg.model.UserConstRepository.VERIFY_NORMAL_ID;
  * @author: 0GGmr0
  * @create: 2019-04-11 16:45
  */
+@CrossOrigin
 @RestController
-@Resource
 @RequestMapping("/user")
 public class UserController  {
 

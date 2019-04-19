@@ -13,7 +13,9 @@ import com.shumsg.model.front.SpiderLabelInfo;
 import com.shumsg.model.front.SpiderNewsInfo;
 import com.shumsg.model.front.SpiderUserInfo;
 import com.shumsg.tools.ResultTool;
+import com.sun.org.apache.bcel.internal.generic.LADD;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -95,18 +97,23 @@ public class SpiderService {
      * @Date: 2019-04-17
      */
     public Result insertLabel(SpiderLabelInfo info) throws AllException {
-        Label label = new Label();
-        label.setName(info.getLabelName());
         try {
-            labelMapper.insert(label);
+            // 标签未存在
+            Label label;
+            if((label = labelMapper.selectLabelByLabelInfo(info.getLabelName(), SELECT_LABEL_BY_NAME)) == null) {
+                label = new Label();
+                label.setName(info.getLabelName());
+                labelMapper.insert(label);
+            }
+            String uuid = label.getId();
+            return ResultTool.success(
+                new HashMap<String, String>(){{
+                    put("id", uuid);
+            }});
         } catch (DataAccessException e) {
             log.info("SpiderService -> insertLabel接口出错，错误信息为:{}",e.toString());
             return ResultTool.error(400, e.toString());
         }
-        return ResultTool.success(
-                new HashMap<String, String>(){{
-                    put("id", label.getId());
-        }});
     }
 
 

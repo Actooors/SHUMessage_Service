@@ -16,8 +16,8 @@ import javax.annotation.Resource;
  * @author: 0GGmr0
  * @create: 2019-04-16 21:17
  */
+@CrossOrigin
 @RestController
-@Resource
 @RequestMapping("/spider")
 public class SpiderController {
 

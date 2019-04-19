@@ -5,15 +5,11 @@ import com.shumsg.exception.EmAllException;
 import com.shumsg.model.back.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +19,9 @@ import java.util.List;
  * @author: 0GGmr0
  * @create: 2019-04-10 19:48
  */
-@ControllerAdvice
 @Slf4j
+@CrossOrigin
+@ControllerAdvice
 public class HandlerException {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)

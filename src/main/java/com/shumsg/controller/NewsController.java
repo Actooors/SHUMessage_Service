@@ -1,5 +1,6 @@
 package com.shumsg.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +12,8 @@ import javax.annotation.Resource;
  * @create: 2019-04-10 19:52
  */
 
+@CrossOrigin
 @RestController
-@Resource
 @RequestMapping("/news")
 public class NewsController {
 

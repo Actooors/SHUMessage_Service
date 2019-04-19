@@ -2,7 +2,9 @@ package com.shumsg.model.front;
 
 import com.shumsg.model.entity.User;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -19,6 +21,7 @@ public class ModifyUserInfo {
     private String password;
     private String phone;
     private String mail;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date birthday;
     private String gender;
     private String about;

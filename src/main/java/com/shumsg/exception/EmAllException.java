@@ -28,6 +28,9 @@ public enum EmAllException implements CommonError {
 
     PASSWORD_ERROR(400, "密码错误"),
 
+    BAD_REQUEST(400, "请求参数格式有误"),
+
+
     NO_LOGIN_AUTHORIZATION(403, "没有登录权限"),
 
     LOGIN_VERIFICATION_ERROR(500, "上海大学登录接口出现异常"),

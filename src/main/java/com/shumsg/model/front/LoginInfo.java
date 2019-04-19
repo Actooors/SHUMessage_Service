@@ -3,6 +3,8 @@ package com.shumsg.model.front;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @program: shumsg
  * @description: 登录请求信息
@@ -11,7 +13,10 @@ import lombok.Data;
  */
 @Data
 public class LoginInfo {
+    @NotBlank(message = "登录账号不能为空")
     private String userId;
+    @NotBlank(message = "密码不能为空")
     private String password;
+    @NotBlank(message = "登录种类不能为空")
     private String loginType;
 }

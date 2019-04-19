@@ -4,6 +4,7 @@ import com.shumsg.exception.AllException;
 import com.shumsg.model.back.Result;
 import com.shumsg.model.front.ModifyUserInfo;
 import com.shumsg.service.UserService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ public class UserController  {
     private UserService userService;
 
     @PutMapping("/info")
-    public Result modifyUserInfo(@RequestBody ModifyUserInfo modifyUserInfo) throws AllException {
+    public Result modifyUserInfo(@Validated @RequestBody ModifyUserInfo modifyUserInfo) throws AllException {
 
         return userService.modifyUserInfo(modifyUserInfo);
     }

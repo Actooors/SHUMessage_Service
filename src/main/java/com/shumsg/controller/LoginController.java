@@ -4,6 +4,7 @@ import com.shumsg.exception.AllException;
 import com.shumsg.model.back.Result;
 import com.shumsg.model.front.LoginInfo;
 import com.shumsg.service.UserService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class LoginController {
     private UserService userService;
 
     @PostMapping("")
-    public Result login(@RequestBody LoginInfo loginInfo) throws AllException {
+    public Result login(@Validated @RequestBody LoginInfo loginInfo) throws AllException {
         return userService.login(loginInfo);
     }
 

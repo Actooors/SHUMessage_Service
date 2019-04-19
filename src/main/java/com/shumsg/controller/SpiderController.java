@@ -6,6 +6,7 @@ import com.shumsg.model.front.SpiderLabelInfo;
 import com.shumsg.model.front.SpiderNewsInfo;
 import com.shumsg.model.front.SpiderUserInfo;
 import com.shumsg.service.SpiderService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,19 +26,19 @@ public class SpiderController {
 
 
     @PostMapping("user")
-    public Result insertUser(@RequestBody SpiderUserInfo info) throws AllException {
+    public Result insertUser(@Validated @RequestBody SpiderUserInfo info) throws AllException {
         
         return spiderService.insertUser(info);
     }
 
     @PostMapping("news")
-    public Result insertUser(@RequestBody SpiderNewsInfo info) throws AllException {
+    public Result insertUser(@Validated @RequestBody SpiderNewsInfo info) throws AllException {
 
         return spiderService.insertNews(info);
     }
 
     @PostMapping("label")
-    public Result insertUser(@RequestBody SpiderLabelInfo info) throws AllException {
+    public Result insertUser(@Validated @RequestBody SpiderLabelInfo info) throws AllException {
 
         return spiderService.insertLabel(info);
     }

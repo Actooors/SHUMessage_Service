@@ -2,6 +2,8 @@ package com.shumsg.model.front;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @program: shumsg
  * @description: 爬虫端插入标签接口
@@ -10,5 +12,6 @@ import lombok.Data;
  */
 @Data
 public class SpiderLabelInfo {
+    @NotBlank(message = "标签名不能为空")
     private String labelName;
 }

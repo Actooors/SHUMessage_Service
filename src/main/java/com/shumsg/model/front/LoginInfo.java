@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @program: shumsg
  * @description: 登录请求信息
  * @author: 0GGmr0
  * @create: 2019-04-10 21:52

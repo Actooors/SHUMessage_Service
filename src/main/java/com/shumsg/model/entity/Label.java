@@ -2,7 +2,7 @@ package com.shumsg.model.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class Label {
@@ -10,8 +10,8 @@ public class Label {
 
     private String name;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date deleteTime;
+    private LocalDateTime deleteTime;
 
 }

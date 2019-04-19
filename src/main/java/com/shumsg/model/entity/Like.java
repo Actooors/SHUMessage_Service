@@ -2,7 +2,7 @@ package com.shumsg.model.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class Like {
@@ -16,8 +16,8 @@ public class Like {
 
     private Boolean liked;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date deleteTime;
+    private LocalDateTime deleteTime;
 
 }

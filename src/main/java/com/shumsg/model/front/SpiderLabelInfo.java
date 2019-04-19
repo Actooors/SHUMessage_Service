@@ -12,6 +12,6 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 public class SpiderLabelInfo {
-    @NotBlank(message = "标签名不能为空")
+    @NotBlank(message = "biaoqi不能为空")
     private String labelName;
 }

@@ -7,7 +7,7 @@ package com.shumsg.exception;
  */
 public interface CommonError {
 
-    public Integer getErrCode();
-    public String getMsg();
-    public CommonError setErrMsg(String errMsg);
+    Integer getErrCode();
+    String getMsg();
+    CommonError setErrMsg(String errMsg);
 }

@@ -2,6 +2,8 @@ package com.shumsg.model.entity;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -30,7 +32,7 @@ public class User {
 
     private String mail;
 
-    private Date birthday;
+    private LocalDate birthday;
 
     private String gender;
 
@@ -54,11 +56,11 @@ public class User {
 
     private Integer consequentLoginDays;
 
-    private Date lastLoginTime;
+    private LocalDateTime lastLoginTime;
 
     private Short pushInterval;
 
-    private Date lastPushTime;
+    private LocalDateTime lastPushTime;
 
     private Integer socialGroupNum;
 
@@ -68,8 +70,8 @@ public class User {
 
     private Integer myGroupsNum;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date deleteTime;
+    private LocalDateTime deleteTime;
 
 }

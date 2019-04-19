@@ -1,11 +1,10 @@
 package com.shumsg.model.front;
 
-import com.shumsg.model.entity.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @program: shumsg
@@ -21,8 +20,8 @@ public class ModifyUserInfo {
     private String password;
     private String phone;
     private String mail;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date birthday;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private LocalDate birthday;
     private String gender;
     private String about;
     private String job;

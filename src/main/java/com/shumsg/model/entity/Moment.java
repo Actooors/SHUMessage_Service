@@ -2,7 +2,7 @@ package com.shumsg.model.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class Moment {
@@ -38,9 +38,9 @@ public class Moment {
 
     private Integer viewsNum;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date discussUpdateTime;
+    private LocalDateTime discussUpdateTime;
 
-    private Date deleteTime;
+    private LocalDateTime deleteTime;
 }

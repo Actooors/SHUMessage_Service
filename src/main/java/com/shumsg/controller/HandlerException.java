@@ -46,7 +46,7 @@ public class HandlerException {
             result.setCode(EmAllException.BAD_REQUEST.getErrCode());
         } else if(ex instanceof HttpMessageNotReadableException) {
             HttpMessageNotReadableException exception = (HttpMessageNotReadableException) ex;
-            if(Objects.requireNonNull(exception.getMessage()).contains("java.util.Date")) {
+            if(Objects.requireNonNull(exception.getMessage()).contains("java.time.LocalDateTime")) {
                 result.setMessage("时间格式有误");
             } else {
                 result.setMessage(exception.getMessage());

@@ -2,7 +2,7 @@ package com.shumsg.model.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class UserInterestNews {
@@ -10,6 +10,6 @@ public class UserInterestNews {
 
     private String content;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
 }

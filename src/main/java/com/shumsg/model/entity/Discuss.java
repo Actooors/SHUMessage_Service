@@ -2,7 +2,7 @@ package com.shumsg.model.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class Discuss {
@@ -24,8 +24,8 @@ public class Discuss {
 
     private String img;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date deleteTime;
+    private LocalDateTime deleteTime;
 
 }
